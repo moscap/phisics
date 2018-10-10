@@ -1,0 +1,69 @@
+C:/Users/mosca/source/repos/WindowsFormsApp1/WindowsFormsApp1/bin/Debug/WindowsFormsApp1.exe.config
+C:/Users/mosca/source/repos/WindowsFormsApp1/WindowsFormsApp1/bin/Debug/WindowsFormsApp1.exe
+C:/Users/mosca/source/repos/WindowsFormsApp1/WindowsFormsApp1/bin/Debug/WindowsFormsApp1.pdb
+C:/Users/mosca/source/repos/WindowsFormsApp1/WindowsFormsApp1/obj/Debug/WindowsFormsApp1.csprojAssemblyReference.cache
+C:/Users/mosca/source/repos/WindowsFormsApp1/WindowsFormsApp1/obj/Debug/WindowsFormsApp1.Form1.resources
+C:/Users/mosca/source/repos/WindowsFormsApp1/WindowsFormsApp1/obj/Debug/WindowsFormsApp1.Properties.Resources.resources
+C:/Users/mosca/source/repos/WindowsFormsApp1/WindowsFormsApp1/obj/Debug/WindowsFormsApp1.csproj.GenerateResource.cache
+C:/Users/mosca/source/repos/WindowsFormsApp1/WindowsFormsApp1/obj/Debug/WindowsFormsApp1.csproj.CoreCompileInputs.cache
+C:/Users/mosca/source/repos/WindowsFormsApp1/WindowsFormsApp1/obj/Debug/WindowsFormsApp1.exe
+C:/Users/mosca/source/repos/WindowsFormsApp1/WindowsFormsApp1/obj/Debug/WindowsFormsApp1.pdb
+C:/Users/mosca/source/repos/WindowsFormsApp1/WindowsFormsApp1/bin/Debug/OxyPlot.dll
+C:/Users/mosca/source/repos/WindowsFormsApp1/WindowsFormsApp1/bin/Debug/OxyPlot.WindowsForms.dll
+C:/Users/mosca/source/repos/WindowsFormsApp1/WindowsFormsApp1/bin/Debug/OxyPlot.pdb
+C:/Users/mosca/source/repos/WindowsFormsApp1/WindowsFormsApp1/bin/Debug/OxyPlot.xml
+C:/Users/mosca/source/repos/WindowsFormsApp1/WindowsFormsApp1/bin/Debug/OxyPlot.WindowsForms.pdb
+C:/Users/mosca/source/repos/WindowsFormsApp1/WindowsFormsApp1/bin/Debug/OxyPlot.WindowsForms.xml
+C:/Users/mosca/source/repos/WindowsFormsApp1/WindowsFormsApp1/obj/Debug/WindowsFormsApp1.csproj.CopyComplete
+/Users/kononykhindanil/Downloads/WindowsFormsApp1 2/WindowsFormsApp1/bin/Debug/WindowsFormsApp1.exe.config
+/Users/kononykhindanil/Downloads/WindowsFormsApp1 2/WindowsFormsApp1/bin/Debug/WindowsFormsApp1.exe
+/Users/kononykhindanil/Downloads/WindowsFormsApp1 2/WindowsFormsApp1/bin/Debug/WindowsFormsApp1.pdb
+/Users/kononykhindanil/Downloads/WindowsFormsApp1 2/WindowsFormsApp1/bin/Debug/OxyPlot.dll
+/Users/kononykhindanil/Downloads/WindowsFormsApp1 2/WindowsFormsApp1/bin/Debug/OxyPlot.WindowsForms.dll
+/Users/kononykhindanil/Downloads/WindowsFormsApp1 2/WindowsFormsApp1/bin/Debug/OxyPlot.pdb
+/Users/kononykhindanil/Downloads/WindowsFormsApp1 2/WindowsFormsApp1/bin/Debug/OxyPlot.xml
+/Users/kononykhindanil/Downloads/WindowsFormsApp1 2/WindowsFormsApp1/bin/Debug/OxyPlot.WindowsForms.pdb
+/Users/kononykhindanil/Downloads/WindowsFormsApp1 2/WindowsFormsApp1/bin/Debug/OxyPlot.WindowsForms.xml
+/Users/kononykhindanil/Downloads/WindowsFormsApp1 2/WindowsFormsApp1/obj/Debug/WindowsFormsApp1.csprojAssemblyReference.cache
+/Users/kononykhindanil/Downloads/WindowsFormsApp1 2/WindowsFormsApp1/obj/Debug/WindowsFormsApp1.Form1.resources
+/Users/kononykhindanil/Downloads/WindowsFormsApp1 2/WindowsFormsApp1/obj/Debug/WindowsFormsApp1.Properties.Resources.resources
+/Users/kononykhindanil/Downloads/WindowsFormsApp1 2/WindowsFormsApp1/obj/Debug/WindowsFormsApp1.csproj.GenerateResource.cache
+/Users/kononykhindanil/Downloads/WindowsFormsApp1 2/WindowsFormsApp1/obj/Debug/WindowsFormsApp1.csproj.CoreCompileInputs.cache
+/Users/kononykhindanil/Downloads/WindowsFormsApp1 2/WindowsFormsApp1/obj/Debug/WindowsFormsApp1.csproj.CopyComplete
+/Users/kononykhindanil/Downloads/WindowsFormsApp1 2/WindowsFormsApp1/obj/Debug/WindowsFormsApp1.exe
+/Users/kononykhindanil/Downloads/WindowsFormsApp1 2/WindowsFormsApp1/obj/Debug/WindowsFormsApp1.pdb
+/Users/kononykhindanil/Downloads/WindowsFormsApp1 2/WindowsFormsApp1/bin/Debug/LiveCharts.dll
+/Users/kononykhindanil/Downloads/WindowsFormsApp1 2/WindowsFormsApp1/bin/Debug/LiveCharts.WinForms.dll
+/Users/kononykhindanil/Downloads/WindowsFormsApp1 2/WindowsFormsApp1/bin/Debug/LiveCharts.Wpf.dll
+/Users/kononykhindanil/Downloads/WindowsFormsApp1 2/WindowsFormsApp1/bin/Debug/LiveCharts.pdb
+/Users/kononykhindanil/Downloads/WindowsFormsApp1 2/WindowsFormsApp1/bin/Debug/LiveCharts.xml
+/Users/kononykhindanil/Downloads/WindowsFormsApp1 2/WindowsFormsApp1/bin/Debug/LiveCharts.Wpf.pdb
+/Users/kononykhindanil/Downloads/WindowsFormsApp1 2/WindowsFormsApp1/bin/Debug/LiveCharts.Wpf.xml
+/Users/kononykhindanil/Downloads/WindowsFormsApp1 2/WindowsFormsApp1/bin/Debug/LiveCharts.WinForms.pdb
+/Users/kononykhindanil/Downloads/WindowsFormsApp1 2/WindowsFormsApp1/bin/Debug/LiveCharts.WinForms.xml
+C:\Users\d.kononykhin\Downloads\WindowsFormsApp1 2\WindowsFormsApp1 2\WindowsFormsApp1\bin\Debug\WindowsFormsApp1.exe.config
+C:\Users\d.kononykhin\Downloads\WindowsFormsApp1 2\WindowsFormsApp1 2\WindowsFormsApp1\bin\Debug\WindowsFormsApp1.exe
+C:\Users\d.kononykhin\Downloads\WindowsFormsApp1 2\WindowsFormsApp1 2\WindowsFormsApp1\bin\Debug\WindowsFormsApp1.pdb
+C:\Users\d.kononykhin\Downloads\WindowsFormsApp1 2\WindowsFormsApp1 2\WindowsFormsApp1\bin\Debug\LiveCharts.dll
+C:\Users\d.kononykhin\Downloads\WindowsFormsApp1 2\WindowsFormsApp1 2\WindowsFormsApp1\bin\Debug\LiveCharts.WinForms.dll
+C:\Users\d.kononykhin\Downloads\WindowsFormsApp1 2\WindowsFormsApp1 2\WindowsFormsApp1\bin\Debug\LiveCharts.Wpf.dll
+C:\Users\d.kononykhin\Downloads\WindowsFormsApp1 2\WindowsFormsApp1 2\WindowsFormsApp1\bin\Debug\OxyPlot.dll
+C:\Users\d.kononykhin\Downloads\WindowsFormsApp1 2\WindowsFormsApp1 2\WindowsFormsApp1\bin\Debug\OxyPlot.WindowsForms.dll
+C:\Users\d.kononykhin\Downloads\WindowsFormsApp1 2\WindowsFormsApp1 2\WindowsFormsApp1\bin\Debug\OxyPlot.pdb
+C:\Users\d.kononykhin\Downloads\WindowsFormsApp1 2\WindowsFormsApp1 2\WindowsFormsApp1\bin\Debug\OxyPlot.xml
+C:\Users\d.kononykhin\Downloads\WindowsFormsApp1 2\WindowsFormsApp1 2\WindowsFormsApp1\bin\Debug\OxyPlot.WindowsForms.pdb
+C:\Users\d.kononykhin\Downloads\WindowsFormsApp1 2\WindowsFormsApp1 2\WindowsFormsApp1\bin\Debug\OxyPlot.WindowsForms.xml
+C:\Users\d.kononykhin\Downloads\WindowsFormsApp1 2\WindowsFormsApp1 2\WindowsFormsApp1\bin\Debug\LiveCharts.pdb
+C:\Users\d.kononykhin\Downloads\WindowsFormsApp1 2\WindowsFormsApp1 2\WindowsFormsApp1\bin\Debug\LiveCharts.xml
+C:\Users\d.kononykhin\Downloads\WindowsFormsApp1 2\WindowsFormsApp1 2\WindowsFormsApp1\bin\Debug\LiveCharts.Wpf.pdb
+C:\Users\d.kononykhin\Downloads\WindowsFormsApp1 2\WindowsFormsApp1 2\WindowsFormsApp1\bin\Debug\LiveCharts.Wpf.xml
+C:\Users\d.kononykhin\Downloads\WindowsFormsApp1 2\WindowsFormsApp1 2\WindowsFormsApp1\bin\Debug\LiveCharts.WinForms.pdb
+C:\Users\d.kononykhin\Downloads\WindowsFormsApp1 2\WindowsFormsApp1 2\WindowsFormsApp1\bin\Debug\LiveCharts.WinForms.xml
+C:\Users\d.kononykhin\Downloads\WindowsFormsApp1 2\WindowsFormsApp1 2\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.csprojAssemblyReference.cache
+C:\Users\d.kononykhin\Downloads\WindowsFormsApp1 2\WindowsFormsApp1 2\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.Form1.resources
+C:\Users\d.kononykhin\Downloads\WindowsFormsApp1 2\WindowsFormsApp1 2\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.Properties.Resources.resources
+C:\Users\d.kononykhin\Downloads\WindowsFormsApp1 2\WindowsFormsApp1 2\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.csproj.GenerateResource.cache
+C:\Users\d.kononykhin\Downloads\WindowsFormsApp1 2\WindowsFormsApp1 2\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.csproj.CoreCompileInputs.cache
+C:\Users\d.kononykhin\Downloads\WindowsFormsApp1 2\WindowsFormsApp1 2\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.csproj.CopyComplete
+C:\Users\d.kononykhin\Downloads\WindowsFormsApp1 2\WindowsFormsApp1 2\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.exe
+C:\Users\d.kononykhin\Downloads\WindowsFormsApp1 2\WindowsFormsApp1 2\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.pdb
