@@ -65,7 +65,6 @@
             this.elementHost1.Size = new System.Drawing.Size(567, 400);
             this.elementHost1.TabIndex = 2;
             this.elementHost1.Text = "elementHost1";
-            // this.elementHost1.ChildChanged += new System.EventHandler<System.Windows.Forms.Integration.ChildChangedEventArgs>(this.elementHost1_ChildChanged);
             this.elementHost1.Child = this.cartesianChart1;
             // 
             // elementHost2
@@ -88,6 +87,7 @@
             this.Controls.Add(this.plotView1);
             this.Name = "Form1";
             this.Text = "Form1";
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
 
         }
