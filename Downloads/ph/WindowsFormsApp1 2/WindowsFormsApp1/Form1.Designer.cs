@@ -166,6 +166,7 @@
             this.Controls.Add(this.elementHost1);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.plotView1);
+            this.MaximizeBox = false;
             this.Name = "Form1";
             this.Text = "Form1";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;

@@ -162,6 +162,7 @@
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.elementHost2);
             this.Controls.Add(this.elementHost1);
+            this.MaximizeBox = false;
             this.Name = "Form2";
             this.Text = "Form2";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
