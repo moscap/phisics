@@ -111,6 +111,7 @@
             this.trackBar1.Size = new System.Drawing.Size(203, 45);
             this.trackBar1.TabIndex = 6;
             this.trackBar1.Value = 100;
+            this.trackBar1.Scroll += new System.EventHandler(this.trackBar1_Scroll);
             // 
             // textBox2
             // 
@@ -119,6 +120,7 @@
             this.textBox2.Size = new System.Drawing.Size(159, 20);
             this.textBox2.TabIndex = 7;
             this.textBox2.Text = "-10";
+            this.textBox2.TextChanged += new System.EventHandler(this.textBox2_TextChanged);
             // 
             // textBox4
             // 
@@ -127,6 +129,7 @@
             this.textBox4.Size = new System.Drawing.Size(159, 20);
             this.textBox4.TabIndex = 9;
             this.textBox4.Text = "10";
+            this.textBox4.TextChanged += new System.EventHandler(this.textBox4_TextChanged);
             // 
             // label2
             // 

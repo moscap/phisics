@@ -69,16 +69,8 @@ namespace WindowsFormsApp1
             return Math.Exp(-x * x / (sigma * sigma * 2)) / (Math.Sqrt(2 * Math.PI) * sigma);
         }
 
-        public Form1()
+        void Repaint()
         {
-            InitializeComponent();
-            NumOfPoints = trackBar1.Value;
-            XStart = Convert.ToDouble(textBox2.Text);
-            XEnd = Convert.ToDouble(textBox4.Text);
-            sigma = Convert.ToDouble(textBox1.Text);
-
-            x = ArrayBuilder.CreateVector(XStart, XEnd, NumOfPoints);
-
             double[] f = new double[NumOfPoints];
             // Compute function values (rectangle)
             for (int i = 0; i < NumOfPoints; i++)
@@ -111,8 +103,17 @@ namespace WindowsFormsApp1
                     Values =  new ChartValues<double> (RealFourierF)
                 }
             };
-            
+        }
 
+        public Form1()
+        {
+            InitializeComponent();
+            NumOfPoints = trackBar1.Value;
+            XStart = Convert.ToDouble(textBox2.Text);
+            XEnd = Convert.ToDouble(textBox4.Text);
+            sigma = Convert.ToDouble(textBox1.Text);
+            x = ArrayBuilder.CreateVector(XStart, XEnd, NumOfPoints);
+            Repaint();
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -133,40 +134,39 @@ namespace WindowsFormsApp1
 
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
+            double buf;
             if (textBox1.Text.Length == 0) return;
-            sigma = Convert.ToDouble(textBox1.Text);
-            double[] f = new double[NumOfPoints];
-            // Compute function values (rectangle)
-            for (int i = 0; i < NumOfPoints; i++)
-            {
-                f[i] = func_gauss(x[i], sigma);
-                //f[i] = func_rect(x[i]);
-            }
+            else if (!double.TryParse(textBox1.Text, out buf)) return;
+            sigma = buf;
+            Repaint();
 
-            // Don't know how to cast double array to complex 
+        }
 
-            complex[] FourierF = SlowDFT(f);
-            double[] RealFourierF = new double[FourierF.Length];
-            for (int i = 0; i < FourierF.Length; i++)
-            {
-                RealFourierF[i] = FourierF[i].Magnitude;
-            }
+        private void textBox2_TextChanged(object sender, EventArgs e)
+        {
+            double buf;
+            if (textBox2.Text.Length == 0) return;
+            else if (!double.TryParse(textBox2.Text, out buf)) return;
+            XStart = buf;
+            x = ArrayBuilder.CreateVector(XStart, XEnd, NumOfPoints);
+            Repaint();
+        }
 
-            cartesianChart1.Series = new SeriesCollection
-            {
-                new LineSeries
-                {
-                    Values =  new ChartValues<double> (f)
-                }
-            };
+        private void textBox4_TextChanged(object sender, EventArgs e)
+        {
+            double buf;
+            if (textBox4.Text.Length == 0) return;
+            else if (!double.TryParse(textBox4.Text, out buf)) return;
+            XEnd = buf;
+            x = ArrayBuilder.CreateVector(XStart, XEnd, NumOfPoints);
+            Repaint();
+        }
 
-            cartesianChart2.Series = new SeriesCollection
-            {
-                new LineSeries
-                {
-                    Values =  new ChartValues<double> (RealFourierF)
-                }
-            };
+        private void trackBar1_Scroll(object sender, EventArgs e)
+        {
+            NumOfPoints = trackBar1.Value;
+            x = ArrayBuilder.CreateVector(XStart, XEnd, NumOfPoints);
+            Repaint();
         }
     }
 }
