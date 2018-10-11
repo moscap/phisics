@@ -15,7 +15,14 @@ using LiveCharts.Wpf;
 namespace WindowsFormsApp1
 {
     public partial class Form1 : Form
-    {       
+    {
+        public int NumOfPoints { get; set; }
+        double XStart { get; set; }
+        double XEnd { get; set; }
+        double[] x = null;
+        double sigma;
+
+
 
         protected override void OnPaint(PaintEventArgs e)
         {            
@@ -59,28 +66,25 @@ namespace WindowsFormsApp1
 
         static double func_gauss(double x, double sigma)
         {
-            // Returns rect that is non-zero from -5 to 5.
             return Math.Exp(-x * x / (sigma * sigma * 2)) / (Math.Sqrt(2 * Math.PI) * sigma);
         }
 
         public Form1()
         {
             InitializeComponent();
+            NumOfPoints = trackBar1.Value;
+            XStart = Convert.ToDouble(textBox2.Text);
+            XEnd = Convert.ToDouble(textBox4.Text);
+            sigma = Convert.ToDouble(textBox1.Text);
 
-            var FourierFunc = new OxyPlot.PlotModel { Title = "Fourie" };
-            var SourceFunc = new OxyPlot.PlotModel { Title = "Source Func" };
-
-            int NumOfPoints = 100;
-            double XStart = -10.0;
-            double XEnd = 10.0;
-            var x = ArrayBuilder.CreateVector(XStart, XEnd, NumOfPoints);
+            x = ArrayBuilder.CreateVector(XStart, XEnd, NumOfPoints);
 
             double[] f = new double[NumOfPoints];
             // Compute function values (rectangle)
             for (int i = 0; i < NumOfPoints; i++)
             {
-                // f[i] = func_gauss(x[i], 1);
-                f[i] = func_rect(x[i]);
+                f[i] = func_gauss(x[i], sigma);
+                //f[i] = func_rect(x[i]);
             }
 
             // Don't know how to cast double array to complex 
@@ -107,20 +111,61 @@ namespace WindowsFormsApp1
                     Values =  new ChartValues<double> (RealFourierF)
                 }
             };
-
-            var lineSeriesF = new LineSeries();
-            this.plotView1.Model = FourierFunc;
             
 
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
+            Form2 NewForm = new Form2(this);    
+            NewForm.Show();
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private void label2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+            sigma = Convert.ToDouble(textBox1.Text);
+            double[] f = new double[NumOfPoints];
+            // Compute function values (rectangle)
+            for (int i = 0; i < NumOfPoints; i++)
+            {
+                f[i] = func_gauss(x[i], sigma);
+                //f[i] = func_rect(x[i]);
+            }
+
+            // Don't know how to cast double array to complex 
+
+            complex[] FourierF = SlowDFT(f);
+            double[] RealFourierF = new double[FourierF.Length];
+            for (int i = 0; i < FourierF.Length; i++)
+            {
+                RealFourierF[i] = FourierF[i].Magnitude;
+            }
+
+            cartesianChart1.Series = new SeriesCollection
+            {
+                new LineSeries
+                {
+                    Values =  new ChartValues<double> (f)
+                }
+            };
+
+            cartesianChart2.Series = new SeriesCollection
+            {
+                new LineSeries
+                {
+                    Values =  new ChartValues<double> (RealFourierF)
+                }
+            };
         }
     }
 }

@@ -67,3 +67,30 @@ C:\Users\d.kononykhin\Downloads\WindowsFormsApp1 2\WindowsFormsApp1 2\WindowsFor
 C:\Users\d.kononykhin\Downloads\WindowsFormsApp1 2\WindowsFormsApp1 2\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.csproj.CopyComplete
 C:\Users\d.kononykhin\Downloads\WindowsFormsApp1 2\WindowsFormsApp1 2\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.exe
 C:\Users\d.kononykhin\Downloads\WindowsFormsApp1 2\WindowsFormsApp1 2\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.pdb
+D:\GitHub\phisics\Downloads\ph\WindowsFormsApp1 2\WindowsFormsApp1\bin\Debug\WindowsFormsApp1.exe.config
+D:\GitHub\phisics\Downloads\ph\WindowsFormsApp1 2\WindowsFormsApp1\bin\Debug\WindowsFormsApp1.exe
+D:\GitHub\phisics\Downloads\ph\WindowsFormsApp1 2\WindowsFormsApp1\bin\Debug\WindowsFormsApp1.pdb
+D:\GitHub\phisics\Downloads\ph\WindowsFormsApp1 2\WindowsFormsApp1\bin\Debug\LiveCharts.dll
+D:\GitHub\phisics\Downloads\ph\WindowsFormsApp1 2\WindowsFormsApp1\bin\Debug\LiveCharts.WinForms.dll
+D:\GitHub\phisics\Downloads\ph\WindowsFormsApp1 2\WindowsFormsApp1\bin\Debug\LiveCharts.Wpf.dll
+D:\GitHub\phisics\Downloads\ph\WindowsFormsApp1 2\WindowsFormsApp1\bin\Debug\OxyPlot.dll
+D:\GitHub\phisics\Downloads\ph\WindowsFormsApp1 2\WindowsFormsApp1\bin\Debug\OxyPlot.WindowsForms.dll
+D:\GitHub\phisics\Downloads\ph\WindowsFormsApp1 2\WindowsFormsApp1\bin\Debug\OxyPlot.pdb
+D:\GitHub\phisics\Downloads\ph\WindowsFormsApp1 2\WindowsFormsApp1\bin\Debug\OxyPlot.xml
+D:\GitHub\phisics\Downloads\ph\WindowsFormsApp1 2\WindowsFormsApp1\bin\Debug\OxyPlot.WindowsForms.pdb
+D:\GitHub\phisics\Downloads\ph\WindowsFormsApp1 2\WindowsFormsApp1\bin\Debug\OxyPlot.WindowsForms.xml
+D:\GitHub\phisics\Downloads\ph\WindowsFormsApp1 2\WindowsFormsApp1\bin\Debug\LiveCharts.pdb
+D:\GitHub\phisics\Downloads\ph\WindowsFormsApp1 2\WindowsFormsApp1\bin\Debug\LiveCharts.xml
+D:\GitHub\phisics\Downloads\ph\WindowsFormsApp1 2\WindowsFormsApp1\bin\Debug\LiveCharts.Wpf.pdb
+D:\GitHub\phisics\Downloads\ph\WindowsFormsApp1 2\WindowsFormsApp1\bin\Debug\LiveCharts.Wpf.xml
+D:\GitHub\phisics\Downloads\ph\WindowsFormsApp1 2\WindowsFormsApp1\bin\Debug\LiveCharts.WinForms.pdb
+D:\GitHub\phisics\Downloads\ph\WindowsFormsApp1 2\WindowsFormsApp1\bin\Debug\LiveCharts.WinForms.xml
+D:\GitHub\phisics\Downloads\ph\WindowsFormsApp1 2\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.csprojAssemblyReference.cache
+D:\GitHub\phisics\Downloads\ph\WindowsFormsApp1 2\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.Form1.resources
+D:\GitHub\phisics\Downloads\ph\WindowsFormsApp1 2\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.Properties.Resources.resources
+D:\GitHub\phisics\Downloads\ph\WindowsFormsApp1 2\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.csproj.GenerateResource.cache
+D:\GitHub\phisics\Downloads\ph\WindowsFormsApp1 2\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.csproj.CoreCompileInputs.cache
+D:\GitHub\phisics\Downloads\ph\WindowsFormsApp1 2\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.csproj.CopyComplete
+D:\GitHub\phisics\Downloads\ph\WindowsFormsApp1 2\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.exe
+D:\GitHub\phisics\Downloads\ph\WindowsFormsApp1 2\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.pdb
+D:\GitHub\phisics\Downloads\ph\WindowsFormsApp1 2\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.Form2.resources
