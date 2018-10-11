@@ -133,6 +133,7 @@ namespace WindowsFormsApp1
 
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
+            if (textBox1.Text.Length == 0) return;
             sigma = Convert.ToDouble(textBox1.Text);
             double[] f = new double[NumOfPoints];
             // Compute function values (rectangle)
