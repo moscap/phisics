@@ -45,7 +45,7 @@ namespace WindowsFormsApp1
 
             return X;
         }
-
+        // ну тут ты знаешь, просто параметры добавил
         static double func_rect(double x, double start, double end)
         {
             // Returns rect that is non-zero from -5 to 5.
@@ -58,6 +58,9 @@ namespace WindowsFormsApp1
                 return 5;
             }
         }
+        // здесь выполняется все кроме пересоздания массива при
+        // изменении числа точек и изменения параметров
+        // измение массива х возлагатся на метод, в котором изменяеются его параметры
         void Repaint()
         {
             double[] f = new double[NumOfPoints];
@@ -92,7 +95,7 @@ namespace WindowsFormsApp1
                 }
             };
         }
-
+        // ставятся начальные значения
         public Form2()
         {
             InitializeComponent();
@@ -114,7 +117,8 @@ namespace WindowsFormsApp1
         {
 
         }
-
+        // дальше проверка длинны это проверка того что ты не удалили все из текст бокса
+        // а проверка приведения, это проверка того что в текст боксе число
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
             double buf;
