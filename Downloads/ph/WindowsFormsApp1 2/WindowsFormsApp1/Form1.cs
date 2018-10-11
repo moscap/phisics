@@ -56,6 +56,34 @@ namespace WindowsFormsApp1
         {
             return Math.Exp(-x * x / (sigma * sigma * 2)) / (Math.Sqrt(2 * Math.PI) * sigma);
         }
+        // приводим к нормальному виду
+        void FlipFlop(double[] f)
+        {
+            if (f.Length % 2 == 0)
+            {
+                for (int i = 0, j = f.Length / 2; j < f.Length; ++i, ++j)
+                {
+                    double buf = f[i];
+                    f[i] = f[j];
+                    f[j] = buf;
+                }
+            }
+            else
+            {
+                double mem = f[f.Length / 2];
+                for (int i = 0, j = f.Length / 2 + 1; j < f.Length; ++i, ++j)
+                {
+                    double buf = f[i];
+                    f[i] = f[j];
+                    f[j] = buf;
+                }
+                for(int i = f.Length / 2; i > 0; --i)
+                {
+                    f[i] = f[i - 1];
+                }
+                f[0] = mem;
+            }
+        }
         // здесь выполняется все кроме пересоздания массива при
         // изменении числа точек и изменения параметров
         // измение массива х возлагатся на метод, в котором изменяеются его параметры
@@ -76,7 +104,7 @@ namespace WindowsFormsApp1
             {
                 RealFourierF[i] = FourierF[i].Magnitude;
             }
-
+            FlipFlop(RealFourierF);
             cartesianChart1.Series = new SeriesCollection
             {
                 new LineSeries
