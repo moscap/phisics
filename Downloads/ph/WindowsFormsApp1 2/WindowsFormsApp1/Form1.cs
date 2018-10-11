@@ -52,18 +52,6 @@ namespace WindowsFormsApp1
             return X;
         }
 
-        static double func_rect(double x)
-        {
-            // Returns rect that is non-zero from -5 to 5.
-            if (x < -5 || x > 5) {
-                return 0;
-            }
-            else
-            {
-                return 5;
-            }
-        }
-
         static double func_gauss(double x, double sigma)
         {
             return Math.Exp(-x * x / (sigma * sigma * 2)) / (Math.Sqrt(2 * Math.PI) * sigma);
@@ -76,7 +64,6 @@ namespace WindowsFormsApp1
             for (int i = 0; i < NumOfPoints; i++)
             {
                 f[i] = func_gauss(x[i], sigma);
-                //f[i] = func_rect(x[i]);
             }
 
             // Don't know how to cast double array to complex 
@@ -118,7 +105,7 @@ namespace WindowsFormsApp1
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Form2 NewForm = new Form2(this);    
+            Form2 NewForm = new Form2();    
             NewForm.Show();
         }
 

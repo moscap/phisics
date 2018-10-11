@@ -104,18 +104,18 @@
             // 
             // trackBar1
             // 
-            this.trackBar1.Location = new System.Drawing.Point(62, 538);
+            this.trackBar1.Location = new System.Drawing.Point(62, 515);
             this.trackBar1.Maximum = 500;
             this.trackBar1.Minimum = 30;
             this.trackBar1.Name = "trackBar1";
-            this.trackBar1.Size = new System.Drawing.Size(203, 45);
+            this.trackBar1.Size = new System.Drawing.Size(200, 45);
             this.trackBar1.TabIndex = 6;
             this.trackBar1.Value = 100;
             this.trackBar1.Scroll += new System.EventHandler(this.trackBar1_Scroll);
             // 
             // textBox2
             // 
-            this.textBox2.Location = new System.Drawing.Point(62, 589);
+            this.textBox2.Location = new System.Drawing.Point(62, 566);
             this.textBox2.Name = "textBox2";
             this.textBox2.Size = new System.Drawing.Size(159, 20);
             this.textBox2.TabIndex = 7;
@@ -124,7 +124,7 @@
             // 
             // textBox4
             // 
-            this.textBox4.Location = new System.Drawing.Point(62, 629);
+            this.textBox4.Location = new System.Drawing.Point(62, 592);
             this.textBox4.Name = "textBox4";
             this.textBox4.Size = new System.Drawing.Size(159, 20);
             this.textBox4.TabIndex = 9;
@@ -134,7 +134,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(227, 592);
+            this.label2.Location = new System.Drawing.Point(227, 569);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(33, 13);
             this.label2.TabIndex = 10;
@@ -144,7 +144,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(227, 632);
+            this.label3.Location = new System.Drawing.Point(227, 595);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(36, 13);
             this.label3.TabIndex = 11;
@@ -168,6 +168,7 @@
             this.Controls.Add(this.plotView1);
             this.Name = "Form1";
             this.Text = "Form1";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).EndInit();
             this.ResumeLayout(false);
