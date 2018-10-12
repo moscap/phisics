@@ -28,30 +28,6 @@ namespace WindowsFormsApp1
         {            
         }
 
-        // Maybe it should have complex array
-        static complex[] SlowDFT(double[] x)
-        {
-            int N = x.Length;
-            complex[] X = new complex[N];
-
-            for (int k = 0; k < N; k++)
-            {
-                X[k] = new complex(0);
-
-                for (int n = 0; n < N; n++)
-                {
-                    complex temp = complex.from_polar(
-                        1,
-                        -2 * Math.PI * n * k / N
-                    );
-                    temp *= new complex(x[n]); // how to overload *= ??
-                    X[k] += temp;
-                }
-            }
-
-            return X;
-        }
-
         static double func_gauss(double x, double sigma)
         {
             return Math.Exp(-x * x / (sigma * sigma * 2)) / (Math.Sqrt(2 * Math.PI) * sigma);
@@ -98,7 +74,7 @@ namespace WindowsFormsApp1
 
             // Don't know how to cast double array to complex 
 
-            complex[] FourierF = SlowDFT(f);
+            complex[] FourierF = complex.SlowDFT(f);
             double[] RealFourierF = new double[FourierF.Length];
             for (int i = 0; i < FourierF.Length; i++)
             {

@@ -71,5 +71,28 @@ namespace WindowsFormsApp1
         {
             return real + " + i " + imag;
         }
+
+        public static complex[] SlowDFT(double[] x)
+        {
+            int N = x.Length;
+            complex[] X = new complex[N];
+
+            for (int k = 0; k < N; k++)
+            {
+                X[k] = new complex(0);
+
+                for (int n = 0; n < N; n++)
+                {
+                    complex temp = complex.from_polar(
+                        1,
+                        -2 * Math.PI * n * k / N
+                    );
+                    temp *= new complex(x[n]); // how to overload *= ??                    
+                    X[k] += temp;
+                }
+            }
+
+            return X;
+        }
     }
 }
