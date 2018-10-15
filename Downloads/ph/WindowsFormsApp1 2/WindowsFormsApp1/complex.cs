@@ -90,6 +90,8 @@ namespace WindowsFormsApp1
                     temp *= new complex(x[n]); // how to overload *= ??                    
                     X[k] += temp;
                 }
+                complex koef = new complex(1.0 / Math.Sqrt(x.Length), 0);
+                X[k] *= koef;
             }
 
             return X;

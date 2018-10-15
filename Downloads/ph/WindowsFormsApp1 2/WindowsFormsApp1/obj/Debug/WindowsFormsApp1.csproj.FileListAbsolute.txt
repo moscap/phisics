@@ -121,3 +121,5 @@ C:\Users\mosca\Source\Repos\phisics\Downloads\ph\WindowsFormsApp1 2\WindowsForms
 C:\Users\mosca\Source\Repos\phisics\Downloads\ph\WindowsFormsApp1 2\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.csproj.CopyComplete
 C:\Users\mosca\Source\Repos\phisics\Downloads\ph\WindowsFormsApp1 2\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.exe
 C:\Users\mosca\Source\Repos\phisics\Downloads\ph\WindowsFormsApp1 2\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.pdb
+D:\GitHub\phisics\Downloads\ph\WindowsFormsApp1 2\WindowsFormsApp1\bin\Debug\MathNet.Numerics.dll
+D:\GitHub\phisics\Downloads\ph\WindowsFormsApp1 2\WindowsFormsApp1\bin\Debug\MathNet.Numerics.xml

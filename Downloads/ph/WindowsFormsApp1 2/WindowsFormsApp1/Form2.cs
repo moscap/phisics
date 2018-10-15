@@ -11,6 +11,7 @@ using OxyPlot;
 using LiveCharts;
 using LiveCharts.WinForms;
 using LiveCharts.Wpf;
+using MathNet.Numerics;
 
 namespace WindowsFormsApp1
 {
@@ -35,6 +36,10 @@ namespace WindowsFormsApp1
             {
                 return 5;
             }
+        }
+        static double trans_func_rect(double x, double end)
+        {
+            return Math.Abs(end * 2 * 5 * Trig.Sinc(x * end));
         }
         // приводим к нормальному виду
         void FlipFlop(double[] f)
@@ -70,36 +75,77 @@ namespace WindowsFormsApp1
         void Repaint()
         {
             double[] f = new double[NumOfPoints];
-            // Compute function values (rectangle)
+
             for (int i = 0; i < NumOfPoints; i++)
             {
                 f[i] = func_rect(x[i], Start, End);
             }
 
-            // Don't know how to cast double array to complex 
-
             complex[] FourierF = complex.SlowDFT(f);
+
             double[] RealFourierF = new double[FourierF.Length];
+
             for (int i = 0; i < FourierF.Length; i++)
             {
                 RealFourierF[i] = FourierF[i].Magnitude;
             }
+            double koef = RealFourierF[0];
             FlipFlop(RealFourierF);
+
+            var ListPoints = new ChartValues<LiveCharts.Defaults.ObservablePoint>();
+            for (int i = 0; i < x.Length; i++)
+            {
+                ListPoints.Add(new LiveCharts.Defaults.ObservablePoint
+                {
+                    X = x[i],
+                    Y = f[i]
+                });
+            }
+            x = ArrayBuilder.CreateVector(-Math.PI / ((XEnd - XStart) / NumOfPoints),
+                Math.PI / ((XEnd - XStart) / NumOfPoints), NumOfPoints);
             cartesianChart1.Series = new SeriesCollection
             {
                 new LineSeries
                 {
-                    Values =  new ChartValues<double> (f)
+                    // Values =  new ChartValues<double> (f)
+                    Values =  ListPoints
                 }
             };
+            var yy = ArrayBuilder.CreateVector(-Math.PI / ((XEnd - XStart) / NumOfPoints),
+                Math.PI / ((XEnd - XStart) / NumOfPoints), NumOfPoints);
+            // TODO: change x axis for Fourier transformed function
+            var ListPoints2 = new ChartValues<LiveCharts.Defaults.ObservablePoint>();
+            for (int i = 0; i < yy.Length; i++)
+            {
+                ListPoints2.Add(new LiveCharts.Defaults.ObservablePoint
+                {
+                    X = yy[i],
+                    Y = RealFourierF[i] / koef
+                });
+            }
+
+            var ListPointsAnalytRect = new ChartValues<LiveCharts.Defaults.ObservablePoint>();
+            for (int i = 0; i < yy.Length; i++)
+            {
+                ListPointsAnalytRect.Add(new LiveCharts.Defaults.ObservablePoint
+                {
+                    X = yy[i],
+                    Y = trans_func_rect(yy[i], End) / trans_func_rect(0, End)
+                });
+            }
 
             cartesianChart2.Series = new SeriesCollection
             {
                 new LineSeries
                 {
-                    Values =  new ChartValues<double> (RealFourierF)
+                    Values = ListPoints2
+                },
+                new LineSeries
+                {
+                    Values = ListPointsAnalytRect
                 }
             };
+
         }
         // ставятся начальные значения
         public Form2()
