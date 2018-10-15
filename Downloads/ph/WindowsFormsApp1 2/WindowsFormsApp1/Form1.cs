@@ -56,11 +56,11 @@ namespace WindowsFormsApp1
                     f[i] = f[j];
                     f[j] = buf;
                 }
-                for(int i = f.Length / 2; i > 0; --i)
+                for (int i = f.Length / 2; i < f.Length - 1; ++i)
                 {
-                    f[i] = f[i - 1];
+                    f[i] = f[i + 1];
                 }
-                f[0] = mem;
+                f[f.Length - 1] = mem;
             }
         }
         // здесь выполняется все кроме пересоздания массива при
