@@ -37,9 +37,9 @@ namespace WindowsFormsApp1
                 return 5;
             }
         }
-        static double trans_func_rect(double x, double end)
+        static double trans_func_rect(double x, double start, double end)
         {
-            return Math.Abs(end * 2 * 5 * Trig.Sinc(x * end));
+            return Math.Abs((end - start) * 5 * Trig.Sinc(x * ((end - start) / 2.0) / Math.PI));
         }
         // приводим к нормальному виду
         void FlipFlop(double[] f)
@@ -130,7 +130,7 @@ namespace WindowsFormsApp1
                 ListPointsAnalytRect.Add(new LiveCharts.Defaults.ObservablePoint
                 {
                     X = yy[i],
-                    Y = trans_func_rect(yy[i], End) / trans_func_rect(0, End)
+                    Y = trans_func_rect(yy[i], Start, End) / trans_func_rect(0, Start, End)
                 });
             }
 
