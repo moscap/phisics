@@ -101,8 +101,6 @@ namespace WindowsFormsApp1
                     Y = f[i]
                 });
             }
-            x = ArrayBuilder.CreateVector(-Math.PI / ((XEnd - XStart) / NumOfPoints),
-                Math.PI / ((XEnd - XStart) / NumOfPoints), NumOfPoints);
             cartesianChart1.Series = new SeriesCollection
             {
                 new LineSeries
