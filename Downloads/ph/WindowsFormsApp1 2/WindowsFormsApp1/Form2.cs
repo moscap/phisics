@@ -128,7 +128,8 @@ namespace WindowsFormsApp1
                 ListPointsAnalytRect.Add(new LiveCharts.Defaults.ObservablePoint
                 {
                     X = yy[i],
-                    Y = trans_func_rect(yy[i], Start, End) / trans_func_rect(0, Start, End)
+                    Y = trans_func_rect(yy[i], Math.Max(Start , XStart), Math.Min(End, XEnd)) / 
+                        trans_func_rect(0, Math.Max(Start, XStart), Math.Min(End, XEnd))
                 });
             }
 
