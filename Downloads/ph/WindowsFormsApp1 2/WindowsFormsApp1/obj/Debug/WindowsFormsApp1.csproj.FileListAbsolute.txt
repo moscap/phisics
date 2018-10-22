@@ -152,3 +152,32 @@ D:\GitHub\moscap\phisics\phisics\Downloads\ph\WindowsFormsApp1 2\WindowsFormsApp
 D:\GitHub\moscap\phisics\phisics\Downloads\ph\WindowsFormsApp1 2\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.csproj.CopyComplete
 D:\GitHub\moscap\phisics\phisics\Downloads\ph\WindowsFormsApp1 2\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.exe
 D:\GitHub\moscap\phisics\phisics\Downloads\ph\WindowsFormsApp1 2\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.pdb
+F:\старый комп\Users\mosca\source\repos\phisics\Downloads\ph\WindowsFormsApp1 2\WindowsFormsApp1\bin\Debug\WindowsFormsApp1.exe.config
+F:\старый комп\Users\mosca\source\repos\phisics\Downloads\ph\WindowsFormsApp1 2\WindowsFormsApp1\bin\Debug\WindowsFormsApp1.exe
+F:\старый комп\Users\mosca\source\repos\phisics\Downloads\ph\WindowsFormsApp1 2\WindowsFormsApp1\bin\Debug\WindowsFormsApp1.pdb
+F:\старый комп\Users\mosca\source\repos\phisics\Downloads\ph\WindowsFormsApp1 2\WindowsFormsApp1\bin\Debug\LiveCharts.dll
+F:\старый комп\Users\mosca\source\repos\phisics\Downloads\ph\WindowsFormsApp1 2\WindowsFormsApp1\bin\Debug\LiveCharts.WinForms.dll
+F:\старый комп\Users\mosca\source\repos\phisics\Downloads\ph\WindowsFormsApp1 2\WindowsFormsApp1\bin\Debug\LiveCharts.Wpf.dll
+F:\старый комп\Users\mosca\source\repos\phisics\Downloads\ph\WindowsFormsApp1 2\WindowsFormsApp1\bin\Debug\MathNet.Numerics.dll
+F:\старый комп\Users\mosca\source\repos\phisics\Downloads\ph\WindowsFormsApp1 2\WindowsFormsApp1\bin\Debug\OxyPlot.dll
+F:\старый комп\Users\mosca\source\repos\phisics\Downloads\ph\WindowsFormsApp1 2\WindowsFormsApp1\bin\Debug\OxyPlot.WindowsForms.dll
+F:\старый комп\Users\mosca\source\repos\phisics\Downloads\ph\WindowsFormsApp1 2\WindowsFormsApp1\bin\Debug\MathNet.Numerics.xml
+F:\старый комп\Users\mosca\source\repos\phisics\Downloads\ph\WindowsFormsApp1 2\WindowsFormsApp1\bin\Debug\OxyPlot.pdb
+F:\старый комп\Users\mosca\source\repos\phisics\Downloads\ph\WindowsFormsApp1 2\WindowsFormsApp1\bin\Debug\OxyPlot.xml
+F:\старый комп\Users\mosca\source\repos\phisics\Downloads\ph\WindowsFormsApp1 2\WindowsFormsApp1\bin\Debug\OxyPlot.WindowsForms.pdb
+F:\старый комп\Users\mosca\source\repos\phisics\Downloads\ph\WindowsFormsApp1 2\WindowsFormsApp1\bin\Debug\OxyPlot.WindowsForms.xml
+F:\старый комп\Users\mosca\source\repos\phisics\Downloads\ph\WindowsFormsApp1 2\WindowsFormsApp1\bin\Debug\LiveCharts.pdb
+F:\старый комп\Users\mosca\source\repos\phisics\Downloads\ph\WindowsFormsApp1 2\WindowsFormsApp1\bin\Debug\LiveCharts.xml
+F:\старый комп\Users\mosca\source\repos\phisics\Downloads\ph\WindowsFormsApp1 2\WindowsFormsApp1\bin\Debug\LiveCharts.Wpf.pdb
+F:\старый комп\Users\mosca\source\repos\phisics\Downloads\ph\WindowsFormsApp1 2\WindowsFormsApp1\bin\Debug\LiveCharts.Wpf.xml
+F:\старый комп\Users\mosca\source\repos\phisics\Downloads\ph\WindowsFormsApp1 2\WindowsFormsApp1\bin\Debug\LiveCharts.WinForms.pdb
+F:\старый комп\Users\mosca\source\repos\phisics\Downloads\ph\WindowsFormsApp1 2\WindowsFormsApp1\bin\Debug\LiveCharts.WinForms.xml
+F:\старый комп\Users\mosca\source\repos\phisics\Downloads\ph\WindowsFormsApp1 2\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.csprojAssemblyReference.cache
+F:\старый комп\Users\mosca\source\repos\phisics\Downloads\ph\WindowsFormsApp1 2\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.Form1.resources
+F:\старый комп\Users\mosca\source\repos\phisics\Downloads\ph\WindowsFormsApp1 2\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.Form2.resources
+F:\старый комп\Users\mosca\source\repos\phisics\Downloads\ph\WindowsFormsApp1 2\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.Properties.Resources.resources
+F:\старый комп\Users\mosca\source\repos\phisics\Downloads\ph\WindowsFormsApp1 2\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.csproj.GenerateResource.cache
+F:\старый комп\Users\mosca\source\repos\phisics\Downloads\ph\WindowsFormsApp1 2\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.csproj.CoreCompileInputs.cache
+F:\старый комп\Users\mosca\source\repos\phisics\Downloads\ph\WindowsFormsApp1 2\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.csproj.CopyComplete
+F:\старый комп\Users\mosca\source\repos\phisics\Downloads\ph\WindowsFormsApp1 2\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.exe
+F:\старый комп\Users\mosca\source\repos\phisics\Downloads\ph\WindowsFormsApp1 2\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.pdb
