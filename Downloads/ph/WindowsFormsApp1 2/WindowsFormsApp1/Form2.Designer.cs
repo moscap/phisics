@@ -99,7 +99,7 @@
             // trackBar1
             // 
             this.trackBar1.Location = new System.Drawing.Point(3, 53);
-            this.trackBar1.Maximum = 14;
+            this.trackBar1.Maximum = 12;
             this.trackBar1.Minimum = 7;
             this.trackBar1.Name = "trackBar1";
             this.trackBar1.Size = new System.Drawing.Size(84, 19);
