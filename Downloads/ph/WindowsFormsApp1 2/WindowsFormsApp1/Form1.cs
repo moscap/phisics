@@ -148,8 +148,10 @@ namespace WindowsFormsApp1
             tableLayoutPanel1.Height = (int)(resolution.Height * (10.0 / 11.0)) ;
             elementHost1.Height = (int)(tableLayoutPanel1.Height * tableLayoutPanel1.RowStyles[0].Height);
             elementHost1.Width = (int)(tableLayoutPanel1.Width * tableLayoutPanel1.ColumnStyles[0].Width);
-            elementHost2.Height = (int)(tableLayoutPanel1.Height * tableLayoutPanel1.RowStyles[1].Height);
+            elementHost2.Height = (int)(tableLayoutPanel1.Height * tableLayoutPanel1.RowStyles[0].Height);
             elementHost2.Width = (int)(tableLayoutPanel1.Width * tableLayoutPanel1.ColumnStyles[1].Width);
+            tableLayoutPanel7.Height = (int)(tableLayoutPanel1.Height * tableLayoutPanel1.RowStyles[1].Height);
+            tableLayoutPanel7.Width = (int)(tableLayoutPanel1.Width * tableLayoutPanel1.ColumnStyles[1].Width);
             NumOfPoints = (int)Math.Pow(2, trackBar1.Value);
             XStart = Convert.ToDouble(textBox2.Text);
             XEnd = Convert.ToDouble(textBox4.Text);
@@ -210,6 +212,12 @@ namespace WindowsFormsApp1
             NumOfPoints = (int)Math.Pow(2, trackBar1.Value);
             x = ArrayBuilder.CreateVector(XStart, XEnd, NumOfPoints);
             Repaint();
+        }
+
+        private void tableLayoutPanel7_Paint(object sender, PaintEventArgs e)
+        {
+            Pen pen = new Pen(Color.FromArgb(255, 0, 0, 0));
+            e.Graphics.DrawLine(pen, 20, 10, tableLayoutPanel7.Width, tableLayoutPanel7.Height);
         }
     }
 }
