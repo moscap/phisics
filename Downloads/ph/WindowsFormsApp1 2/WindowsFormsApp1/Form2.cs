@@ -150,14 +150,7 @@ namespace WindowsFormsApp1
         public Form2()
         {
             InitializeComponent();
-            Size resolution = System.Windows.Forms.Screen.PrimaryScreen.Bounds.Size;
-            tableLayoutPanel1.Width = (int)(resolution.Width * (15.0 / 16.0));
-            tableLayoutPanel1.Height = (int)(resolution.Height * (10.0 / 11.0));
-            elementHost1.Height = (int)(tableLayoutPanel1.Height * tableLayoutPanel1.RowStyles[0].Height / 100);
-            elementHost1.Width = (int)(tableLayoutPanel1.Width * tableLayoutPanel1.ColumnStyles[0].Width / 100);
-            elementHost2.Height = (int)(tableLayoutPanel1.Height * tableLayoutPanel1.RowStyles[0].Height / 100);
-            elementHost2.Width = (int)(tableLayoutPanel1.Width * tableLayoutPanel1.ColumnStyles[1].Width / 100);
-            NumOfPoints = (int)Math.Pow(2, trackBar1.Value);
+            NumOfPoints = trackBar1.Value;
             XStart = Convert.ToDouble(textBox3.Text);
             XEnd = Convert.ToDouble(textBox4.Text);
             Start = Convert.ToDouble(textBox1.Text);
@@ -217,7 +210,7 @@ namespace WindowsFormsApp1
 
         private void trackBar1_Scroll(object sender, EventArgs e)
         {
-            NumOfPoints = (int)Math.Pow(2, trackBar1.Value);
+            NumOfPoints = trackBar1.Value;
             x = ArrayBuilder.CreateVector(XStart, XEnd, NumOfPoints);
             Repaint();
         }

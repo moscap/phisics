@@ -150,8 +150,8 @@ namespace WindowsFormsApp1
             elementHost1.Width = (int)(tableLayoutPanel1.Width * tableLayoutPanel1.ColumnStyles[0].Width / 100);
             elementHost2.Height = (int)(tableLayoutPanel1.Height * tableLayoutPanel1.RowStyles[0].Height / 100);
             elementHost2.Width = (int)(tableLayoutPanel1.Width * tableLayoutPanel1.ColumnStyles[1].Width / 100);
-            //tableLayoutPanel7.Height = (int)(tableLayoutPanel1.Height * tableLayoutPanel1.RowStyles[1].Height);
-            //tableLayoutPanel7.Width = (int)(tableLayoutPanel1.Width * tableLayoutPanel1.ColumnStyles[1].Width);
+            tableLayoutPanel7.Height = (int)(tableLayoutPanel1.Height * tableLayoutPanel1.RowStyles[1].Height);
+            tableLayoutPanel7.Width = (int)(tableLayoutPanel1.Width * tableLayoutPanel1.ColumnStyles[1].Width);
             NumOfPoints = (int)Math.Pow(2, trackBar1.Value);
             XStart = Convert.ToDouble(textBox2.Text);
             XEnd = Convert.ToDouble(textBox4.Text);
@@ -214,10 +214,23 @@ namespace WindowsFormsApp1
             Repaint();
         }
 
-        //private void tableLayoutPanel7_Paint(object sender, PaintEventArgs e)
-        //{
-        //    Pen pen = new Pen(Color.FromArgb(255, 0, 0, 0));
-        //    e.Graphics.DrawLine(pen, 20, 10, tableLayoutPanel7.Width, tableLayoutPanel7.Height);
-        //}
+        private void tableLayoutPanel7_Paint_1(object sender, PaintEventArgs e)
+        {
+            Graphics graphics = e.Graphics;
+            SolidBrush black_brush = new SolidBrush(Color.Black);
+            SolidBrush blue_brush = new SolidBrush(Color.Blue);
+            SolidBrush red_brush = new SolidBrush(Color.Red);
+            int base_x = tableLayoutPanel7.Width / 9; // единицы измерения длинны
+            int base_y = tableLayoutPanel7.Height / 9; // единицы измерения длинны
+            graphics.FillRectangle(black_brush, new Rectangle(4 * base_x, base_y, base_x, base_y / 5));
+            graphics.FillRectangle(blue_brush, new Rectangle(4 * base_x, 8 * base_y - base_y / 5, base_x, base_y / 5));
+            graphics.FillRectangle(black_brush, new Rectangle(base_x, 4 * base_y, base_x, base_y));
+            graphics.FillRectangle(red_brush, new Rectangle(2 * base_x, 4 * base_y + (int)(base_y * 0.4), base_x / 10, base_y / 5));
+            graphics.RotateTransform((float)(Math.Atan((double)base_y / (double)base_x) * 180 / Math.PI));
+            graphics.FillRectangle(black_brush, new Rectangle((int)Math.Sqrt(Math.Pow(4.5 * base_x, 2) + Math.Pow(4.5 * base_y, 2)) 
+                - base_x / 2, 0, base_x, base_y / 5));
+
+
+        }
     }
 }
