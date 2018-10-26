@@ -21,6 +21,8 @@ namespace WindowsFormsApp1
         double XEnd { get; set; }
         double[] x = null;
         double sigma;
+        Graphics graphics { get; set; }
+        Rectangle moving_length { get; set; }
 
 
 
@@ -157,6 +159,7 @@ namespace WindowsFormsApp1
             XEnd = Convert.ToDouble(textBox4.Text);
             sigma = Convert.ToDouble(textBox1.Text);
             x = ArrayBuilder.CreateVector(XStart, XEnd, NumOfPoints);
+            graphics = tableLayoutPanel7.CreateGraphics(); 
             Repaint();
         }
 
@@ -231,6 +234,34 @@ namespace WindowsFormsApp1
                 - base_x / 2, 0, base_x, base_y / 5));
 
 
+        }
+
+        private void tableLayoutPanel6_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            SolidBrush red_brush = new SolidBrush(Color.Red);
+            int base_x = tableLayoutPanel7.Width / 9; // единицы измерения длинны
+            int base_y = tableLayoutPanel7.Height / 9; // единицы измерения длинны
+            moving_length = new Rectangle(8 * base_x, 4 * base_y, base_x / 5, base_y);
+            graphics.FillRectangle(red_brush, moving_length);
+
+            timer1.Enabled = true;
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            textBox3.Text = moving_length.Left.ToString();
+            Graphics graphics = tableLayoutPanel7.CreateGraphics();
+            SolidBrush white_brush = new SolidBrush(Color.White);
+            SolidBrush red_brush = new SolidBrush(Color.Red);
+            graphics.FillRectangle(white_brush, moving_length);
+            moving_length = new Rectangle(moving_length.Left - 10, moving_length.Top,
+                moving_length.Width, moving_length.Height);
+            graphics.FillRectangle(red_brush, moving_length);
         }
     }
 }
