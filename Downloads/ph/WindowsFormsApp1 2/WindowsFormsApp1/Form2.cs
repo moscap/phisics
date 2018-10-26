@@ -24,52 +24,7 @@ namespace WindowsFormsApp1
         double[] x = null;
         double Start { get; set; }
         double End { get; set; }
-
-        // ну тут ты знаешь, просто параметры добавил
-        static double func_rect(double x, double start, double end)
-        {
-            // Returns rect that is non-zero from -5 to 5.
-            if (x < start || x > end)
-            {
-                return 0;
-            }
-            else
-            {
-                return 5;
-            }
-        }
-        static double trans_func_rect(double x, double start, double end)
-        {
-            return Math.Abs((end - start) * 5 * Trig.Sinc(x * ((end - start) / 2.0) / Math.PI));
-        }
-        // приводим к нормальному виду
-        void FlipFlop(double[] f)
-        {
-            if (f.Length % 2 == 0)
-            {
-                for (int i = 0, j = f.Length / 2; j < f.Length; ++i, ++j)
-                {
-                    double buf = f[i];
-                    f[i] = f[j];
-                    f[j] = buf;
-                }
-            }
-            else
-            {
-                double mem = f[f.Length / 2];
-                for (int i = 0, j = f.Length / 2 + 1; j < f.Length; ++i, ++j)
-                {
-                    double buf = f[i];
-                    f[i] = f[j];
-                    f[j] = buf;
-                }
-                for (int i = f.Length / 2; i < f.Length - 1; ++i)
-                {
-                    f[i] = f[i + 1];
-                }
-                f[f.Length - 1] = mem;
-            }
-        }
+       
         // здесь выполняется все кроме пересоздания массива при
         // изменении числа точек и изменения параметров
         // измение массива х возлагатся на метод, в котором изменяеются его параметры
@@ -79,74 +34,18 @@ namespace WindowsFormsApp1
 
             for (int i = 0; i < NumOfPoints; i++)
             {
-                f[i] = new Complex(func_rect(x[i], Start, End), 0);
+                f[i] = new Complex(Functions.func_rect(x[i], Start, End), 0);
             }
-            Complex[] func = new Complex[NumOfPoints];
-            f.CopyTo(func, 0);
-
-            complex.FastDFT(f);
-
-            double[] RealFourierF = new double[f.Length];
-
-            for (int i = 0; i < f.Length; i++)
-            {
-                RealFourierF[i] = f[i].Magnitude;
-            }
-            double koef = RealFourierF[0];
-            FlipFlop(RealFourierF);
-
-            var ListPoints = new ChartValues<LiveCharts.Defaults.ObservablePoint>();
-            for (int i = 0; i < x.Length; i++)
-            {
-                ListPoints.Add(new LiveCharts.Defaults.ObservablePoint
-                {
-                    X = x[i],
-                    Y = func[i].Re
-                });
-            }
-            cartesianChart1.Series = new SeriesCollection
-            {
-                new LineSeries
-                {
-                    // Values =  new ChartValues<double> (f)
-                    Values =  ListPoints
-                }
-            };
-            var yy = ArrayBuilder.CreateVector(-Math.PI / ((XEnd - XStart) / NumOfPoints),
+            Functions.complex_re_paint(cartesianChart1, x, f);
+            Functions.FastDFT(f);
+            double koef = f[0].Magnitude;
+            Functions.FlipFlop(f);
+            x = ArrayBuilder.CreateVector(-Math.PI / ((XEnd - XStart) / NumOfPoints),
                 Math.PI / ((XEnd - XStart) / NumOfPoints), NumOfPoints);
-            // TODO: change x axis for Fourier transformed function
-            var ListPoints2 = new ChartValues<LiveCharts.Defaults.ObservablePoint>();
-            for (int i = 0; i < yy.Length; i++)
-            {
-                ListPoints2.Add(new LiveCharts.Defaults.ObservablePoint
-                {
-                    X = yy[i],
-                    Y = RealFourierF[i] / koef
-                });
-            }
-
-            var ListPointsAnalytRect = new ChartValues<LiveCharts.Defaults.ObservablePoint>();
-            for (int i = 0; i < yy.Length; i++)
-            {
-                ListPointsAnalytRect.Add(new LiveCharts.Defaults.ObservablePoint
-                {
-                    X = yy[i],
-                    Y = trans_func_rect(yy[i], Math.Max(Start , XStart), Math.Min(End, XEnd)) / 
-                        trans_func_rect(0, Math.Max(Start, XStart), Math.Min(End, XEnd))
-                });
-            }
-
-            cartesianChart2.Series = new SeriesCollection
-            {
-                new LineSeries
-                {
-                    Values = ListPoints2
-                },
-                new LineSeries
-                {
-                    Values = ListPointsAnalytRect
-                }
-            };
+            Functions.complex_magnitude_paint(cartesianChart2, x, f, koef);
+            Func<double, double> t_r_f = (x) => Functions.trans_func_rect(x, Math.Max(Start, XStart), Math.Min(End, XEnd)) /
+                Functions.trans_func_rect(0, Math.Max(Start, XStart), Math.Min(End, XEnd));
+            Functions.double_paint_with_func(cartesianChart2, x, x, t_r_f);
 
         }
         // ставятся начальные значения

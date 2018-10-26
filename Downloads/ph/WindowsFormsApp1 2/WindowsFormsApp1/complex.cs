@@ -9,37 +9,22 @@ namespace WindowsFormsApp1
 {
     class complex
     {
-        public double real;
-        public double imag;
-
-        public double Magnitude => Math.Sqrt(real * real + imag * imag);
-
-        public double Phase
-        {
-            get
-            {
-                if (real != 0)
-                {
-                    return Math.Atan(imag / real);
-                }
-                if (imag > 0)
-                {
-                    return 90;
-                }
-
-                return -90;
-            }
-        }
+        public Complex num { get; set; }
+        public double Magnitude => num.Magnitude;
+        public double Phase => num.Phase;
         public complex()
         {
-            real = new double();
-            imag = new double();
+            num = new Complex();
         }
 
         public complex(double real, double imag = 0)
         {
-            this.real = real;
-            this.imag = imag;
+            num = new Complex(real, imag);
+        }
+
+        public complex(Complex num)
+        {
+            this.num = new Complex(num);
         }
 
         public static complex from_polar(double r, double theta)
@@ -51,26 +36,25 @@ namespace WindowsFormsApp1
 
         public static complex operator +(complex a, complex b)
         {
-            complex num = new complex(a.real + b.real, a.imag + b.imag);
+            complex num = new complex(a.num + b.num);
             return num;
         }
 
         public static complex operator -(complex a, complex b)
         {
-            complex num = new complex(a.real - b.real, a.imag - b.imag);
+            complex num = new complex(a.num - b.num);
             return num;
         }
 
         public static complex operator *(complex a, complex b)
         {
-            complex num = new complex(a.real * b.real - a.imag * b.imag,
-                                      a.real * b.imag + a.imag * b.real);
+            complex num = new complex(a.num * b.num);
             return num;
         }
 
         public override string ToString()
         {
-            return real + " + i " + imag;
+            return this.num.ToString();
         }
 
         public static void FastDFT(Complex[] x, int mode = 1)

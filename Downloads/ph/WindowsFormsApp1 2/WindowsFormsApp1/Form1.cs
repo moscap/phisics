@@ -11,6 +11,7 @@ using OxyPlot;
 using LiveCharts;
 using LiveCharts.WinForms;
 using LiveCharts.Wpf;
+using AForge.Math;
 
 namespace WindowsFormsApp1
 {
@@ -23,122 +24,27 @@ namespace WindowsFormsApp1
         double sigma;
         Graphics graphics { get; set; }
         Rectangle moving_length { get; set; }
-
-
-
-        protected override void OnPaint(PaintEventArgs e)
-        {            
-        }
-        static double trans_func_gauss(double w, double sigma)
-        {
-            return Math.Exp(-w * w * sigma * sigma / 2.0) * Math.Sqrt(sigma) / Math.Sqrt(Math.PI * 2);
-        }
-        static double func_gauss(double x, double sigma)
-        {
-            return Math.Exp(-x * x / (sigma * sigma * 2.0)) / (Math.Sqrt(2.0 * Math.PI) * sigma);
-        }
         // приводим к нормальному виду
-        void FlipFlop(double[] f)
-        {
-            if (f.Length % 2 == 0)
-            {
-                for (int i = 0, j = f.Length / 2; j < f.Length; ++i, ++j)
-                {
-                    double buf = f[i];
-                    f[i] = f[j];
-                    f[j] = buf;
-                }
-            }
-            else
-            {
-                double mem = f[f.Length / 2];
-                for (int i = 0, j = f.Length / 2 + 1; j < f.Length; ++i, ++j)
-                {
-                    double buf = f[i];
-                    f[i] = f[j];
-                    f[j] = buf;
-                }
-                for (int i = f.Length / 2; i < f.Length - 1; ++i)
-                {
-                    f[i] = f[i + 1];
-                }
-                f[f.Length - 1] = mem;
-            }
-        }
         // здесь выполняется все кроме пересоздания массива при
         // изменении числа точек и изменения параметров
         // измение массива х возлагатся на метод, в котором изменяеются его параметры
         void Repaint()
         {
-            double[] f = new double[NumOfPoints];
+            Complex[] f = new Complex[NumOfPoints];
 
             for (int i = 0; i < NumOfPoints; i++)
             {
-                f[i] = func_gauss(x[i], sigma);
+                f[i] = new Complex(Functions.func_gauss(x[i], sigma), 0);
             }
-
-            complex[] FourierF = complex.SlowDFT(f);
-
-            double[] RealFourierF = new double[FourierF.Length];
-
-            for (int i = 0; i < FourierF.Length; i++)
-            {
-                RealFourierF[i] = FourierF[i].Magnitude;
-            }
-            double koef = RealFourierF[0];
-            FlipFlop(RealFourierF);
-
-            var ListPoints = new ChartValues<LiveCharts.Defaults.ObservablePoint>();
-            for (int i = 0; i < x.Length; i++)
-            {
-                ListPoints.Add(new LiveCharts.Defaults.ObservablePoint
-                {
-                    X = x[i],
-                    Y = f[i]
-                });
-            }
-            cartesianChart1.Series = new SeriesCollection
-            {
-                new LineSeries
-                {
-                    // Values =  new ChartValues<double> (f)
-                    Values =  ListPoints
-                }
-            };
-            var yy = ArrayBuilder.CreateVector(-Math.PI / ((XEnd - XStart) / NumOfPoints),
+            Functions.complex_re_paint(cartesianChart1, x, f);
+            Functions.FastDFT(f);
+            double koef = f[0].Magnitude;
+            Functions.FlipFlop(f);
+            x = ArrayBuilder.CreateVector(-Math.PI / ((XEnd - XStart) / NumOfPoints),
                 Math.PI / ((XEnd - XStart) / NumOfPoints), NumOfPoints);
-            // TODO: change x axis for Fourier transformed function
-            var ListPoints2 = new ChartValues<LiveCharts.Defaults.ObservablePoint>();
-            for (int i = 0; i < yy.Length; i++)
-            {
-                ListPoints2.Add(new LiveCharts.Defaults.ObservablePoint
-                {
-                    X = yy[i],
-                    Y = RealFourierF[i] / koef
-                });
-            }
-
-            var ListPointsAnalyt = new ChartValues<LiveCharts.Defaults.ObservablePoint>();
-            for (int i = 0; i < yy.Length; i++)
-            {
-                ListPointsAnalyt.Add(new LiveCharts.Defaults.ObservablePoint
-                {
-                    X = yy[i],
-                    Y = trans_func_gauss(yy[i], sigma) / trans_func_gauss(0.0, sigma)
-                });
-            }
-
-            cartesianChart2.Series = new SeriesCollection
-            {
-                new LineSeries
-                {
-                    Values = ListPoints2
-                },
-                new LineSeries
-                {
-                    Values = ListPointsAnalyt
-                }
-            };
+            Functions.complex_magnitude_paint(cartesianChart2, x, f, koef);
+            Func<double, double> t_r_f = (x) => Functions.trans_func_gauss(x, sigma) / Functions.trans_func_gauss(0.0, sigma);
+            Functions.double_paint_with_func(cartesianChart2, x, x, t_r_f);
 
         }
         // ставятся начальные значения
@@ -233,11 +139,6 @@ namespace WindowsFormsApp1
             graphics.FillRectangle(black_brush, new Rectangle((int)Math.Sqrt(Math.Pow(4.5 * base_x, 2) + Math.Pow(4.5 * base_y, 2)) 
                 - base_x / 2, 0, base_x, base_y / 5));
 
-
-        }
-
-        private void tableLayoutPanel6_Paint(object sender, PaintEventArgs e)
-        {
 
         }
 
