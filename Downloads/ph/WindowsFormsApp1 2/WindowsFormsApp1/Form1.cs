@@ -30,20 +30,21 @@ namespace WindowsFormsApp1
         // измение массива х возлагатся на метод, в котором изменяеются его параметры
         void Repaint()
         {
+            cartesianChart1.Series = new SeriesCollection();
+            cartesianChart2.Series = new SeriesCollection();
             Complex[] f = new Complex[NumOfPoints];
-
             for (int i = 0; i < NumOfPoints; i++)
             {
-                f[i] = new Complex(Functions.func_gauss(x[i], sigma), 0);
+                f[i] = new Complex(Functions.func_gauss(this.x[i], sigma), 0);
             }
-            Functions.complex_re_paint(cartesianChart1, x, f);
+            Functions.complex_re_paint(cartesianChart1, this.x, f);
             Functions.FastDFT(f);
             double koef = f[0].Magnitude;
             Functions.FlipFlop(f);
-            x = ArrayBuilder.CreateVector(-Math.PI / ((XEnd - XStart) / NumOfPoints),
+            var x = ArrayBuilder.CreateVector(-Math.PI / ((XEnd - XStart) / NumOfPoints),
                 Math.PI / ((XEnd - XStart) / NumOfPoints), NumOfPoints);
             Functions.complex_magnitude_paint(cartesianChart2, x, f, koef);
-            Func<double, double> t_r_f = (x) => Functions.trans_func_gauss(x, sigma) / Functions.trans_func_gauss(0.0, sigma);
+            Func<double, double> t_r_f = (prm) => Functions.trans_func_gauss(prm, sigma) / Functions.trans_func_gauss(0.0, sigma);
             Functions.double_paint_with_func(cartesianChart2, x, x, t_r_f);
 
         }
@@ -66,7 +67,6 @@ namespace WindowsFormsApp1
             sigma = Convert.ToDouble(textBox1.Text);
             x = ArrayBuilder.CreateVector(XStart, XEnd, NumOfPoints);
             graphics = tableLayoutPanel3.CreateGraphics(); 
-            Repaint();
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -149,7 +149,6 @@ namespace WindowsFormsApp1
             int base_y = tableLayoutPanel3.Height / 9; // единицы измерения длинны
             moving_length = new Rectangle(8 * base_x, 4 * base_y, base_x / 5, base_y);
             graphics.FillRectangle(red_brush, moving_length);
-
             timer1.Enabled = true;
         }
 
@@ -162,7 +161,10 @@ namespace WindowsFormsApp1
             moving_length = new Rectangle(moving_length.Left - 1, moving_length.Top,
                 moving_length.Width, moving_length.Height);
             if (moving_length.Left <= tableLayoutPanel3.Width * 7.0 / 9)
+            {
                 timer1.Enabled = false;
+                Repaint();
+            }
             graphics.FillRectangle(red_brush, moving_length);
         }
     }

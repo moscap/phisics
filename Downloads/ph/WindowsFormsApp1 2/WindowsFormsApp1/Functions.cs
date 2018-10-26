@@ -36,7 +36,7 @@ namespace WindowsFormsApp1
         }
         public static double trans_func_rect(double x, double start, double end)
         {
-            return Math.Abs((end - start) * 5 * Trig.Sinc(x * ((end - start) / 2.0) / Math.PI));
+            return Math.Abs((end - start) * 5 *  Trig.Sinc(x * ((end - start) / 2.0) / Math.PI));
         }
         // приводим к нормальному виду
         public static void FlipFlop<T>(T[] f)

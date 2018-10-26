@@ -30,8 +30,9 @@ namespace WindowsFormsApp1
         // измение массива х возлагатся на метод, в котором изменяеются его параметры
         void Repaint()
         {
+            cartesianChart1.Series = new SeriesCollection();
+            cartesianChart2.Series = new SeriesCollection();
             Complex[] f = new Complex[NumOfPoints];
-
             for (int i = 0; i < NumOfPoints; i++)
             {
                 f[i] = new Complex(Functions.func_rect(x[i], Start, End), 0);
