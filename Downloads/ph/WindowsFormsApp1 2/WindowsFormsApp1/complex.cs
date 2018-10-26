@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using AForge.Math;
 
 namespace WindowsFormsApp1
 {
@@ -70,6 +71,16 @@ namespace WindowsFormsApp1
         public override string ToString()
         {
             return real + " + i " + imag;
+        }
+
+        public static void FastDFT(Complex[] x, int mode = 1)
+        {
+            var dir = FourierTransform.Direction.Forward;
+            if (mode == -1)
+            {
+                dir = FourierTransform.Direction.Backward;
+            }
+            FourierTransform.FFT(x, dir);
         }
 
         public static complex[] SlowDFT(double[] x)

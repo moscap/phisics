@@ -149,17 +149,17 @@ namespace WindowsFormsApp1
             tableLayoutPanel1.Width = (int)(resolution.Width * (15.0 / 16.0));
             tableLayoutPanel1.Height = (int)(resolution.Height * (10.0 / 11.0)) ;
             elementHost1.Height = (int)(tableLayoutPanel1.Height * tableLayoutPanel1.RowStyles[0].Height / 100);
-            elementHost1.Width = (int)(tableLayoutPanel1.Width * tableLayoutPanel1.ColumnStyles[0].Width / 100);
+            elementHost1.Width = (int)(tableLayoutPanel1.Width * tableLayoutPanel1.ColumnStyles[1].Width / 100);
             elementHost2.Height = (int)(tableLayoutPanel1.Height * tableLayoutPanel1.RowStyles[0].Height / 100);
-            elementHost2.Width = (int)(tableLayoutPanel1.Width * tableLayoutPanel1.ColumnStyles[1].Width / 100);
-            tableLayoutPanel7.Height = (int)(tableLayoutPanel1.Height * tableLayoutPanel1.RowStyles[1].Height);
-            tableLayoutPanel7.Width = (int)(tableLayoutPanel1.Width * tableLayoutPanel1.ColumnStyles[1].Width);
+            elementHost2.Width = (int)(tableLayoutPanel1.Width * tableLayoutPanel1.ColumnStyles[2].Width / 100);
+            tableLayoutPanel3.Height = (int)(tableLayoutPanel1.Height * tableLayoutPanel1.RowStyles[1].Height);
+            tableLayoutPanel3.Width = (int)(tableLayoutPanel1.Width * tableLayoutPanel1.ColumnStyles[2].Width);
             NumOfPoints = (int)Math.Pow(2, trackBar1.Value);
             XStart = Convert.ToDouble(textBox2.Text);
             XEnd = Convert.ToDouble(textBox4.Text);
             sigma = Convert.ToDouble(textBox1.Text);
             x = ArrayBuilder.CreateVector(XStart, XEnd, NumOfPoints);
-            graphics = tableLayoutPanel7.CreateGraphics(); 
+            graphics = tableLayoutPanel3.CreateGraphics(); 
             Repaint();
         }
 
@@ -217,14 +217,14 @@ namespace WindowsFormsApp1
             Repaint();
         }
 
-        private void tableLayoutPanel7_Paint_1(object sender, PaintEventArgs e)
+        private void tableLayoutPanel3_Paint(object sender, PaintEventArgs e)
         {
             Graphics graphics = e.Graphics;
             SolidBrush black_brush = new SolidBrush(Color.Black);
             SolidBrush blue_brush = new SolidBrush(Color.Blue);
             SolidBrush red_brush = new SolidBrush(Color.Red);
-            int base_x = tableLayoutPanel7.Width / 9; // единицы измерения длинны
-            int base_y = tableLayoutPanel7.Height / 9; // единицы измерения длинны
+            int base_x = tableLayoutPanel3.Width / 9; // единицы измерения длинны
+            int base_y = tableLayoutPanel3.Height / 9; // единицы измерения длинны
             graphics.FillRectangle(black_brush, new Rectangle(4 * base_x, base_y, base_x, base_y / 5));
             graphics.FillRectangle(blue_brush, new Rectangle(4 * base_x, 8 * base_y - base_y / 5, base_x, base_y / 5));
             graphics.FillRectangle(black_brush, new Rectangle(base_x, 4 * base_y, base_x, base_y));
@@ -244,8 +244,8 @@ namespace WindowsFormsApp1
         private void button2_Click(object sender, EventArgs e)
         {
             SolidBrush red_brush = new SolidBrush(Color.Red);
-            int base_x = tableLayoutPanel7.Width / 9; // единицы измерения длинны
-            int base_y = tableLayoutPanel7.Height / 9; // единицы измерения длинны
+            int base_x = tableLayoutPanel3.Width / 9; // единицы измерения длинны
+            int base_y = tableLayoutPanel3.Height / 9; // единицы измерения длинны
             moving_length = new Rectangle(8 * base_x, 4 * base_y, base_x / 5, base_y);
             graphics.FillRectangle(red_brush, moving_length);
 
@@ -254,13 +254,14 @@ namespace WindowsFormsApp1
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            textBox3.Text = moving_length.Left.ToString();
-            Graphics graphics = tableLayoutPanel7.CreateGraphics();
-            SolidBrush white_brush = new SolidBrush(Color.White);
+            Graphics graphics = tableLayoutPanel3.CreateGraphics();
+            SolidBrush white_brush = new SolidBrush(Color.WhiteSmoke);
             SolidBrush red_brush = new SolidBrush(Color.Red);
             graphics.FillRectangle(white_brush, moving_length);
-            moving_length = new Rectangle(moving_length.Left - 10, moving_length.Top,
+            moving_length = new Rectangle(moving_length.Left - 1, moving_length.Top,
                 moving_length.Width, moving_length.Height);
+            if (moving_length.Left <= tableLayoutPanel3.Width * 7.0 / 9)
+                timer1.Enabled = false;
             graphics.FillRectangle(red_brush, moving_length);
         }
     }

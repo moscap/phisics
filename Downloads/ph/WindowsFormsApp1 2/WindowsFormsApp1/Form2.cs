@@ -12,6 +12,7 @@ using LiveCharts;
 using LiveCharts.WinForms;
 using LiveCharts.Wpf;
 using MathNet.Numerics;
+using AForge.Math;
 
 namespace WindowsFormsApp1
 {
@@ -74,20 +75,22 @@ namespace WindowsFormsApp1
         // измение массива х возлагатся на метод, в котором изменяеются его параметры
         void Repaint()
         {
-            double[] f = new double[NumOfPoints];
+            Complex[] f = new Complex[NumOfPoints];
 
             for (int i = 0; i < NumOfPoints; i++)
             {
-                f[i] = func_rect(x[i], Start, End);
+                f[i] = new Complex(func_rect(x[i], Start, End), 0);
             }
+            Complex[] func = new Complex[NumOfPoints];
+            f.CopyTo(func, 0);
 
-            complex[] FourierF = complex.SlowDFT(f);
+            complex.FastDFT(f);
 
-            double[] RealFourierF = new double[FourierF.Length];
+            double[] RealFourierF = new double[f.Length];
 
-            for (int i = 0; i < FourierF.Length; i++)
+            for (int i = 0; i < f.Length; i++)
             {
-                RealFourierF[i] = FourierF[i].Magnitude;
+                RealFourierF[i] = f[i].Magnitude;
             }
             double koef = RealFourierF[0];
             FlipFlop(RealFourierF);
@@ -98,7 +101,7 @@ namespace WindowsFormsApp1
                 ListPoints.Add(new LiveCharts.Defaults.ObservablePoint
                 {
                     X = x[i],
-                    Y = f[i]
+                    Y = func[i].Re
                 });
             }
             cartesianChart1.Series = new SeriesCollection
