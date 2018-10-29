@@ -32,18 +32,25 @@ namespace WindowsFormsApp1
         {
             cartesianChart1.Series = new SeriesCollection();
             cartesianChart2.Series = new SeriesCollection();
+            cartesianChart3.Series = new SeriesCollection();
             Complex[] f = new Complex[NumOfPoints];
             for (int i = 0; i < NumOfPoints; i++)
             {
-                f[i] = new Complex(Functions.func_gauss(this.x[i], sigma), 0);
+                f[i] = new Complex(Functions.func_gauss(this.x[i], sigma, Math.PI), 0);
             }
+            Complex[] f_copy = new Complex[f.Length];
+            f.CopyTo(f_copy, 0);
             Functions.complex_re_paint(cartesianChart1, this.x, f);
-            Functions.FastDFT(f);
-            double koef = f[0].Magnitude;
+            Functions.FastDFT(f, -1);
+            Functions.FastDFT(f_copy);
+            double koef_r = f[0].Magnitude;
+            double koef_s = f_copy[0].Magnitude;
+            Functions.FlipFlop(f_copy);
             Functions.FlipFlop(f);
             var x = ArrayBuilder.CreateVector(-Math.PI / ((XEnd - XStart) / NumOfPoints),
                 Math.PI / ((XEnd - XStart) / NumOfPoints), NumOfPoints);
-            Functions.complex_magnitude_paint(cartesianChart2, x, f, koef);
+            Functions.complex_re_paint(cartesianChart2, x, f, koef_r);
+            Functions.complex_magnitude_paint(cartesianChart3, x, f_copy, koef_s);
             Func<double, double> t_r_f = (prm) => Functions.trans_func_gauss(prm, sigma) / Functions.trans_func_gauss(0.0, sigma);
             Functions.double_paint_with_func(cartesianChart2, x, x, t_r_f);
 
@@ -56,9 +63,11 @@ namespace WindowsFormsApp1
             tableLayoutPanel1.Width = (int)(resolution.Width * (15.0 / 16.0));
             tableLayoutPanel1.Height = (int)(resolution.Height * (10.0 / 11.0)) ;
             elementHost1.Height = (int)(tableLayoutPanel1.Height * tableLayoutPanel1.RowStyles[0].Height / 100);
-            elementHost1.Width = (int)(tableLayoutPanel1.Width * tableLayoutPanel1.ColumnStyles[1].Width / 100);
+            elementHost1.Width = (int)(tableLayoutPanel1.Width * tableLayoutPanel1.ColumnStyles[2].Width / 100);
             elementHost2.Height = (int)(tableLayoutPanel1.Height * tableLayoutPanel1.RowStyles[0].Height / 100);
-            elementHost2.Width = (int)(tableLayoutPanel1.Width * tableLayoutPanel1.ColumnStyles[2].Width / 100);
+            elementHost2.Width = (int)(tableLayoutPanel1.Width * tableLayoutPanel1.ColumnStyles[1].Width / 100);
+            elementHost3.Height = (int)(tableLayoutPanel1.Height * tableLayoutPanel1.RowStyles[1].Height / 100);
+            elementHost3.Width = (int)(tableLayoutPanel1.Width * tableLayoutPanel1.ColumnStyles[2].Width / 100);
             tableLayoutPanel3.Height = (int)(tableLayoutPanel1.Height * tableLayoutPanel1.RowStyles[1].Height);
             tableLayoutPanel3.Width = (int)(tableLayoutPanel1.Width * tableLayoutPanel1.ColumnStyles[2].Width);
             NumOfPoints = (int)Math.Pow(2, trackBar1.Value);

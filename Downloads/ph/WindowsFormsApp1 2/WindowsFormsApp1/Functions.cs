@@ -18,9 +18,10 @@ namespace WindowsFormsApp1
         {
             return Math.Exp(-w * w * sigma * sigma / 2.0) * Math.Sqrt(sigma) / Math.Sqrt(Math.PI * 2);
         }
-        public static double func_gauss(double x, double sigma)
+        public static double func_gauss(double x, double sigma, double offset = 0)
         {
-            return Math.Exp(-x * x / (sigma * sigma * 2.0)) / (Math.Sqrt(2.0 * Math.PI) * sigma);
+            double new_x = x - offset; 
+            return Math.Exp(-new_x * new_x / (sigma * sigma * 2.0)) / (Math.Sqrt(2.0 * Math.PI) * sigma);
         }
         public static double func_rect(double x, double start, double end)
         {

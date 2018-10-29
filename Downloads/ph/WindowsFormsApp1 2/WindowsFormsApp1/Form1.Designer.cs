@@ -44,9 +44,11 @@
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.button2 = new System.Windows.Forms.Button();
-            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.tableLayoutPanel8 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.elementHost3 = new System.Windows.Forms.Integration.ElementHost();
+            this.cartesianChart3 = new LiveCharts.Wpf.CartesianChart();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
@@ -65,7 +67,7 @@
             // 
             // elementHost1
             // 
-            this.elementHost1.Location = new System.Drawing.Point(155, 3);
+            this.elementHost1.Location = new System.Drawing.Point(459, 3);
             this.elementHost1.Name = "elementHost1";
             this.elementHost1.Size = new System.Drawing.Size(298, 262);
             this.elementHost1.TabIndex = 2;
@@ -74,7 +76,7 @@
             // 
             // elementHost2
             // 
-            this.elementHost2.Location = new System.Drawing.Point(459, 3);
+            this.elementHost2.Location = new System.Drawing.Point(155, 3);
             this.elementHost2.Name = "elementHost2";
             this.elementHost2.Size = new System.Drawing.Size(298, 262);
             this.elementHost2.TabIndex = 3;
@@ -154,10 +156,11 @@
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 40F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 40F));
             this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel2, 0, 1);
-            this.tableLayoutPanel1.Controls.Add(this.elementHost2, 2, 0);
-            this.tableLayoutPanel1.Controls.Add(this.elementHost1, 1, 0);
+            this.tableLayoutPanel1.Controls.Add(this.elementHost3, 2, 1);
             this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel8, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel3, 1, 1);
+            this.tableLayoutPanel1.Controls.Add(this.elementHost2, 1, 0);
+            this.tableLayoutPanel1.Controls.Add(this.elementHost1, 2, 0);
             this.tableLayoutPanel1.Location = new System.Drawing.Point(12, 12);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 2;
@@ -190,11 +193,6 @@
             this.button2.Text = "Замер";
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
-            // 
-            // timer1
-            // 
-            this.timer1.Interval = 10;
-            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
             // tableLayoutPanel8
             // 
@@ -233,6 +231,20 @@
             this.tableLayoutPanel3.Size = new System.Drawing.Size(298, 263);
             this.tableLayoutPanel3.TabIndex = 7;
             this.tableLayoutPanel3.Paint += new System.Windows.Forms.PaintEventHandler(this.tableLayoutPanel3_Paint);
+            // 
+            // timer1
+            // 
+            this.timer1.Interval = 10;
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
+            // elementHost3
+            // 
+            this.elementHost3.Location = new System.Drawing.Point(459, 271);
+            this.elementHost3.Name = "elementHost3";
+            this.elementHost3.Size = new System.Drawing.Size(298, 263);
+            this.elementHost3.TabIndex = 8;
+            this.elementHost3.Text = "elementHost3";
+            this.elementHost3.Child = this.cartesianChart3;
             // 
             // Form1
             // 
@@ -274,6 +286,8 @@
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel8;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
+        private System.Windows.Forms.Integration.ElementHost elementHost3;
+        private LiveCharts.Wpf.CartesianChart cartesianChart3;
     }
 }
 
