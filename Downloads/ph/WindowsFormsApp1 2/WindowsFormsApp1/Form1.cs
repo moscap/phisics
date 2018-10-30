@@ -38,11 +38,12 @@ namespace WindowsFormsApp1
             {
                 f[i] = new Complex(Functions.func_gauss(this.x[i], sigma, Math.PI), 0);
             }
+            Functions.complex_re_paint(cartesianChart1, this.x, f);
             Complex[] f_copy = new Complex[f.Length];
             f.CopyTo(f_copy, 0);
-            Functions.complex_re_paint(cartesianChart1, this.x, f);
             Functions.FastDFT(f, -1);
             Functions.FastDFT(f_copy);
+            textBox3.Text = "ok" + NumOfPoints.ToString();
             double koef_r = f[0].Magnitude;
             double koef_s = f_copy[0].Magnitude;
             Functions.FlipFlop(f_copy);
@@ -59,15 +60,18 @@ namespace WindowsFormsApp1
         public Form1()
         {
             InitializeComponent();
+            cartesianChart1.DisableAnimations = true;
+            cartesianChart2.DisableAnimations = true;
+            cartesianChart2.DisableAnimations = true;
             Size resolution = System.Windows.Forms.Screen.PrimaryScreen.Bounds.Size;
             tableLayoutPanel1.Width = (int)(resolution.Width * (15.0 / 16.0));
             tableLayoutPanel1.Height = (int)(resolution.Height * (10.0 / 11.0)) ;
-            elementHost1.Height = (int)(tableLayoutPanel1.Height * tableLayoutPanel1.RowStyles[0].Height / 100);
-            elementHost1.Width = (int)(tableLayoutPanel1.Width * tableLayoutPanel1.ColumnStyles[2].Width / 100);
-            elementHost2.Height = (int)(tableLayoutPanel1.Height * tableLayoutPanel1.RowStyles[0].Height / 100);
-            elementHost2.Width = (int)(tableLayoutPanel1.Width * tableLayoutPanel1.ColumnStyles[1].Width / 100);
-            elementHost3.Height = (int)(tableLayoutPanel1.Height * tableLayoutPanel1.RowStyles[1].Height / 100);
-            elementHost3.Width = (int)(tableLayoutPanel1.Width * tableLayoutPanel1.ColumnStyles[2].Width / 100);
+            cartesianChart1.Height = (int)(tableLayoutPanel1.Height * tableLayoutPanel1.RowStyles[0].Height / 100);
+            cartesianChart1.Width = (int)(tableLayoutPanel1.Width * tableLayoutPanel1.ColumnStyles[2].Width / 100);
+            cartesianChart2.Height = (int)(tableLayoutPanel1.Height * tableLayoutPanel1.RowStyles[0].Height / 100);
+            cartesianChart2.Width = (int)(tableLayoutPanel1.Width * tableLayoutPanel1.ColumnStyles[1].Width / 100);
+            cartesianChart3.Height = (int)(tableLayoutPanel1.Height * tableLayoutPanel1.RowStyles[1].Height / 100);
+            cartesianChart3.Width = (int)(tableLayoutPanel1.Width * tableLayoutPanel1.ColumnStyles[2].Width / 100);
             tableLayoutPanel3.Height = (int)(tableLayoutPanel1.Height * tableLayoutPanel1.RowStyles[1].Height);
             tableLayoutPanel3.Width = (int)(tableLayoutPanel1.Width * tableLayoutPanel1.ColumnStyles[2].Width);
             NumOfPoints = (int)Math.Pow(2, trackBar1.Value);

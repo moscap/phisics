@@ -8,6 +8,7 @@ using AForge.Math;
 using LiveCharts;
 using LiveCharts.WinForms;
 using LiveCharts.Wpf;
+using OxyPlot;
 
 
 namespace WindowsFormsApp1
@@ -78,16 +79,18 @@ namespace WindowsFormsApp1
         }
         public static void complex_magnitude_paint(object obj, double[] x, Complex[] y, double koef = 1.0)
         {
-            LiveCharts.Wpf.CartesianChart paint_obj = obj as LiveCharts.Wpf.CartesianChart;
-            var ListPoints = new ChartValues<LiveCharts.Defaults.ObservablePoint>();
+            LiveCharts.WinForms.CartesianChart paint_obj = obj as LiveCharts.WinForms.CartesianChart;
+            LiveCharts.Defaults.ObservablePoint[] mas = new LiveCharts.Defaults.ObservablePoint[x.Length];
             for (int i = 0; i < x.Length; i++)
             {
-                ListPoints.Add(new LiveCharts.Defaults.ObservablePoint
+                mas[i] = (new LiveCharts.Defaults.ObservablePoint
                 {
                     X = x[i],
                     Y = y[i].Magnitude / koef
                 });
             }
+            var ListPoints = new ChartValues<LiveCharts.Defaults.ObservablePoint>();
+            ListPoints.AddRange(mas);
             paint_obj.Series.Add(new LineSeries
             {
                 Values = ListPoints
@@ -96,16 +99,18 @@ namespace WindowsFormsApp1
         }
         public static void complex_re_paint(object obj, double[] x, Complex[] y, double koef = 1.0)
         {
-            LiveCharts.Wpf.CartesianChart paint_obj = obj as LiveCharts.Wpf.CartesianChart;
-            var ListPoints = new ChartValues<LiveCharts.Defaults.ObservablePoint>();
+            LiveCharts.WinForms.CartesianChart paint_obj = obj as LiveCharts.WinForms.CartesianChart;
+            LiveCharts.Defaults.ObservablePoint[] mas = new LiveCharts.Defaults.ObservablePoint[x.Length];
             for (int i = 0; i < x.Length; i++)
             {
-                ListPoints.Add(new LiveCharts.Defaults.ObservablePoint
+                mas[i] = (new LiveCharts.Defaults.ObservablePoint
                 {
                     X = x[i],
                     Y = y[i].Re / koef
                 });
             }
+            var ListPoints = new ChartValues<LiveCharts.Defaults.ObservablePoint>();
+            ListPoints.AddRange(mas);
             paint_obj.Series.Add(new LineSeries
             {
                 Values = ListPoints
@@ -114,16 +119,18 @@ namespace WindowsFormsApp1
         }
         public static void double_paint(object obj, double[] x, double[] y, double koef = 1.0)
         {
-            LiveCharts.Wpf.CartesianChart paint_obj = obj as LiveCharts.Wpf.CartesianChart;
-            var ListPoints = new ChartValues<LiveCharts.Defaults.ObservablePoint>();
+            LiveCharts.WinForms.CartesianChart paint_obj = obj as LiveCharts.WinForms.CartesianChart;
+            LiveCharts.Defaults.ObservablePoint[] mas = new LiveCharts.Defaults.ObservablePoint[x.Length];
             for (int i = 0; i < x.Length; i++)
             {
-                ListPoints.Add(new LiveCharts.Defaults.ObservablePoint
+                mas[i] = (new LiveCharts.Defaults.ObservablePoint
                 {
                     X = x[i],
                     Y = y[i] / koef
                 });
             }
+            var ListPoints = new ChartValues<LiveCharts.Defaults.ObservablePoint>();
+            ListPoints.AddRange(mas);
             paint_obj.Series.Add(new LineSeries
             { 
                 Values = ListPoints
@@ -132,16 +139,18 @@ namespace WindowsFormsApp1
         }
         public static void double_paint_with_func(object obj, double[] x, double[] y, Func<double, double> f, double koef = 1.0)
         {
-            LiveCharts.Wpf.CartesianChart paint_obj = obj as LiveCharts.Wpf.CartesianChart;
-            var ListPoints = new ChartValues<LiveCharts.Defaults.ObservablePoint>();
+            LiveCharts.WinForms.CartesianChart paint_obj = obj as LiveCharts.WinForms.CartesianChart;
+            LiveCharts.Defaults.ObservablePoint[] mas = new LiveCharts.Defaults.ObservablePoint[x.Length];
             for (int i = 0; i < x.Length; i++)
             {
-                ListPoints.Add(new LiveCharts.Defaults.ObservablePoint
+                mas[i] = (new LiveCharts.Defaults.ObservablePoint
                 {
                     X = x[i],
                     Y = f(y[i]) / koef
                 });
             }
+            var ListPoints = new ChartValues<LiveCharts.Defaults.ObservablePoint>();
+            ListPoints.AddRange(mas);
             paint_obj.Series.Add(new LineSeries
             {
                 Values = ListPoints
@@ -150,16 +159,18 @@ namespace WindowsFormsApp1
         }
         public static void complex_magnitude_paint_with_func(object obj, double[] x, Complex[] y, Func<double, double> f, double koef = 1.0)
         {
-            LiveCharts.Wpf.CartesianChart paint_obj = obj as LiveCharts.Wpf.CartesianChart;
-            var ListPoints = new ChartValues<LiveCharts.Defaults.ObservablePoint>();
+            LiveCharts.WinForms.CartesianChart paint_obj = obj as LiveCharts.WinForms.CartesianChart;
+            LiveCharts.Defaults.ObservablePoint[] mas = new LiveCharts.Defaults.ObservablePoint[x.Length];
             for (int i = 0; i < x.Length; i++)
             {
-                ListPoints.Add(new LiveCharts.Defaults.ObservablePoint
+                mas[i] = (new LiveCharts.Defaults.ObservablePoint
                 {
                     X = x[i],
                     Y = f(y[i].Magnitude) / koef
                 });
             }
+            var ListPoints = new ChartValues<LiveCharts.Defaults.ObservablePoint>();
+            ListPoints.AddRange(mas);
             paint_obj.Series.Add(new LineSeries
             {
                 Values = ListPoints
@@ -169,15 +180,17 @@ namespace WindowsFormsApp1
         public static void complex_re_paint_with_func(object obj, double[] x, Complex[] y, Func<double, double> f, double koef = 1.0)
         {
             LiveCharts.Wpf.CartesianChart paint_obj = obj as LiveCharts.Wpf.CartesianChart;
-            var ListPoints = new ChartValues<LiveCharts.Defaults.ObservablePoint>();
+            LiveCharts.Defaults.ObservablePoint[] mas = new LiveCharts.Defaults.ObservablePoint[x.Length];
             for (int i = 0; i < x.Length; i++)
             {
-                ListPoints.Add(new LiveCharts.Defaults.ObservablePoint
+                mas[i] = (new LiveCharts.Defaults.ObservablePoint
                 {
                     X = x[i],
                     Y = f(y[i].Re) / koef
                 });
             }
+            var ListPoints = new ChartValues<LiveCharts.Defaults.ObservablePoint>();
+            ListPoints.AddRange(mas);
             paint_obj.Series.Add(new LineSeries
             {
                 Values = ListPoints

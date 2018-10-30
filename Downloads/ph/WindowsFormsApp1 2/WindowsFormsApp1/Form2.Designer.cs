@@ -28,10 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.elementHost1 = new System.Windows.Forms.Integration.ElementHost();
-            this.cartesianChart1 = new LiveCharts.Wpf.CartesianChart();
-            this.elementHost2 = new System.Windows.Forms.Integration.ElementHost();
-            this.cartesianChart2 = new LiveCharts.Wpf.CartesianChart();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.textBox3 = new System.Windows.Forms.TextBox();
@@ -44,30 +40,13 @@
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
+            this.cartesianChart1 = new LiveCharts.WinForms.CartesianChart();
+            this.cartesianChart2 = new LiveCharts.WinForms.CartesianChart();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // elementHost1
-            // 
-            this.elementHost1.Location = new System.Drawing.Point(3, 3);
-            this.elementHost1.Name = "elementHost1";
-            this.elementHost1.Size = new System.Drawing.Size(374, 262);
-            this.elementHost1.TabIndex = 0;
-            this.elementHost1.Text = "elementHost1";
-            this.elementHost1.Child = this.cartesianChart1;
-            // 
-            // elementHost2
-            // 
-            this.elementHost2.Location = new System.Drawing.Point(383, 3);
-            this.elementHost2.Name = "elementHost2";
-            this.elementHost2.Size = new System.Drawing.Size(374, 262);
-            this.elementHost2.TabIndex = 1;
-            this.elementHost2.Text = "elementHost2";
-            this.elementHost2.ChildChanged += new System.EventHandler<System.Windows.Forms.Integration.ChildChangedEventArgs>(this.elementHost2_ChildChanged);
-            this.elementHost2.Child = this.cartesianChart2;
             // 
             // textBox1
             // 
@@ -157,9 +136,9 @@
             this.tableLayoutPanel1.ColumnCount = 2;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.Controls.Add(this.elementHost1, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.elementHost2, 1, 0);
             this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel2, 0, 1);
+            this.tableLayoutPanel1.Controls.Add(this.cartesianChart1, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.cartesianChart2, 1, 0);
             this.tableLayoutPanel1.Location = new System.Drawing.Point(12, 12);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 2;
@@ -207,6 +186,22 @@
             this.tableLayoutPanel3.Size = new System.Drawing.Size(181, 125);
             this.tableLayoutPanel3.TabIndex = 0;
             // 
+            // cartesianChart1
+            // 
+            this.cartesianChart1.Location = new System.Drawing.Point(3, 3);
+            this.cartesianChart1.Name = "cartesianChart1";
+            this.cartesianChart1.Size = new System.Drawing.Size(200, 100);
+            this.cartesianChart1.TabIndex = 4;
+            this.cartesianChart1.Text = "cartesianChart1";
+            // 
+            // cartesianChart2
+            // 
+            this.cartesianChart2.Location = new System.Drawing.Point(383, 3);
+            this.cartesianChart2.Name = "cartesianChart2";
+            this.cartesianChart2.Size = new System.Drawing.Size(200, 100);
+            this.cartesianChart2.TabIndex = 5;
+            this.cartesianChart2.Text = "cartesianChart2";
+            // 
             // Form2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -228,11 +223,6 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.Integration.ElementHost elementHost1;
-        private LiveCharts.Wpf.CartesianChart cartesianChart1;
-        private System.Windows.Forms.Integration.ElementHost elementHost2;
-        private LiveCharts.Wpf.CartesianChart cartesianChart2;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.TextBox textBox3;
@@ -245,5 +235,7 @@
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
+        private LiveCharts.WinForms.CartesianChart cartesianChart1;
+        private LiveCharts.WinForms.CartesianChart cartesianChart2;
     }
 }
