@@ -93,7 +93,8 @@ namespace WindowsFormsApp1
             ListPoints.AddRange(mas);
             paint_obj.Series.Add(new LineSeries
             {
-                Values = ListPoints
+                Values = ListPoints,
+                PointGeometrySize = 0
             });
 
         }
@@ -113,7 +114,8 @@ namespace WindowsFormsApp1
             ListPoints.AddRange(mas);
             paint_obj.Series.Add(new LineSeries
             {
-                Values = ListPoints
+                Values = ListPoints,
+                PointGeometrySize = 0
             });
 
         }
@@ -133,7 +135,8 @@ namespace WindowsFormsApp1
             ListPoints.AddRange(mas);
             paint_obj.Series.Add(new LineSeries
             { 
-                Values = ListPoints
+                Values = ListPoints,
+                PointGeometrySize = 0
             });
 
         }
@@ -153,7 +156,8 @@ namespace WindowsFormsApp1
             ListPoints.AddRange(mas);
             paint_obj.Series.Add(new LineSeries
             {
-                Values = ListPoints
+                Values = ListPoints,
+                PointGeometrySize = 0
             });
 
         }
@@ -173,7 +177,8 @@ namespace WindowsFormsApp1
             ListPoints.AddRange(mas);
             paint_obj.Series.Add(new LineSeries
             {
-                Values = ListPoints
+                Values = ListPoints,
+                PointGeometrySize = 0
             });
 
         }
@@ -193,7 +198,8 @@ namespace WindowsFormsApp1
             ListPoints.AddRange(mas);
             paint_obj.Series.Add(new LineSeries
             {
-                Values = ListPoints
+                Values = ListPoints,
+                PointGeometrySize = 0
             });
 
         }

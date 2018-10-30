@@ -36,7 +36,7 @@ namespace WindowsFormsApp1
             Complex[] f = new Complex[NumOfPoints];
             for (int i = 0; i < NumOfPoints; i++)
             {
-                f[i] = new Complex(Functions.func_gauss(this.x[i], sigma, Math.PI), 0);
+                f[i] = new Complex(Functions.func_gauss(this.x[i], sigma, 0), 0);
             }
             Functions.complex_re_paint(cartesianChart1, this.x, f);
             Complex[] f_copy = new Complex[f.Length];
@@ -62,7 +62,7 @@ namespace WindowsFormsApp1
             InitializeComponent();
             cartesianChart1.DisableAnimations = true;
             cartesianChart2.DisableAnimations = true;
-            cartesianChart2.DisableAnimations = true;
+            cartesianChart3.DisableAnimations = true;
             Size resolution = System.Windows.Forms.Screen.PrimaryScreen.Bounds.Size;
             tableLayoutPanel1.Width = (int)(resolution.Width * (15.0 / 16.0));
             tableLayoutPanel1.Height = (int)(resolution.Height * (10.0 / 11.0)) ;
@@ -106,7 +106,6 @@ namespace WindowsFormsApp1
             else if (!double.TryParse(textBox1.Text, out buf)) return;
             sigma = buf;
             Repaint();
-
         }
 
         private void textBox2_TextChanged(object sender, EventArgs e)

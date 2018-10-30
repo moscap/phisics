@@ -211,7 +211,6 @@ D:\GitHub\moscap\phisics\phisics\Downloads\ph\WindowsFormsApp1 2\WindowsFormsApp
 D:\GitHub\moscap\phisics\phisics\Downloads\ph\WindowsFormsApp1 2\WindowsFormsApp1\bin\Debug\Unity.Interception.Configuration.pdb
 D:\GitHub\moscap\phisics\phisics\Downloads\ph\WindowsFormsApp1 2\WindowsFormsApp1\bin\Debug\Unity.RegistrationByConvention.pdb
 D:\GitHub\moscap\phisics\phisics\Downloads\ph\WindowsFormsApp1 2\WindowsFormsApp1\bin\Debug\Unity.ServiceLocation.pdb
-D:\GitHub\moscap\phisics\phisics\Downloads\ph\WindowsFormsApp1 2\WindowsFormsApp1\bin\Debug\TeeChart.dll
 D:\GitHub\moscap\phisics\phisics\Downloads\ph\WindowsFormsApp1 2\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.exe.config
 D:\GitHub\moscap\phisics\phisics\Downloads\ph\WindowsFormsApp1 2\WindowsFormsApp1\bin\Debug\Microsoft.Win32.Primitives.dll
 D:\GitHub\moscap\phisics\phisics\Downloads\ph\WindowsFormsApp1 2\WindowsFormsApp1\bin\Debug\netstandard.dll
