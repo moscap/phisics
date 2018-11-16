@@ -22,9 +22,11 @@ namespace WindowsFormsApp1
         double XStart { get; set; }
         double XEnd { get; set; }
         double[] x = null;
-        double Start { get; set; }
-        double End { get; set; }
-       
+        double sigma;
+        double sigma1;
+        Graphics graphics { get; set; }
+        Rectangle moving_length { get; set; }
+
         // здесь выполняется все кроме пересоздания массива при
         // изменении числа точек и изменения параметров
         // измение массива х возлагатся на метод, в котором изменяеются его параметры
@@ -32,22 +34,53 @@ namespace WindowsFormsApp1
         {
             cartesianChart1.Series = new SeriesCollection();
             cartesianChart2.Series = new SeriesCollection();
+            cartesianChart3.Series = new SeriesCollection();
             Complex[] f = new Complex[NumOfPoints];
             for (int i = 0; i < NumOfPoints; i++)
             {
-                f[i] = new Complex(Functions.func_rect(x[i], Start, End), 0);
+                f[i] = new Complex(Functions.func_gauss(this.x[i], sigma, 1) *
+                    Math.Sin(this.x[i] * Math.PI * 10), 0);
             }
-            Functions.complex_re_paint(cartesianChart1, x, f);
-            Functions.FastDFT(f);
-            double koef = f[0].Magnitude;
+            Functions.complex_re_paint(cartesianChart1, this.x, f);
+            //Complex[] auto_f = new Complex[f.Length];
+            //for (int i = 0; i < NumOfPoints; i++)
+            //{
+            //    auto_f[i] = new Complex(0, 0);
+            //    for (int j = 0; j < NumOfPoints; j++)
+            //    {
+            //        auto_f[i] += f[(j + i) % NumOfPoints] * f[j];
+            //    }
+            //}
+            //Complex[] ift_auto_f = new Complex[NumOfPoints];
+            //auto_f.CopyTo(ift_auto_f, 0);
+            Functions.FastDFT(f, -1);
             Functions.FlipFlop(f);
-            x = ArrayBuilder.CreateVector(-Math.PI / ((XEnd - XStart) / NumOfPoints),
+            var x = ArrayBuilder.CreateVector(-Math.PI / ((XEnd - XStart) / NumOfPoints),
                 Math.PI / ((XEnd - XStart) / NumOfPoints), NumOfPoints);
-            Functions.complex_magnitude_paint(cartesianChart2, x, f, koef);
-            Func<double, double> t_r_f = (x) => Functions.trans_func_rect(x, Math.Max(Start, XStart), Math.Min(End, XEnd)) /
-                Functions.trans_func_rect(0, Math.Max(Start, XStart), Math.Min(End, XEnd));
-            Functions.double_paint_with_func(cartesianChart2, x, x, t_r_f);
-
+            for (int i = 0; i < NumOfPoints; i++)
+            {
+                f[i] *= new Complex(1 - Functions.func_gauss(x[i], sigma1, 1.5), 0);
+            }
+            // Complex[] f_copy = new Complex[f.Length];
+            // f.CopyTo(f_copy, 0);
+            // Functions.FastDFT(f, -1);
+            // Functions.FastDFT(f_copy, 1);
+            //textBox3.Text = "ok" + NumOfPoints.ToString();
+            double koef_r = f.Max(t => t.Re);
+            //double koef_auto = auto_f.Max(t => t.Re);
+            //double f_auto = ift_auto_f.Max(t => t.Magnitude);
+            // double koef_s = f_copy.Max(t => t.Magnitude);
+            // Functions.FlipFlop(f_copy);
+            // Functions.FlipFlop(f);
+            // Functions.FlipFlop(ift_auto_f);
+   
+            Functions.complex_re_paint(cartesianChart2, x, f, koef_r);
+           // Functions.FastDFT
+            //Functions.complex_re_paint(cartesianChart3, this.x, auto_f, koef_auto);
+            //Functions.complex_magnitude_paint(cartesianChart2, x, ift_auto_f, f_auto);
+            // Functions.complex_magnitude_paint(cartesianChart3, x, f_copy, koef_s);
+            // Func<double, double> t_r_f = (prm) => Functions.trans_func_gauss(prm, sigma) / Functions.trans_func_gauss(0.0, sigma);
+            // Functions.double_paint_with_func(cartesianChart2, x, x, t_r_f);
         }
         // ставятся начальные значения
         public Form2()
@@ -63,8 +96,8 @@ namespace WindowsFormsApp1
             NumOfPoints = (int)Math.Pow(2, trackBar1.Value);
             XStart = Convert.ToDouble(textBox3.Text);
             XEnd = Convert.ToDouble(textBox4.Text);
-            Start = Convert.ToDouble(textBox1.Text);
-            End = Convert.ToDouble(textBox2.Text);
+            sigma = Convert.ToDouble(textBox1.Text);
+            sigma1 = Convert.ToDouble(textBox2.Text);
             x = ArrayBuilder.CreateVector(XStart, XEnd, NumOfPoints);
             Repaint();
         }
@@ -85,7 +118,7 @@ namespace WindowsFormsApp1
             double buf;
             if (textBox1.Text.Length == 0) return;
             else if (!double.TryParse(textBox1.Text, out buf)) return;
-            Start = buf;
+            sigma = buf;
             Repaint();
         }
 
@@ -94,7 +127,7 @@ namespace WindowsFormsApp1
             double buf;
             if (textBox2.Text.Length == 0) return;
             else if (!double.TryParse(textBox2.Text, out buf)) return;
-            End = buf;
+            sigma1 = buf;
             Repaint();
         }
 

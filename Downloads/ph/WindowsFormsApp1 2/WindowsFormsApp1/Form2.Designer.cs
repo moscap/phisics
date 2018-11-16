@@ -42,6 +42,7 @@
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.cartesianChart1 = new LiveCharts.WinForms.CartesianChart();
             this.cartesianChart2 = new LiveCharts.WinForms.CartesianChart();
+            this.cartesianChart3 = new LiveCharts.WinForms.CartesianChart();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
@@ -139,6 +140,7 @@
             this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel2, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.cartesianChart1, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.cartesianChart2, 1, 0);
+            this.tableLayoutPanel1.Controls.Add(this.cartesianChart3, 1, 1);
             this.tableLayoutPanel1.Location = new System.Drawing.Point(12, 12);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 2;
@@ -202,6 +204,14 @@
             this.cartesianChart2.TabIndex = 5;
             this.cartesianChart2.Text = "cartesianChart2";
             // 
+            // cartesianChart3
+            // 
+            this.cartesianChart3.Location = new System.Drawing.Point(383, 271);
+            this.cartesianChart3.Name = "cartesianChart3";
+            this.cartesianChart3.Size = new System.Drawing.Size(200, 100);
+            this.cartesianChart3.TabIndex = 6;
+            this.cartesianChart3.Text = "cartesianChart3";
+            // 
             // Form2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -237,5 +247,6 @@
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
         private LiveCharts.WinForms.CartesianChart cartesianChart1;
         private LiveCharts.WinForms.CartesianChart cartesianChart2;
+        private LiveCharts.WinForms.CartesianChart cartesianChart3;
     }
 }

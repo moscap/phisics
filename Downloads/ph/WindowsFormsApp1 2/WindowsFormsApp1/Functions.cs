@@ -21,8 +21,8 @@ namespace WindowsFormsApp1
         }
         public static double func_gauss(double x, double sigma, double offset = 0)
         {
-            double new_x = x - offset; 
-            return Math.Exp(-new_x * new_x / (sigma * sigma * 2.0)) / (Math.Sqrt(2.0 * Math.PI) * sigma);
+            double new_x = x - offset;
+            return Math.Exp(-new_x * new_x / (sigma * sigma * 2.0)); // / (Math.Sqrt(2.0 * Math.PI) * sigma);
         }
         public static double func_rect(double x, double start, double end)
         {
@@ -79,45 +79,45 @@ namespace WindowsFormsApp1
         }
         public static void complex_magnitude_paint(object obj, double[] x, Complex[] y, double koef = 1.0)
         {
-            LiveCharts.WinForms.CartesianChart paint_obj = obj as LiveCharts.WinForms.CartesianChart;
-            LiveCharts.Defaults.ObservablePoint[] mas = new LiveCharts.Defaults.ObservablePoint[x.Length];
+            var paint_obj = obj as System.Windows.Forms.DataVisualization.Charting.Chart;
+            var ser = paint_obj.Series.Add("New plot");
             for (int i = 0; i < x.Length; i++)
             {
-                mas[i] = (new LiveCharts.Defaults.ObservablePoint
-                {
-                    X = x[i],
-                    Y = y[i].Magnitude / koef
-                });
+                ser.Points.AddXY(x[i], y[i].Magnitude / koef);
             }
-            var ListPoints = new ChartValues<LiveCharts.Defaults.ObservablePoint>();
-            ListPoints.AddRange(mas);
-            paint_obj.Series.Add(new LineSeries
+        }
+        public static void complex_re_paint(object obj, double[] x, Complex[] y, double koef = 1.0, double sigma = 10,double offset = 0, string name = "New plot!")
+        {
+            var paint_obj = obj as System.Windows.Forms.DataVisualization.Charting.Chart;
+            var ser = paint_obj.Series.Add(name);
+            paint_obj.ChartAreas[0].AxisX.Maximum = 3.5 * sigma + offset;
+            paint_obj.ChartAreas[0].AxisX.Minimum = -3.5 * sigma + offset;
+            ser.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
+            for (int i = 0; i < x.Length; i++)
             {
-                Values = ListPoints,
-                PointGeometrySize = 0
-            });
+                //if (Math.Abs(x[i]) <= 3.5 * sigma)
+                    ser.Points.AddXY(x[i], y[i].Re / koef);
+            }
+        }
+        public static void complex_im_paint(object obj, double[] x, Complex[] y, double koef = 1.0)
+        {
+            var paint_obj = obj as System.Windows.Forms.DataVisualization.Charting.Chart;
+            var ser = paint_obj.Series.Add("New plot");
+            for (int i = 0; i < x.Length; i++)
+            {
+                ser.Points.AddXY(x[i], y[i].Im / koef);
+            }
 
         }
-        public static void complex_re_paint(object obj, double[] x, Complex[] y, double koef = 1.0)
+        public static void complex_re_paint_chart(object obj, double[] x, Complex[] y, double koef = 1.0)
         {
-            LiveCharts.WinForms.CartesianChart paint_obj = obj as LiveCharts.WinForms.CartesianChart;
-            LiveCharts.Defaults.ObservablePoint[] mas = new LiveCharts.Defaults.ObservablePoint[x.Length];
+            var paint_obj = obj as System.Windows.Forms.DataVisualization.Charting.Chart;
+            var ser = paint_obj.Series.Add("New plot");
+            ser.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
             for (int i = 0; i < x.Length; i++)
             {
-                mas[i] = (new LiveCharts.Defaults.ObservablePoint
-                {
-                    X = x[i],
-                    Y = y[i].Re / koef
-                });
+                ser.Points.AddXY(x[i], y[i].Re / koef);
             }
-            var ListPoints = new ChartValues<LiveCharts.Defaults.ObservablePoint>();
-            ListPoints.AddRange(mas);
-            paint_obj.Series.Add(new LineSeries
-            {
-                Values = ListPoints,
-                PointGeometrySize = 0
-            });
-
         }
         public static void double_paint(object obj, double[] x, double[] y, double koef = 1.0)
         {
