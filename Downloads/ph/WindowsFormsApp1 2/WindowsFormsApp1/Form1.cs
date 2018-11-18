@@ -36,17 +36,13 @@ namespace WindowsFormsApp1
         // изменении числа точек и изменения параметров
         // измение массива х возлагатся на метод, в котором изменяеются его параметры
         void Repaint()
-        {
-            //cartesianChart1.Series = new SeriesCollection();
-            //cartesianChart2.Series = new SeriesCollection();
-            //cartesianChart3.Series = new SeriesCollection();
+        { 
             chart1.Series.Clear();
             chart2.Series.Clear();
-            //chart3.Series.Clear();
             chart1.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.SemiTransparent;
 
-            var x = ArrayBuilder.CreateVector(-Math.PI / ((XEnd - XStart) / NumOfPoints),
-                Math.PI / ((XEnd - XStart) / NumOfPoints), NumOfPoints);
+            var x = ArrayBuilder.CreateVector( 0 ,
+                2 * Math.PI / ((XEnd - XStart) / NumOfPoints), NumOfPoints);
             Complex[] G = new Complex[NumOfPoints];
             Complex[] K = new Complex[NumOfPoints];
             Complex[] G_K = new Complex[NumOfPoints];
@@ -64,8 +60,6 @@ namespace WindowsFormsApp1
             }
             var koef_g = G.Max(t => t.Re);
             var koef_g_k = G_K.Max(t => t.Re);
-            //Functions.complex_re_paint(chart1, x, G, koef_g, "G(w)");
-            //Functions.complex_re_paint(chart1, x, K, koef_k, "K(w)");
             Functions.complex_re_paint(chart1, x, G_K, 1, sigma_G, omega_G, "GK(w)");
             Y_c = new Complex[NumOfPoints];
             for (int i = 0; i < NumOfPoints; i++)
@@ -74,10 +68,11 @@ namespace WindowsFormsApp1
                 Y_c[i] = new Complex(mag * mag, 0);
             }
             //G_K.CopyTo(ft_g_k, 0);
-            Functions.FastDFT(Y_c, 1);
+            Functions.FastDFT(Y_c, -1);
             Complex add_k = new Complex(Y_c[0].Re, 0);
             for (int i = 0; i < NumOfPoints; i++)
             {
+                //Y_c[i] = new Complex(Math.Abs(Y_c[i].Re), 0);
                 Y_c[i] += add_k;
             }
             Functions.FlipFlop(Y_c);
@@ -85,7 +80,6 @@ namespace WindowsFormsApp1
             timer1.Enabled = true;
             Functions.complex_re_paint(chart1, x, G, 1, sigma_G, omega_G, "G");
             Functions.complex_re_paint(chart2, x, K, 1, sigma_K, omega_K, "K");
-            //Functions.complex_re_paint(chart3, this.x, ft_g_k, ft_g_k.Max(t => t.Re), "AutoF");
 
         }
         // ставятся начальные значения
@@ -167,7 +161,7 @@ namespace WindowsFormsApp1
             double buf;
             if (textBox7.Text.Length == 0) return;
             else if (!double.TryParse(textBox7.Text, out buf)) return;
-            omega_K = buf;
+            omega_G = buf;
         }
 
         private void textBox8_TextChanged(object sender, EventArgs e)
@@ -175,7 +169,7 @@ namespace WindowsFormsApp1
             double buf;
             if (textBox8.Text.Length == 0) return;
             else if (!double.TryParse(textBox8.Text, out buf)) return;
-            omega_G = buf;
+            omega_K = buf;
         }
 
 
@@ -205,6 +199,11 @@ namespace WindowsFormsApp1
 
         private void button2_Click(object sender, EventArgs e)
         {
+            SolidBrush smoke_brush = new SolidBrush(Color.WhiteSmoke);
+            if (!moving_length.IsEmpty)
+            {
+                graphics.FillRectangle(smoke_brush, moving_length);
+            }
             SolidBrush red_brush = new SolidBrush(Color.Red);
             int base_x = tableLayoutPanel3.Width / 9; // единицы измерения длинны
             int base_y = tableLayoutPanel3.Height / 9; // единицы измерения длинны
@@ -228,7 +227,7 @@ namespace WindowsFormsApp1
             double buf;
             if (textBox7.Text.Length == 0) return;
             else if (!double.TryParse(textBox7.Text, out buf)) return;
-            omega_K = buf;
+            omega_G = buf;
         }
    
 
@@ -240,7 +239,8 @@ namespace WindowsFormsApp1
             graphics.FillRectangle(white_brush, moving_length);
             moving_length = new Rectangle(tableLayoutPanel3.Width * 8 / 9 - (int)(tableLayoutPanel3.Width / 9 * tic / NumOfPoints)
                 , moving_length.Top, moving_length.Width, moving_length.Height);
-            ser.Points.AddXY(x[tic], Y_c[tic].Re / koef);
+            //if(tic % 2 == 0)
+                ser.Points.AddXY(x[tic], Y_c[tic].Re / koef);
             if (tic == NumOfPoints - 1)
             {
                 timer1.Enabled = false;
@@ -271,7 +271,7 @@ namespace WindowsFormsApp1
             double buf;
             if (textBox8.Text.Length == 0) return;
             else if (!double.TryParse(textBox8.Text, out buf)) return;
-            omega_G = buf;
+            omega_K = buf;
         }
 
         private void chart1_Click(object sender, EventArgs e)
