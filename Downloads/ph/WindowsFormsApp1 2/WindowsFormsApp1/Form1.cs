@@ -21,7 +21,7 @@ namespace WindowsFormsApp1
         double XStart { get; set; }
         double XEnd { get; set; }
         double[] x = null;
-        double sigma;
+        double amplitude;
         double sigma_G, sigma_K, omega_G;
         double omega_K { get; set; }
         Graphics graphics { get; set; }
@@ -39,10 +39,11 @@ namespace WindowsFormsApp1
         { 
             chart1.Series.Clear();
             chart2.Series.Clear();
-            chart1.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.SemiTransparent;
 
-            var x = ArrayBuilder.CreateVector( 0 ,
-                2 * Math.PI / ((XEnd - XStart) / NumOfPoints), NumOfPoints);
+            var x = ArrayBuilder.CreateVector(
+                0,
+                2 * Math.PI / ((XEnd - XStart) / NumOfPoints), 
+                NumOfPoints);
             Complex[] G = new Complex[NumOfPoints];
             Complex[] K = new Complex[NumOfPoints];
             Complex[] G_K = new Complex[NumOfPoints];
@@ -52,7 +53,7 @@ namespace WindowsFormsApp1
             }
             for (int i = 0; i < NumOfPoints; i++)
             {
-                K[i] = new Complex (1 - sigma * Functions.func_gauss(x[i], sigma_K, omega_K), 0);
+                K[i] = new Complex (1 - amplitude * Functions.func_gauss(x[i], sigma_K, omega_K), 0);
             }
             for (int i = 0; i < NumOfPoints; i++)
             {
@@ -88,21 +89,30 @@ namespace WindowsFormsApp1
             InitializeComponent();
             Size resolution = System.Windows.Forms.Screen.PrimaryScreen.Bounds.Size;
             tableLayoutPanel1.Width = (int)(resolution.Width * (15.0 / 16.0));
-            tableLayoutPanel1.Height = (int)(resolution.Height * (10.0 / 11.0)) ;
+            tableLayoutPanel1.Height = (int)(resolution.Height * (10.0 / 11.0));
+
             chart1.Height = (int)(tableLayoutPanel1.Height * tableLayoutPanel1.RowStyles[0].Height / 100);
             chart1.Width = (int)(tableLayoutPanel1.Width * tableLayoutPanel1.ColumnStyles[2].Width / 100);
+            chart1.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.SemiTransparent;
+            chart1.ChartAreas[0].AxisX.LabelStyle.Format = "{F2}";
+            chart1.ChartAreas[0].AxisX.Title = "герц";
+
             chart2.Height = (int)(tableLayoutPanel1.Height * tableLayoutPanel1.RowStyles[0].Height / 100);
             chart2.Width = (int)(tableLayoutPanel1.Width * tableLayoutPanel1.ColumnStyles[1].Width / 100);
+            chart2.ChartAreas[0].AxisX.LabelStyle.Format = "{F2}";
+            chart2.ChartAreas[0].AxisX.Title = "герц";
+
             chart3.Height = (int)(tableLayoutPanel1.Height * tableLayoutPanel1.RowStyles[1].Height / 100);
             chart3.Width = (int)(tableLayoutPanel1.Width * tableLayoutPanel1.ColumnStyles[2].Width / 100);
             chart3.ChartAreas[0].AxisX.LabelStyle.Format = "{F2}";
             chart3.ChartAreas[0].AxisX.Title = "сек.";
+
             tableLayoutPanel3.Height = (int)(tableLayoutPanel1.Height * tableLayoutPanel1.RowStyles[1].Height / 100);
             tableLayoutPanel3.Width = (int)(tableLayoutPanel1.Width * tableLayoutPanel1.ColumnStyles[1].Width / 100);
             NumOfPoints = (int)Math.Pow(2, trackBar1.Value);
             XStart = Convert.ToDouble(textBox2.Text);
             XEnd = Convert.ToDouble(textBox4.Text);
-            sigma = Convert.ToDouble(textBox1.Text);
+            amplitude = Convert.ToDouble(textBox1.Text);
             sigma_G = Convert.ToDouble(textBox5.Text);
             sigma_K = Convert.ToDouble(textBox6.Text);
             omega_K = Convert.ToDouble(textBox7.Text);
@@ -133,11 +143,11 @@ namespace WindowsFormsApp1
             double buf;
             if (textBox1.Text.Length == 0) return;
             else if (!double.TryParse(textBox1.Text, out buf)) return;
-            sigma = buf;
-            if (sigma < 0)
-                sigma = 0;
-            if (sigma > 1)
-                sigma = 1;
+            amplitude = buf;
+            if (amplitude < 0)
+                amplitude = 0;
+            if (amplitude > 1)
+                amplitude = 1;
         }
 
         private void textBox5_TextChanged(object sender, EventArgs e)
