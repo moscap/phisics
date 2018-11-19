@@ -21,6 +21,7 @@ namespace WindowsFormsApp1
         double XStart { get; set; }
         double XEnd { get; set; }
         double[] x = null;
+        double[] x_w = null;
         double amplitude;
         double sigma_G, sigma_K, omega_G;
         double omega_K { get; set; }
@@ -30,60 +31,68 @@ namespace WindowsFormsApp1
         long tic { get; set; }
         Complex[] Y_c = null;
         double koef { get; set; }
+        Complex[] G { get; set; }
+        Complex[] G_K { get; set; }
+        Complex[] K {get; set;}
 
         // приводим к нормальному виду
         // здесь выполняется все кроме пересоздания массива при
         // изменении числа точек и изменения параметров
         // измение массива х возлагатся на метод, в котором изменяеются его параметры
-        void Repaint()
-        { 
-            chart1.Series.Clear();
-            chart2.Series.Clear();
-
-            var x = ArrayBuilder.CreateVector(
+        void Initialize_Empty()
+        {
+            G = new Complex[NumOfPoints];
+            Y_c = new Complex[NumOfPoints];
+            x_w = ArrayBuilder.CreateVector(
                 0,
                 2 * Math.PI / ((XEnd - XStart) / NumOfPoints), 
                 NumOfPoints);
-            Complex[] G = new Complex[NumOfPoints];
-            Complex[] K = new Complex[NumOfPoints];
-            Complex[] G_K = new Complex[NumOfPoints];
             for (int i = 0; i < NumOfPoints; i++)
             {
-                G[i] = new Complex(Functions.func_gauss(x[i], sigma_G, omega_G), 0);
+                G[i] = new Complex(Functions.func_gauss(x_w[i], sigma_G, omega_G), 0);
             }
             for (int i = 0; i < NumOfPoints; i++)
             {
-                K[i] = new Complex (1 - amplitude * Functions.func_gauss(x[i], sigma_K, omega_K), 0);
+                var mag = G[i].Magnitude;
+                Y_c[i] = new Complex(mag * mag, 0);
+            }
+            Functions.FastDFT(Y_c, 1);
+            Complex add_k = new Complex(Y_c[0].Re, 0);
+            for (int i = 0; i < NumOfPoints; i++)
+            {
+                Y_c[i] += add_k;
+            }
+            Functions.FlipFlop(Y_c);
+            koef = Y_c.Max(t => t.Re);
+        }
+        void Initialize_Filled()
+        {
+            K = new Complex[NumOfPoints];
+            G_K = new Complex[NumOfPoints];
+            for (int i = 0; i < NumOfPoints; i++)
+            {
+                K[i] = new Complex(1 - amplitude * Functions.func_gauss(x_w[i], sigma_K, omega_K), 0);
             }
             for (int i = 0; i < NumOfPoints; i++)
             {
                 G_K[i] = Complex.Multiply(K[i], G[i]);
             }
-            var koef_g = G.Max(t => t.Re);
-            var koef_g_k = G_K.Max(t => t.Re);
-            Functions.complex_re_paint(chart1, x, G_K, 1, sigma_G, omega_G, "GK(w)");
-            Y_c = new Complex[NumOfPoints];
             for (int i = 0; i < NumOfPoints; i++)
             {
                 var mag = G_K[i].Magnitude;
                 Y_c[i] = new Complex(mag * mag, 0);
             }
-            //G_K.CopyTo(ft_g_k, 0);
-            Functions.FastDFT(Y_c, -1);
+            Functions.FastDFT(Y_c, 1);
             Complex add_k = new Complex(Y_c[0].Re, 0);
             for (int i = 0; i < NumOfPoints; i++)
             {
-                //Y_c[i] = new Complex(Math.Abs(Y_c[i].Re), 0);
                 Y_c[i] += add_k;
             }
             Functions.FlipFlop(Y_c);
             koef = Y_c.Max(t => t.Re);
-            timer1.Enabled = true;
-            Functions.complex_re_paint(chart1, x, G, 1, sigma_G, omega_G, "G");
-            Functions.complex_re_paint(chart2, x, K, 1, sigma_K, omega_K, "K");
-
         }
-        // ставятся начальные значения
+
+        
         public Form1()
         {
             InitializeComponent();
@@ -119,12 +128,18 @@ namespace WindowsFormsApp1
             omega_G = Convert.ToDouble(textBox8.Text);
             x = ArrayBuilder.CreateVector(XStart, XEnd, NumOfPoints);
             graphics = tableLayoutPanel3.CreateGraphics();
+            button1.Enabled = false;
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Form2 NewForm = new Form2();    
-            NewForm.Show();
+            chart2.Series.Clear();
+            chart3.Series.Clear();
+            ser = chart3.Series.Add("New plot");
+            ser.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
+            Initialize_Filled();
+            tic = 0;
+            timer1.Enabled = true;
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -209,6 +224,9 @@ namespace WindowsFormsApp1
 
         private void button2_Click(object sender, EventArgs e)
         {
+            chart1.Series.Clear();
+            chart2.Series.Clear();
+            button1.Enabled = false;
             SolidBrush smoke_brush = new SolidBrush(Color.WhiteSmoke);
             if (!moving_length.IsEmpty)
             {
@@ -225,11 +243,11 @@ namespace WindowsFormsApp1
             chart3.ChartAreas[0].AxisX.Minimum = XStart;
             chart3.ChartAreas[0].AxisY.Maximum = 1.1;
             chart3.ChartAreas[0].AxisY.Minimum = 0;
-            ser.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.FastLine;
+            ser.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
+            Initialize_Empty();
             tic = 0;
             timer1.Interval = Math.Max(1, (int)(1500.0 / NumOfPoints));
-            Repaint();
-            //timer1.Enabled = true;
+            timer1.Enabled = true;
         }
 
         private void textBox7_TextChanged_1(object sender, EventArgs e)
@@ -249,15 +267,31 @@ namespace WindowsFormsApp1
             graphics.FillRectangle(white_brush, moving_length);
             moving_length = new Rectangle(tableLayoutPanel3.Width * 8 / 9 - (int)(tableLayoutPanel3.Width / 9 * tic / NumOfPoints)
                 , moving_length.Top, moving_length.Width, moving_length.Height);
-            //if(tic % 2 == 0)
-                ser.Points.AddXY(x[tic], Y_c[tic].Re / koef);
-            if (tic == NumOfPoints - 1)
+            ser.Points.AddXY(x[tic], Y_c[tic].Re / koef);
+            graphics.FillRectangle(red_brush, moving_length);
+            if (NumOfPoints > 4000)
+                tic += 8;
+            else if (NumOfPoints > 2000)
+                tic += 4;
+            else if (NumOfPoints > 1000)
+                tic += 2;
+            else
+                tic++;
+            if (tic >= NumOfPoints)
             {
                 timer1.Enabled = false;
-                //Repaint();
+                if (button1.Enabled)
+                {
+                    Functions.complex_re_paint(chart1, x_w, G_K, 1, sigma_G, omega_G, "GK");
+                    Functions.complex_re_paint(chart2, x_w, K, 1, sigma_K, omega_K, "K");
+                    button1.Enabled = false;
+                }
+                else
+                {
+                    Functions.complex_re_paint(chart1, x_w, G, 1, sigma_G, omega_G, "G");
+                    button1.Enabled = true;
+                }
             }
-            graphics.FillRectangle(red_brush, moving_length);
-            ++tic;
         }
 
         private void textBox5_TextChanged_1(object sender, EventArgs e)
