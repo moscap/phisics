@@ -32,9 +32,9 @@ namespace WindowsFormsApp1
         long tic { get; set; }
         Complex[] Y_c = null;
         double koef { get; set; }
-        Complex[] G { get; set; }
-        Complex[] G_K { get; set; }
-        Complex[] K {get; set;}
+        Complex[] G = null;
+        Complex[] G_K = null;
+        Complex[] K = null;
 
         // приводим к нормальному виду
         // здесь выполняется все кроме пересоздания массива при
@@ -68,6 +68,10 @@ namespace WindowsFormsApp1
         }
         void Initialize_Filled()
         {
+            x_w = ArrayBuilder.CreateVector(
+                0,
+                2 * Math.PI / ((XEnd - XStart) / NumOfPoints),
+                NumOfPoints);
             K = new Complex[NumOfPoints];
             G_K = new Complex[NumOfPoints];
             for (int i = 0; i < NumOfPoints; i++)
@@ -125,8 +129,8 @@ namespace WindowsFormsApp1
             amplitude = Convert.ToDouble(textBox1.Text);
             sigma_G = Convert.ToDouble(textBox5.Text);
             sigma_K = Convert.ToDouble(textBox6.Text);
-            omega_K = Convert.ToDouble(textBox7.Text);
-            omega_G = Convert.ToDouble(textBox8.Text);
+            omega_K = Convert.ToDouble(textBox8.Text);
+            omega_G = Convert.ToDouble(textBox7.Text);
             x = ArrayBuilder.CreateVector(XStart, XEnd, NumOfPoints);
             graphics = tableLayoutPanel3.CreateGraphics();
             button1.Enabled = false;
@@ -279,7 +283,9 @@ namespace WindowsFormsApp1
                 , moving_length.Top, moving_length.Width, moving_length.Height);
             ser.Points.AddXY(x[tic], Y_c[tic].Re / koef);
             graphics.FillRectangle(red_brush, moving_length);
-            if (NumOfPoints > 4000)
+            if (NumOfPoints > 8000)
+                tic += 16;
+            else if (NumOfPoints > 4000)
                 tic += 8;
             else if (NumOfPoints > 2000)
                 tic += 4;

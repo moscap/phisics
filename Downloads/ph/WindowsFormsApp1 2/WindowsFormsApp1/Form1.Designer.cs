@@ -108,12 +108,12 @@
             // trackBar1
             // 
             this.trackBar1.Location = new System.Drawing.Point(3, 3);
-            this.trackBar1.Maximum = 12;
-            this.trackBar1.Minimum = 7;
+            this.trackBar1.Maximum = 13;
+            this.trackBar1.Minimum = 9;
             this.trackBar1.Name = "trackBar1";
             this.trackBar1.Size = new System.Drawing.Size(81, 45);
             this.trackBar1.TabIndex = 6;
-            this.trackBar1.Value = 7;
+            this.trackBar1.Value = 9;
             this.trackBar1.Scroll += new System.EventHandler(this.trackBar1_Scroll);
             // 
             // textBox2
@@ -278,7 +278,7 @@
             this.textBox5.Name = "textBox5";
             this.textBox5.Size = new System.Drawing.Size(81, 20);
             this.textBox5.TabIndex = 12;
-            this.textBox5.Text = "10";
+            this.textBox5.Text = "30";
             this.textBox5.TextChanged += new System.EventHandler(this.textBox5_TextChanged_1);
             // 
             // textBox7
@@ -288,7 +288,7 @@
             this.textBox7.Name = "textBox7";
             this.textBox7.Size = new System.Drawing.Size(81, 20);
             this.textBox7.TabIndex = 14;
-            this.textBox7.Text = "70";
+            this.textBox7.Text = "230";
             this.textBox7.TextChanged += new System.EventHandler(this.textBox7_TextChanged_1);
             // 
             // textBox6
@@ -298,7 +298,7 @@
             this.textBox6.Name = "textBox6";
             this.textBox6.Size = new System.Drawing.Size(81, 20);
             this.textBox6.TabIndex = 13;
-            this.textBox6.Text = "3";
+            this.textBox6.Text = "7";
             this.textBox6.TextChanged += new System.EventHandler(this.textBox6_TextChanged_1);
             // 
             // textBox8
@@ -308,7 +308,7 @@
             this.textBox8.Name = "textBox8";
             this.textBox8.Size = new System.Drawing.Size(81, 20);
             this.textBox8.TabIndex = 15;
-            this.textBox8.Text = "67";
+            this.textBox8.Text = "220";
             this.textBox8.TextChanged += new System.EventHandler(this.textBox8_TextChanged_1);
             // 
             // label4

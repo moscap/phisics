@@ -95,7 +95,6 @@ namespace WindowsFormsApp1
             ser.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
             for (int i = 0; i < x.Length; i++)
             {
-                //if (Math.Abs(x[i]) <= 3.5 * sigma)
                     ser.Points.AddXY(x[i], y[i].Re / koef);
             }
         }
