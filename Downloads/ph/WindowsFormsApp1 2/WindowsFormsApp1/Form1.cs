@@ -27,6 +27,7 @@ namespace WindowsFormsApp1
         double omega_K { get; set; }
         Graphics graphics { get; set; }
         Rectangle moving_length { get; set; }
+        Rectangle sample { get; set; }
         System.Windows.Forms.DataVisualization.Charting.Series ser { get; set; }
         long tic { get; set; }
         Complex[] Y_c = null;
@@ -133,9 +134,14 @@ namespace WindowsFormsApp1
 
         private void button1_Click(object sender, EventArgs e)
         {
+            SolidBrush yellow_brush = new SolidBrush(Color.Yellow);
+            int base_x = tableLayoutPanel3.Width / 9; // единицы измерения длинны
+            int base_y = tableLayoutPanel3.Height / 9; // единицы измерения длинны
+            sample = new Rectangle(4 * base_x, 6 * base_y, base_x, base_y);
+            graphics.FillRectangle(yellow_brush, sample);
             chart2.Series.Clear();
             chart3.Series.Clear();
-            ser = chart3.Series.Add("New plot");
+            ser = chart3.Series.Add("Acorr");
             ser.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
             Initialize_Filled();
             tic = 0;
@@ -232,6 +238,10 @@ namespace WindowsFormsApp1
             {
                 graphics.FillRectangle(smoke_brush, moving_length);
             }
+            if (!sample.IsEmpty)
+            {
+                graphics.FillRectangle(smoke_brush, sample);
+            }
             SolidBrush red_brush = new SolidBrush(Color.Red);
             int base_x = tableLayoutPanel3.Width / 9; // единицы измерения длинны
             int base_y = tableLayoutPanel3.Height / 9; // единицы измерения длинны
@@ -261,7 +271,7 @@ namespace WindowsFormsApp1
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-                Graphics graphics = tableLayoutPanel3.CreateGraphics();
+            Graphics graphics = tableLayoutPanel3.CreateGraphics();
             SolidBrush white_brush = new SolidBrush(Color.WhiteSmoke);
             SolidBrush red_brush = new SolidBrush(Color.Red);
             graphics.FillRectangle(white_brush, moving_length);
@@ -325,6 +335,7 @@ namespace WindowsFormsApp1
 
         private void tableLayoutPanel3_Paint(object sender, PaintEventArgs e)
         {
+            DoubleBuffered = true;
             Graphics graphics = e.Graphics;
             SolidBrush black_brush = new SolidBrush(Color.Black);
             SolidBrush blue_brush = new SolidBrush(Color.Blue);
@@ -335,9 +346,13 @@ namespace WindowsFormsApp1
             graphics.FillRectangle(blue_brush, new Rectangle(4 * base_x, 8 * base_y - base_y / 5, base_x, base_y / 5));
             graphics.FillRectangle(black_brush, new Rectangle(base_x, 4 * base_y, base_x, base_y));
             graphics.FillRectangle(red_brush, new Rectangle(2 * base_x, 4 * base_y + (int)(base_y * 0.4), base_x / 10, base_y / 5));
-            graphics.RotateTransform((float)(Math.Atan((double)base_y / (double)base_x) * 180 / Math.PI));
-            graphics.FillRectangle(black_brush, new Rectangle((int)Math.Sqrt(Math.Pow(4.5 * base_x, 2) + Math.Pow(4.5 * base_y, 2))
-                - base_x / 2, 0, base_x, base_y / 5));
+            //graphics.RotateTransform((float)(Math.Atan((double)base_y / (double)base_x) * 180 / Math.PI));
+
+            //graphics.FillRectangle(black_brush, new Rectangle((int)Math.Sqrt(Math.Pow(4.5 * base_x, 2) + Math.Pow(4.5 * base_y, 2))
+            // - base_x / 2, 0, base_x / 5, base_y));
+            graphics.TranslateTransform((int)(base_x * 4.5), (int)(base_y * 4.5));
+            graphics.RotateTransform(45);
+            graphics.FillRectangle(black_brush, new Rectangle(-base_x / 20, (int)(-base_y / 1.5), base_x / 10, (int)(base_y * 1.5)));
         }
 
         private void label1_Click(object sender, EventArgs e)
