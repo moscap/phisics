@@ -173,30 +173,7 @@ namespace WindowsFormsApp1
                 amplitude = 0;
             if (amplitude > 1)
                 amplitude = 1;
-        }
-
-        private void textBox5_TextChanged(object sender, EventArgs e)
-        {
-            double buf;
-            if (textBox5.Text.Length == 0) return;
-            else if (!double.TryParse(textBox5.Text, out buf)) return;
-            sigma_G = buf;
-        }
-
-        private void TextBox6_TextChanged(object sender, EventArgs e)
-        {
-            double buf;
-            if (textBox6.Text.Length == 0) return;
-            else if (!double.TryParse(textBox6.Text, out buf)) return;
-            sigma_K = buf;
-        }
-
-        private void textBox7_TextChanged(object sender, EventArgs e)
-        {
-            double buf;
-            if (textBox7.Text.Length == 0) return;
-            else if (!double.TryParse(textBox7.Text, out buf)) return;
-            omega_G = buf;
+            button1.Enabled = false;
         }
 
         private void textBox8_TextChanged(object sender, EventArgs e)
@@ -205,6 +182,7 @@ namespace WindowsFormsApp1
             if (textBox8.Text.Length == 0) return;
             else if (!double.TryParse(textBox8.Text, out buf)) return;
             omega_K = buf;
+            button1.Enabled = false;
         }
 
 
@@ -215,6 +193,7 @@ namespace WindowsFormsApp1
             else if (!double.TryParse(textBox2.Text, out buf)) return;
             XStart = buf;
             x = ArrayBuilder.CreateVector(XStart, XEnd, NumOfPoints);
+            button1.Enabled = false;
         }
 
         private void textBox4_TextChanged(object sender, EventArgs e)
@@ -224,12 +203,14 @@ namespace WindowsFormsApp1
             else if (!double.TryParse(textBox4.Text, out buf)) return;
             XEnd = buf;
             x = ArrayBuilder.CreateVector(XStart, XEnd, NumOfPoints);
+            button1.Enabled = false;
         }
 
         private void trackBar1_Scroll(object sender, EventArgs e)
         {
             NumOfPoints = (int)Math.Pow(2, trackBar1.Value);
             x = ArrayBuilder.CreateVector(XStart, XEnd, NumOfPoints);
+            button1.Enabled = false;
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -270,6 +251,7 @@ namespace WindowsFormsApp1
             if (textBox7.Text.Length == 0) return;
             else if (!double.TryParse(textBox7.Text, out buf)) return;
             omega_G = buf;
+            button1.Enabled = false;
         }
    
 
@@ -299,7 +281,7 @@ namespace WindowsFormsApp1
                 if (button1.Enabled)
                 {
                     Functions.complex_re_paint(chart1, x_w, G_K, 1, sigma_G, omega_G, "GK");
-                    Functions.complex_re_paint(chart2, x_w, K, 1, sigma_K, omega_K, "K");
+                    Functions.complex_re_paint_for_ch2(chart2, x_w, K, 1, sigma_K, omega_K, "K");
                     button1.Enabled = false;
                 }
                 else
@@ -316,6 +298,7 @@ namespace WindowsFormsApp1
             if (textBox5.Text.Length == 0) return;
             else if (!double.TryParse(textBox5.Text, out buf)) return;
             sigma_G = buf;
+            button1.Enabled = false;
         }
 
         private void textBox6_TextChanged_1(object sender, EventArgs e)
@@ -324,6 +307,7 @@ namespace WindowsFormsApp1
             if (textBox6.Text.Length == 0) return;
             else if (!double.TryParse(textBox6.Text, out buf)) return;
             sigma_K = buf;
+            button1.Enabled = false;
         }
 
         private void textBox8_TextChanged_1(object sender, EventArgs e)
@@ -332,6 +316,7 @@ namespace WindowsFormsApp1
             if (textBox8.Text.Length == 0) return;
             else if (!double.TryParse(textBox8.Text, out buf)) return;
             omega_K = buf;
+            button1.Enabled = false;
         }
 
         private void chart1_Click(object sender, EventArgs e)
