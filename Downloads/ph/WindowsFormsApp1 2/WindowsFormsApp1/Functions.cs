@@ -88,28 +88,28 @@ namespace WindowsFormsApp1
         }
         public static void complex_re_paint(object obj, double[] x, Complex[] y, double koef = 1.0, double sigma = 10,double offset = 0, string name = "New plot!")
         {
-            int st = 0, end = 0;
-            for(int i = 0; i < y.Length; ++i)
-            {
-                if(Math.Abs(y[i].Re) > 0.001)
-                {
-                    st = i;
-                    break;
-                }
-            }
-            for (int i = y.Length - 1; i >= 0; --i)
-            {
-                if (Math.Abs(y[i].Re) > 0.001)
-                {
-                    end = i;
-                    break;
-                }
-            }
+            //int st = 0, end = 0;
+            //for(int i = 0; i < y.Length; ++i)
+            //{
+            //    if(Math.Abs(y[i].Re) > 0.001)
+            //    {
+            //        st = i;
+            //        break;
+            //    }
+            //}
+            //for (int i = y.Length - 1; i >= 0; --i)
+            //{
+            //    if (Math.Abs(y[i].Re) > 0.001)
+            //    {
+            //        end = i;
+            //        break;
+            //    }
+            //}
             var paint_obj = obj as System.Windows.Forms.DataVisualization.Charting.Chart;
             var ser = paint_obj.Series.Add(name);
-            paint_obj.ChartAreas[0].AxisX.Maximum = x[end];
-            paint_obj.ChartAreas[0].AxisX.Minimum = x[st];
-            ser.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.FastLine;
+            paint_obj.ChartAreas[0].AxisX.Maximum = 4000;
+            paint_obj.ChartAreas[0].AxisX.Minimum = 400;
+            ser.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline ;
             for (int i = 0; i < x.Length; i++)
             {
                     ser.Points.AddXY(x[i], y[i].Re / koef);
@@ -117,28 +117,28 @@ namespace WindowsFormsApp1
         }
         public static void complex_re_paint_for_ch2(object obj, double[] x, Complex[] y, double koef = 1.0, double sigma = 10, double offset = 0, string name = "New plot!")
         {
-            int st = 0, end = 0;
-            for (int i = 0; i < y.Length; ++i)
-            {
-                if (Math.Abs(y[i].Re) < 0.999)
-                {
-                    st = i;
-                    break;
-                }
-            }
-            for (int i = y.Length - 1; i >= 0; --i)
-            {
-                if (Math.Abs(y[i].Re) < 0.999)
-                {
-                    end = i;
-                    break;
-                }
-            }
+            //int st = 0, end = 0;
+            //for (int i = 0; i < y.Length; ++i)
+            //{
+            //    if (Math.Abs(y[i].Re) < 0.999)
+            //    {
+            //        st = i;
+            //        break;
+            //    }
+            //}
+            //for (int i = y.Length - 1; i >= 0; --i)
+            //{
+            //    if (Math.Abs(y[i].Re) < 0.999)
+            //    {
+            //        end = i;
+            //        break;
+            //    }
+            //}
             var paint_obj = obj as System.Windows.Forms.DataVisualization.Charting.Chart;
             var ser = paint_obj.Series.Add(name);
-            paint_obj.ChartAreas[0].AxisX.Maximum = x[end];
-            paint_obj.ChartAreas[0].AxisX.Minimum = x[st];
-            ser.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.FastLine;
+            paint_obj.ChartAreas[0].AxisX.Maximum = 4000;
+            paint_obj.ChartAreas[0].AxisX.Minimum = 400;
+            ser.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
             for (int i = 0; i < x.Length; i++)
             {
                 ser.Points.AddXY(x[i], y[i].Re / koef);

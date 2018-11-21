@@ -17,9 +17,9 @@ namespace WindowsFormsApp1
 {
     public partial class Form1 : Form
     {
-        public int NumOfPoints { get; set; }
-        double XStart { get; set; }
-        double XEnd { get; set; }
+        public int NumOfPoints = 1024;
+        double XStart = -0.1;
+        double XEnd = 0.1;
         double[] x = null;
         double[] x_w = null;
         double amplitude;
@@ -109,23 +109,23 @@ namespace WindowsFormsApp1
             chart1.Width = (int)(tableLayoutPanel1.Width * tableLayoutPanel1.ColumnStyles[2].Width / 100);
             chart1.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.SemiTransparent;
             chart1.ChartAreas[0].AxisX.LabelStyle.Format = "{F2}";
-            chart1.ChartAreas[0].AxisX.Title = "см -1";
+            chart1.ChartAreas[0].AxisX.Title = "волновое число(см -1)";
 
             chart2.Height = (int)(tableLayoutPanel1.Height * tableLayoutPanel1.RowStyles[0].Height / 100);
-            chart2.Width = (int)(tableLayoutPanel1.Width * tableLayoutPanel1.ColumnStyles[1].Width / 100);
+            chart2.Width = (int)(tableLayoutPanel1.Width * tableLayoutPanel1.ColumnStyles[2].Width / 100);
             chart2.ChartAreas[0].AxisX.LabelStyle.Format = "{F2}";
-            chart2.ChartAreas[0].AxisX.Title = "см -1";
+            chart2.ChartAreas[0].AxisX.Title = "волновое число(см -1)";
 
             chart3.Height = (int)(tableLayoutPanel1.Height * tableLayoutPanel1.RowStyles[1].Height / 100);
             chart3.Width = (int)(tableLayoutPanel1.Width * tableLayoutPanel1.ColumnStyles[2].Width / 100);
             chart3.ChartAreas[0].AxisX.LabelStyle.Format = "{F2}";
-            chart3.ChartAreas[0].AxisX.Title = "сек.";
+            chart3.ChartAreas[0].AxisX.Title = "см";
 
             tableLayoutPanel3.Height = (int)(tableLayoutPanel1.Height * tableLayoutPanel1.RowStyles[1].Height / 100);
             tableLayoutPanel3.Width = (int)(tableLayoutPanel1.Width * tableLayoutPanel1.ColumnStyles[1].Width / 100);
-            NumOfPoints = (int)Math.Pow(2, trackBar1.Value);
-            XStart = Convert.ToDouble(textBox2.Text);
-            XEnd = Convert.ToDouble(textBox4.Text);
+            //NumOfPoints = (int)Math.Pow(2, trackBar1.Value);
+            //XStart = Convert.ToDouble(textBox2.Text);
+            //XEnd = Convert.ToDouble(textBox4.Text);
             amplitude = Convert.ToDouble(textBox1.Text);
             sigma_G = Convert.ToDouble(textBox5.Text);
             sigma_K = Convert.ToDouble(textBox6.Text);
@@ -136,20 +136,10 @@ namespace WindowsFormsApp1
             button1.Enabled = false;
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void button1_Click_1(object sender, EventArgs e)
         {
-            SolidBrush yellow_brush = new SolidBrush(Color.Yellow);
-            int base_x = tableLayoutPanel3.Width / 9; // единицы измерения длинны
-            int base_y = tableLayoutPanel3.Height / 9; // единицы измерения длинны
-            sample = new Rectangle(4 * base_x, 6 * base_y, base_x, base_y);
-            graphics.FillRectangle(yellow_brush, sample);
             chart2.Series.Clear();
-            chart3.Series.Clear();
-            ser = chart3.Series.Add("Acorr");
-            ser.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
-            Initialize_Filled();
-            tic = 0;
-            timer1.Enabled = true;
+            Functions.complex_re_paint(chart1, x_w, G, 1, sigma_G, omega_G, "G");
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -183,49 +173,35 @@ namespace WindowsFormsApp1
             button1.Enabled = false;
         }
 
-        private void textBox8_TextChanged(object sender, EventArgs e)
-        {
-            double buf;
-            if (textBox8.Text.Length == 0) return;
-            else if (!double.TryParse(textBox8.Text, out buf)) return;
-            if (buf <= 0)
-            {
-                textBox8.Text = (20).ToString();
-                buf = 20;
-            }
-            omega_K = buf;
-            button1.Enabled = false;
-        }
 
+        //private void textBox2_TextChanged(object sender, EventArgs e)
+        //{
+        //    double buf;
+        //    if (textBox2.Text.Length == 0) return;
+        //    else if (!double.TryParse(textBox2.Text, out buf)) return;
+        //    XStart = buf;
+        //    x = ArrayBuilder.CreateVector(XStart, XEnd, NumOfPoints);
+        //    button1.Enabled = false;
+        //}
 
-        private void textBox2_TextChanged(object sender, EventArgs e)
-        {
-            double buf;
-            if (textBox2.Text.Length == 0) return;
-            else if (!double.TryParse(textBox2.Text, out buf)) return;
-            XStart = buf;
-            x = ArrayBuilder.CreateVector(XStart, XEnd, NumOfPoints);
-            button1.Enabled = false;
-        }
+        //private void textBox4_TextChanged(object sender, EventArgs e)
+        //{
+        //    double buf;
+        //    if (textBox4.Text.Length == 0) return;
+        //    else if (!double.TryParse(textBox4.Text, out buf)) return;
+        //    XEnd = buf;
+        //    x = ArrayBuilder.CreateVector(XStart, XEnd, NumOfPoints);
+        //    button1.Enabled = false;
+        //}
 
-        private void textBox4_TextChanged(object sender, EventArgs e)
-        {
-            double buf;
-            if (textBox4.Text.Length == 0) return;
-            else if (!double.TryParse(textBox4.Text, out buf)) return;
-            XEnd = buf;
-            x = ArrayBuilder.CreateVector(XStart, XEnd, NumOfPoints);
-            button1.Enabled = false;
-        }
+        //private void trackBar1_Scroll(object sender, EventArgs e)
+        //{
+        //    NumOfPoints = (int)Math.Pow(2, trackBar1.Value);
+        //    x = ArrayBuilder.CreateVector(XStart, XEnd, NumOfPoints);
+        //    button1.Enabled = false;
+        //}
 
-        private void trackBar1_Scroll(object sender, EventArgs e)
-        {
-            NumOfPoints = (int)Math.Pow(2, trackBar1.Value);
-            x = ArrayBuilder.CreateVector(XStart, XEnd, NumOfPoints);
-            button1.Enabled = false;
-        }
-
-        private void button2_Click(object sender, EventArgs e)
+        private void button2_Click_1(object sender, EventArgs e)
         {
             chart1.Series.Clear();
             chart2.Series.Clear();
@@ -257,7 +233,7 @@ namespace WindowsFormsApp1
             timer1.Enabled = true;
         }
 
-        private void textBox7_TextChanged_1(object sender, EventArgs e)
+        private void textBox7_TextChanged(object sender, EventArgs e)
         {
             double buf;
             if (textBox7.Text.Length == 0) return;
@@ -297,13 +273,12 @@ namespace WindowsFormsApp1
                 timer1.Enabled = false;
                 if (button1.Enabled)
                 {
-                    Functions.complex_re_paint(chart1, x_w, G_K, 1, sigma_G, omega_G, "GK");
-                    Functions.complex_re_paint_for_ch2(chart2, x_w, K, 1, sigma_K, omega_K, "K");
+                    Functions.complex_re_paint(chart2, x_w, G_K, 1, sigma_G, omega_G, "GK");
                     button1.Enabled = false;
                 }
                 else
                 {
-                    Functions.complex_re_paint(chart1, x_w, G, 1, sigma_G, omega_G, "G");
+                    Functions.complex_re_paint(chart2, x_w, G, 1, sigma_G, omega_G, "G");
                     button1.Enabled = true;
                 }
             }
@@ -323,7 +298,7 @@ namespace WindowsFormsApp1
             button1.Enabled = false;
         }
 
-        private void textBox6_TextChanged_1(object sender, EventArgs e)
+        private void textBox6_TextChanged(object sender, EventArgs e)
         {
             double buf;
             if (textBox6.Text.Length == 0) return;
@@ -337,7 +312,7 @@ namespace WindowsFormsApp1
             button1.Enabled = false;
         }
 
-        private void textBox8_TextChanged_1(object sender, EventArgs e)
+        private void textBox8_TextChanged_2(object sender, EventArgs e)
         {
             double buf;
             if (textBox8.Text.Length == 0) return;
@@ -393,6 +368,38 @@ namespace WindowsFormsApp1
             {
                 textBox8.Text = "100";
             }
+        }
+
+        private void tableLayoutPanel2_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            SolidBrush yellow_brush = new SolidBrush(Color.Yellow);
+            int base_x = tableLayoutPanel3.Width / 9; // единицы измерения длинны
+            int base_y = tableLayoutPanel3.Height / 9; // единицы измерения длинны
+            sample = new Rectangle(4 * base_x, 6 * base_y, base_x, base_y);
+            graphics.FillRectangle(yellow_brush, sample);
+            chart2.Series.Clear();
+            chart3.Series.Clear();
+            ser = chart3.Series.Add("Acorr");
+            ser.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
+            Initialize_Filled();
+            tic = 0;
+            timer1.Enabled = true;
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            chart2.Series.Clear();
+            Functions.complex_re_paint(chart1, x_w, G_K, 1, sigma_G, omega_G, "GK");
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            Functions.complex_re_paint(chart2, x_w, K, 1, sigma_K, omega_K, "K");
         }
 
         private void tableLayoutPanel8_Paint(object sender, PaintEventArgs e)
