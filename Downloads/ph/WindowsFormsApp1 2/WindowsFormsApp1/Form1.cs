@@ -109,12 +109,12 @@ namespace WindowsFormsApp1
             chart1.Width = (int)(tableLayoutPanel1.Width * tableLayoutPanel1.ColumnStyles[2].Width / 100);
             chart1.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.SemiTransparent;
             chart1.ChartAreas[0].AxisX.LabelStyle.Format = "{F2}";
-            chart1.ChartAreas[0].AxisX.Title = "герц";
+            chart1.ChartAreas[0].AxisX.Title = "см -1";
 
             chart2.Height = (int)(tableLayoutPanel1.Height * tableLayoutPanel1.RowStyles[0].Height / 100);
             chart2.Width = (int)(tableLayoutPanel1.Width * tableLayoutPanel1.ColumnStyles[1].Width / 100);
             chart2.ChartAreas[0].AxisX.LabelStyle.Format = "{F2}";
-            chart2.ChartAreas[0].AxisX.Title = "герц";
+            chart2.ChartAreas[0].AxisX.Title = "см -1";
 
             chart3.Height = (int)(tableLayoutPanel1.Height * tableLayoutPanel1.RowStyles[1].Height / 100);
             chart3.Width = (int)(tableLayoutPanel1.Width * tableLayoutPanel1.ColumnStyles[2].Width / 100);
@@ -161,6 +161,7 @@ namespace WindowsFormsApp1
         {
 
         }
+
         // дальше проверка длинны это проверка того что ты не удалили все из текст бокса
         // а проверка приведения, это проверка того что в текст боксе число
         private void textBox1_TextChanged(object sender, EventArgs e)
@@ -170,9 +171,15 @@ namespace WindowsFormsApp1
             else if (!double.TryParse(textBox1.Text, out buf)) return;
             amplitude = buf;
             if (amplitude < 0)
+            {
+                textBox1.Text = 0.ToString();
                 amplitude = 0;
+            }
             if (amplitude > 1)
+            {
+                textBox1.Text = 1.ToString();
                 amplitude = 1;
+            }
             button1.Enabled = false;
         }
 
@@ -181,6 +188,11 @@ namespace WindowsFormsApp1
             double buf;
             if (textBox8.Text.Length == 0) return;
             else if (!double.TryParse(textBox8.Text, out buf)) return;
+            if (buf <= 0)
+            {
+                textBox8.Text = (20).ToString();
+                buf = 20;
+            }
             omega_K = buf;
             button1.Enabled = false;
         }
@@ -250,6 +262,11 @@ namespace WindowsFormsApp1
             double buf;
             if (textBox7.Text.Length == 0) return;
             else if (!double.TryParse(textBox7.Text, out buf)) return;
+            if (buf <= 0)
+            {
+                textBox6.Text = (20).ToString();
+                buf = 20;
+            }
             omega_G = buf;
             button1.Enabled = false;
         }
@@ -297,6 +314,11 @@ namespace WindowsFormsApp1
             double buf;
             if (textBox5.Text.Length == 0) return;
             else if (!double.TryParse(textBox5.Text, out buf)) return;
+            if (buf <= 0)
+            {
+                textBox5.Text = (60).ToString();
+                buf = 60;
+            }
             sigma_G = buf;
             button1.Enabled = false;
         }
@@ -306,6 +328,11 @@ namespace WindowsFormsApp1
             double buf;
             if (textBox6.Text.Length == 0) return;
             else if (!double.TryParse(textBox6.Text, out buf)) return;
+            if (buf <= 0)
+            {
+                textBox6.Text = (60).ToString();
+                buf = 60;
+            }
             sigma_K = buf;
             button1.Enabled = false;
         }
@@ -315,6 +342,11 @@ namespace WindowsFormsApp1
             double buf;
             if (textBox8.Text.Length == 0) return;
             else if (!double.TryParse(textBox8.Text, out buf)) return;
+            if (buf <= 0)
+            {
+                textBox8.Text = (30).ToString();
+                buf = 30;
+            }
             omega_K = buf;
             button1.Enabled = false;
         }
@@ -349,6 +381,18 @@ namespace WindowsFormsApp1
         private void label1_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (comboBox1.Text == "First Preset")
+            {
+                textBox8.Text = "90";
+            }
+            if (comboBox1.Text == "Second Preset")
+            {
+                textBox8.Text = "100";
+            }
         }
 
         private void tableLayoutPanel8_Paint(object sender, PaintEventArgs e)
