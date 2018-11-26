@@ -12,14 +12,15 @@ using LiveCharts;
 using LiveCharts.WinForms;
 using LiveCharts.Wpf;
 using AForge.Math;
+using System.IO;
 
 namespace WindowsFormsApp1
 {
     public partial class Form3 : Form
     {
-        public int NumOfPoints = 1024;
-        double XStart = -0.1;
-        double XEnd = 0.1;
+        public int NumOfPoints = 1868;
+        double XStart { get; set; }
+        double XEnd { get; set; }
         double[] x = null;
         double[] x_w = null;
         double amplitude;
@@ -44,9 +45,9 @@ namespace WindowsFormsApp1
         {
             G = new Complex[NumOfPoints];
             Y_c = new Complex[NumOfPoints];
-            x_w = ArrayBuilder.CreateVector(
-                0,
-                2 * Math.PI / ((XEnd - XStart) / NumOfPoints), 
+            x = ArrayBuilder.CreateVector(
+                - Math.PI / ((x_w[1867] - x_w[0]) / NumOfPoints),
+                Math.PI / ((x_w[1867] - x_w[0]) / NumOfPoints), 
                 NumOfPoints);
             for (int i = 0; i < NumOfPoints; i++)
             {
@@ -57,7 +58,7 @@ namespace WindowsFormsApp1
                 var mag = G[i].Magnitude;
                 Y_c[i] = new Complex(mag * mag, 0);
             }
-            Functions.FastDFT(Y_c, 1);
+            Functions.DFT(Y_c, 1);
             Complex add_k = new Complex(Y_c[0].Re, 0);
             for (int i = 0; i < NumOfPoints; i++)
             {
@@ -68,16 +69,8 @@ namespace WindowsFormsApp1
         }
         void Initialize_Filled()
         {
-            x_w = ArrayBuilder.CreateVector(
-                0,
-                2 * Math.PI / ((XEnd - XStart) / NumOfPoints),
-                NumOfPoints);
-            K = new Complex[NumOfPoints];
+
             G_K = new Complex[NumOfPoints];
-            for (int i = 0; i < NumOfPoints; i++)
-            {
-                K[i] = new Complex(1 - amplitude * Functions.func_gauss(x_w[i], sigma_K, omega_K), 0);
-            }
             for (int i = 0; i < NumOfPoints; i++)
             {
                 G_K[i] = Complex.Multiply(K[i], G[i]);
@@ -87,7 +80,7 @@ namespace WindowsFormsApp1
                 var mag = G_K[i].Magnitude;
                 Y_c[i] = new Complex(mag * mag, 0);
             }
-            Functions.FastDFT(Y_c, 1);
+            Functions.DFT(Y_c, 1);
             Complex add_k = new Complex(Y_c[0].Re, 0);
             for (int i = 0; i < NumOfPoints; i++)
             {
@@ -95,6 +88,27 @@ namespace WindowsFormsApp1
             }
             Functions.FlipFlop(Y_c);
             koef = Y_c.Max(t => t.Re);
+        }
+        
+        void Parse()
+        {
+            K = new Complex[1868];
+            x_w = new double[1868];
+            StreamReader file = new StreamReader("./sp.txt");
+            string buf;
+            for (int i = 0; (buf = file.ReadLine()) != null; ++i)
+            {
+                string[] vals = buf.Split(';');
+                x_w[i] = Convert.ToDouble(vals[0]);
+                K[i] = new Complex(Convert.ToDouble(vals[1]), 0);
+            }
+            Complex koef = new Complex(K.Max(t => t.Re), 0);
+            for(int i = 0; i < NumOfPoints; ++i)
+            {
+                K[i] = Complex.Divide(K[i], koef);
+            }
+            XEnd = x_w[1867];
+            XStart = x_w[0];
         }
 
         
@@ -123,17 +137,10 @@ namespace WindowsFormsApp1
 
             tableLayoutPanel3.Height = (int)(tableLayoutPanel1.Height * tableLayoutPanel1.RowStyles[1].Height / 100);
             tableLayoutPanel3.Width = (int)(tableLayoutPanel1.Width * tableLayoutPanel1.ColumnStyles[1].Width / 100);
-            //NumOfPoints = (int)Math.Pow(2, trackBar1.Value);
-            //XStart = Convert.ToDouble(textBox2.Text);
-            //XEnd = Convert.ToDouble(textBox4.Text);
-            amplitude = Convert.ToDouble(textBox1.Text);
-            sigma_G = Convert.ToDouble(textBox5.Text);
-            sigma_K = Convert.ToDouble(textBox6.Text);
-            omega_K = Convert.ToDouble(textBox8.Text);
-            omega_G = Convert.ToDouble(textBox7.Text);
             x = ArrayBuilder.CreateVector(XStart, XEnd, NumOfPoints);
             graphics = tableLayoutPanel3.CreateGraphics();
             button1.Enabled = false;
+            Parse();
         }
 
         private void button1_Click_1(object sender, EventArgs e)
@@ -154,24 +161,6 @@ namespace WindowsFormsApp1
 
         // дальше проверка длинны это проверка того что ты не удалили все из текст бокса
         // а проверка приведения, это проверка того что в текст боксе число
-        private void textBox1_TextChanged(object sender, EventArgs e)
-        {
-            double buf;
-            if (textBox1.Text.Length == 0) return;
-            else if (!double.TryParse(textBox1.Text, out buf)) return;
-            amplitude = buf;
-            if (amplitude < 0)
-            {
-                textBox1.Text = 0.ToString();
-                amplitude = 0;
-            }
-            if (amplitude > 1)
-            {
-                textBox1.Text = 1.ToString();
-                amplitude = 1;
-            }
-            button1.Enabled = false;
-        }
 
 
         //private void textBox2_TextChanged(object sender, EventArgs e)
@@ -232,20 +221,6 @@ namespace WindowsFormsApp1
             timer1.Interval = Math.Max(1, (int)(1500.0 / NumOfPoints));
             timer1.Enabled = true;
         }
-
-        private void textBox7_TextChanged(object sender, EventArgs e)
-        {
-            double buf;
-            if (textBox7.Text.Length == 0) return;
-            else if (!double.TryParse(textBox7.Text, out buf)) return;
-            if (buf <= 0)
-            {
-                textBox6.Text = (20).ToString();
-                buf = 20;
-            }
-            omega_G = buf;
-            button1.Enabled = false;
-        }
    
 
         private void timer1_Tick(object sender, EventArgs e)
@@ -284,48 +259,6 @@ namespace WindowsFormsApp1
             }
         }
 
-        private void textBox5_TextChanged_1(object sender, EventArgs e)
-        {
-            double buf;
-            if (textBox5.Text.Length == 0) return;
-            else if (!double.TryParse(textBox5.Text, out buf)) return;
-            if (buf <= 0)
-            {
-                textBox5.Text = (60).ToString();
-                buf = 60;
-            }
-            sigma_G = buf;
-            button1.Enabled = false;
-        }
-
-        private void textBox6_TextChanged(object sender, EventArgs e)
-        {
-            double buf;
-            if (textBox6.Text.Length == 0) return;
-            else if (!double.TryParse(textBox6.Text, out buf)) return;
-            if (buf <= 0)
-            {
-                textBox6.Text = (60).ToString();
-                buf = 60;
-            }
-            sigma_K = buf;
-            button1.Enabled = false;
-        }
-
-        private void textBox8_TextChanged_2(object sender, EventArgs e)
-        {
-            double buf;
-            if (textBox8.Text.Length == 0) return;
-            else if (!double.TryParse(textBox8.Text, out buf)) return;
-            if (buf <= 0)
-            {
-                textBox8.Text = (30).ToString();
-                buf = 30;
-            }
-            omega_K = buf;
-            button1.Enabled = false;
-        }
-
         private void chart1_Click(object sender, EventArgs e)
         {
 
@@ -360,14 +293,6 @@ namespace WindowsFormsApp1
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (comboBox1.Text == "First Preset")
-            {
-                textBox8.Text = "90";
-            }
-            if (comboBox1.Text == "Second Preset")
-            {
-                textBox8.Text = "100";
-            }
         }
 
         private void tableLayoutPanel2_Paint(object sender, PaintEventArgs e)

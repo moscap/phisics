@@ -77,6 +77,15 @@ namespace WindowsFormsApp1
             }
             FourierTransform.FFT(x, dir);
         }
+        public static void DFT(Complex[] x, int mode = 1)
+        {
+            var dir = FourierTransform.Direction.Forward;
+            if (mode == -1)
+            {
+                dir = FourierTransform.Direction.Backward;
+            }
+            FourierTransform.DFT(x, dir);
+        }
         public static void complex_magnitude_paint(object obj, double[] x, Complex[] y, double koef = 1.0)
         {
             var paint_obj = obj as System.Windows.Forms.DataVisualization.Charting.Chart;
