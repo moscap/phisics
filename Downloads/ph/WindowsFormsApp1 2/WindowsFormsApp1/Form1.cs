@@ -26,8 +26,11 @@ namespace WindowsFormsApp1
         double sigma_G, sigma_K, omega_G;
         double omega_K { get; set; }
         Graphics graphics { get; set; }
+        Graphics mirror_graph { get; set; }
         Rectangle moving_length { get; set; }
         Rectangle sample { get; set; }
+        Rectangle f_line { get; set; }
+        Rectangle s_line { get; set; }
         System.Windows.Forms.DataVisualization.Charting.Series ser { get; set; }
         long tic { get; set; }
         Complex[] Y_c = null;
@@ -219,6 +222,7 @@ namespace WindowsFormsApp1
             int base_x = tableLayoutPanel3.Width / 9; // единицы измерения длинны
             int base_y = tableLayoutPanel3.Height / 9; // единицы измерения длинны
             moving_length = new Rectangle(8 * base_x, 4 * base_y, base_x / 5, base_y);
+            s_line = new Rectangle((int)(base_x * 21 / 10.0), (int)(base_y * 4.5), moving_length.Left - (int)(base_x * 21 / 10.0), 1);
             graphics.FillRectangle(red_brush, moving_length);
             chart3.Series.Clear();
             ser = chart3.Series.Add("New plot");
@@ -250,14 +254,33 @@ namespace WindowsFormsApp1
 
         private void timer1_Tick(object sender, EventArgs e)
         {
+            int base_x = tableLayoutPanel3.Width / 9; // единицы измерения длинны
+            int base_y = tableLayoutPanel3.Height / 9; // единицы измерения длинны
             Graphics graphics = tableLayoutPanel3.CreateGraphics();
+            mirror_graph = tableLayoutPanel3.CreateGraphics();
+            mirror_graph.TranslateTransform((int)(base_x * 4.5), (int)(base_y * 4.5));
+            mirror_graph.RotateTransform(45);
+            DoubleBuffered = true;
             SolidBrush white_brush = new SolidBrush(Color.WhiteSmoke);
             SolidBrush red_brush = new SolidBrush(Color.Red);
+            SolidBrush black_brush = new SolidBrush(Color.Black);
+            SolidBrush green_brush = new SolidBrush(Color.LightGreen);
+
             graphics.FillRectangle(white_brush, moving_length);
+            mirror_graph.FillRectangle(white_brush, new Rectangle(-base_x / 10, (int)(-base_y / 1.5), base_x / 5, (int)(base_y * 1.5)));
+            graphics.FillRectangle(white_brush, f_line);
+            graphics.FillRectangle(white_brush, s_line);
+            s_line = new Rectangle((int)(base_x * 21 / 10.0), (int)(base_y * 4.5) - 1, moving_length.Left - (int)(base_x * 21 / 10.0), 3);
             moving_length = new Rectangle(tableLayoutPanel3.Width * 8 / 9 - (int)(tableLayoutPanel3.Width / 9 * tic / NumOfPoints)
                 , moving_length.Top, moving_length.Width, moving_length.Height);
+
             ser.Points.AddXY(x[tic], Y_c[tic].Re / koef);
+
             graphics.FillRectangle(red_brush, moving_length);
+            graphics.FillRectangle(green_brush, f_line);
+            graphics.FillRectangle(green_brush, s_line);
+            mirror_graph.FillRectangle(black_brush, new Rectangle(-base_x / 10, (int)(-base_y / 1.5), base_x / 5, (int)(base_y * 1.5)));
+
             if (NumOfPoints > 8000)
                 tic += 16;
             else if (NumOfPoints > 4000)
@@ -283,7 +306,7 @@ namespace WindowsFormsApp1
                 }
             }
         }
-
+    
         private void textBox5_TextChanged_1(object sender, EventArgs e)
         {
             double buf;
@@ -344,13 +367,10 @@ namespace WindowsFormsApp1
             graphics.FillRectangle(blue_brush, new Rectangle(4 * base_x, 8 * base_y - base_y / 5, base_x, base_y / 5));
             graphics.FillRectangle(black_brush, new Rectangle(base_x, 4 * base_y, base_x, base_y));
             graphics.FillRectangle(red_brush, new Rectangle(2 * base_x, 4 * base_y + (int)(base_y * 0.4), base_x / 10, base_y / 5));
-            //graphics.RotateTransform((float)(Math.Atan((double)base_y / (double)base_x) * 180 / Math.PI));
-
-            //graphics.FillRectangle(black_brush, new Rectangle((int)Math.Sqrt(Math.Pow(4.5 * base_x, 2) + Math.Pow(4.5 * base_y, 2))
-            // - base_x / 2, 0, base_x / 5, base_y));
+            f_line = new Rectangle((int)(base_x * 4.5) - 1, (int)(base_y * 6 / 5.0), 3, (int)(8 * base_y - base_y / 5) - (int)(base_y * 6 / 5.0));
             graphics.TranslateTransform((int)(base_x * 4.5), (int)(base_y * 4.5));
             graphics.RotateTransform(45);
-            graphics.FillRectangle(black_brush, new Rectangle(-base_x / 20, (int)(-base_y / 1.5), base_x / 10, (int)(base_y * 1.5)));
+            graphics.FillRectangle(black_brush, new Rectangle(-base_x / 10, (int)(-base_y / 1.5), base_x / 5, (int)(base_y * 1.5)));
         }
 
         private void label1_Click(object sender, EventArgs e)

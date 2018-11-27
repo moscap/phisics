@@ -25,6 +25,7 @@ namespace WindowsFormsApp1
         double[] x_w = null;
         double sigma_G, omega_G;
         Graphics graphics { get; set; }
+        Graphics mirror_graph { get; set; }
         Rectangle moving_length { get; set; }
         Rectangle sample { get; set; }
         System.Windows.Forms.DataVisualization.Charting.Series ser { get; set; }
@@ -73,7 +74,7 @@ namespace WindowsFormsApp1
             G_K = new Complex[NumOfPoints];
             for (int i = 0; i < NumOfPoints; i++)
             {
-                G_K[i] = Complex.Multiply(1 - K[i], G[i]);
+                G_K[i] = Complex.Multiply(K[i], G[i]);
             }
             for (int i = 0; i < NumOfPoints; i++)
             {
@@ -100,10 +101,10 @@ namespace WindowsFormsApp1
             {
                 string[] vals = buf.Split(';');
                 x_w[i] = Convert.ToDouble(vals[0]);
-                K[i] = new Complex(Convert.ToDouble(vals[1]), 0);
+                K[i] = new Complex(1 - Convert.ToDouble(vals[1]), 0);
             }
-            sigma_G = 150;
-            omega_G = 1600;
+            sigma_G = 350;
+            omega_G = 3200;
         }
 
         
@@ -206,8 +207,8 @@ namespace WindowsFormsApp1
             graphics.FillRectangle(red_brush, moving_length);
             chart3.Series.Clear();
             ser = chart3.Series.Add("New plot");
-            chart3.ChartAreas[0].AxisX.Maximum = 0.9;
-            chart3.ChartAreas[0].AxisX.Minimum = -0.9;
+            chart3.ChartAreas[0].AxisX.Maximum = 0.04;
+            chart3.ChartAreas[0].AxisX.Minimum = -0.04;
             chart3.ChartAreas[0].AxisY.Maximum = 1.1;
             chart3.ChartAreas[0].AxisY.Minimum = 0;
             ser.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
@@ -222,6 +223,11 @@ namespace WindowsFormsApp1
             Graphics graphics = tableLayoutPanel3.CreateGraphics();
             SolidBrush white_brush = new SolidBrush(Color.WhiteSmoke);
             SolidBrush red_brush = new SolidBrush(Color.Red);
+            SolidBrush black_brush = new SolidBrush(Color.Black);
+            Pen green_pen = new Pen(Color.SpringGreen);
+            int base_x = tableLayoutPanel3.Width / 9; // единицы измерения длинны
+            int base_y = tableLayoutPanel3.Height / 9; // единицы измерения длинны
+            graphics.FillRectangle(black_brush, new Rectangle(-base_x / 20, (int)(-base_y / 1.5), base_x / 10, (int)(base_y * 1.5)));
             graphics.FillRectangle(white_brush, moving_length);
             moving_length = new Rectangle(tableLayoutPanel3.Width * 8 / 9 - (int)(tableLayoutPanel3.Width / 9 * tic / NumOfPoints)
                 , moving_length.Top, moving_length.Width, moving_length.Height);
@@ -273,6 +279,7 @@ namespace WindowsFormsApp1
             graphics.FillRectangle(red_brush, new Rectangle(2 * base_x, 4 * base_y + (int)(base_y * 0.4), base_x / 10, base_y / 5));
             graphics.TranslateTransform((int)(base_x * 4.5), (int)(base_y * 4.5));
             graphics.RotateTransform(45);
+            mirror_graph = graphics;
             graphics.FillRectangle(black_brush, new Rectangle(-base_x / 20, (int)(-base_y / 1.5), base_x / 10, (int)(base_y * 1.5)));
         }
 
