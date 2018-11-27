@@ -23,9 +23,7 @@ namespace WindowsFormsApp1
         double XEnd { get; set; }
         double[] x = null;
         double[] x_w = null;
-        double amplitude;
-        double sigma_G, sigma_K, omega_G;
-        double omega_K { get; set; }
+        double sigma_G, omega_G;
         Graphics graphics { get; set; }
         Rectangle moving_length { get; set; }
         Rectangle sample { get; set; }
@@ -49,6 +47,8 @@ namespace WindowsFormsApp1
                 - Math.PI / ((x_w[1867] - x_w[0]) / NumOfPoints),
                 Math.PI / ((x_w[1867] - x_w[0]) / NumOfPoints), 
                 NumOfPoints);
+            XEnd = x[1867];
+            XStart = x[0];
             for (int i = 0; i < NumOfPoints; i++)
             {
                 G[i] = new Complex(Functions.func_gauss(x_w[i], sigma_G, omega_G), 0);
@@ -73,7 +73,7 @@ namespace WindowsFormsApp1
             G_K = new Complex[NumOfPoints];
             for (int i = 0; i < NumOfPoints; i++)
             {
-                G_K[i] = Complex.Multiply(K[i], G[i]);
+                G_K[i] = Complex.Multiply(1 - K[i], G[i]);
             }
             for (int i = 0; i < NumOfPoints; i++)
             {
@@ -102,13 +102,8 @@ namespace WindowsFormsApp1
                 x_w[i] = Convert.ToDouble(vals[0]);
                 K[i] = new Complex(Convert.ToDouble(vals[1]), 0);
             }
-            Complex koef = new Complex(K.Max(t => t.Re), 0);
-            for(int i = 0; i < NumOfPoints; ++i)
-            {
-                K[i] = Complex.Divide(K[i], koef);
-            }
-            XEnd = x_w[1867];
-            XStart = x_w[0];
+            sigma_G = 150;
+            omega_G = 1600;
         }
 
         
@@ -137,7 +132,6 @@ namespace WindowsFormsApp1
 
             tableLayoutPanel3.Height = (int)(tableLayoutPanel1.Height * tableLayoutPanel1.RowStyles[1].Height / 100);
             tableLayoutPanel3.Width = (int)(tableLayoutPanel1.Width * tableLayoutPanel1.ColumnStyles[1].Width / 100);
-            x = ArrayBuilder.CreateVector(XStart, XEnd, NumOfPoints);
             graphics = tableLayoutPanel3.CreateGraphics();
             button1.Enabled = false;
             Parse();
@@ -194,6 +188,7 @@ namespace WindowsFormsApp1
         {
             chart1.Series.Clear();
             chart2.Series.Clear();
+            Initialize_Empty();
             button1.Enabled = false;
             SolidBrush smoke_brush = new SolidBrush(Color.WhiteSmoke);
             if (!moving_length.IsEmpty)
@@ -211,12 +206,11 @@ namespace WindowsFormsApp1
             graphics.FillRectangle(red_brush, moving_length);
             chart3.Series.Clear();
             ser = chart3.Series.Add("New plot");
-            chart3.ChartAreas[0].AxisX.Maximum = XEnd;
-            chart3.ChartAreas[0].AxisX.Minimum = XStart;
+            chart3.ChartAreas[0].AxisX.Maximum = 0.9;
+            chart3.ChartAreas[0].AxisX.Minimum = -0.9;
             chart3.ChartAreas[0].AxisY.Maximum = 1.1;
             chart3.ChartAreas[0].AxisY.Minimum = 0;
             ser.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
-            Initialize_Empty();
             tic = 0;
             timer1.Interval = Math.Max(1, (int)(1500.0 / NumOfPoints));
             timer1.Enabled = true;
@@ -277,10 +271,6 @@ namespace WindowsFormsApp1
             graphics.FillRectangle(blue_brush, new Rectangle(4 * base_x, 8 * base_y - base_y / 5, base_x, base_y / 5));
             graphics.FillRectangle(black_brush, new Rectangle(base_x, 4 * base_y, base_x, base_y));
             graphics.FillRectangle(red_brush, new Rectangle(2 * base_x, 4 * base_y + (int)(base_y * 0.4), base_x / 10, base_y / 5));
-            //graphics.RotateTransform((float)(Math.Atan((double)base_y / (double)base_x) * 180 / Math.PI));
-
-            //graphics.FillRectangle(black_brush, new Rectangle((int)Math.Sqrt(Math.Pow(4.5 * base_x, 2) + Math.Pow(4.5 * base_y, 2))
-            // - base_x / 2, 0, base_x / 5, base_y));
             graphics.TranslateTransform((int)(base_x * 4.5), (int)(base_y * 4.5));
             graphics.RotateTransform(45);
             graphics.FillRectangle(black_brush, new Rectangle(-base_x / 20, (int)(-base_y / 1.5), base_x / 10, (int)(base_y * 1.5)));
@@ -324,7 +314,7 @@ namespace WindowsFormsApp1
 
         private void button3_Click(object sender, EventArgs e)
         {
-            Functions.complex_re_paint(chart2, x_w, K, 1, sigma_K, omega_K, "K");
+            Functions.complex_re_paint(chart2, x_w, K, 1, 1, 1, "K");
         }
 
         private void tableLayoutPanel8_Paint(object sender, PaintEventArgs e)

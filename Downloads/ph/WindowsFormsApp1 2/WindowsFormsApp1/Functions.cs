@@ -118,6 +118,7 @@ namespace WindowsFormsApp1
             var ser = paint_obj.Series.Add(name);
             paint_obj.ChartAreas[0].AxisX.Maximum = 4000;
             paint_obj.ChartAreas[0].AxisX.Minimum = 400;
+            paint_obj.ChartAreas[0].AxisY.Maximum = 1.1;
             ser.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline ;
             for (int i = 0; i < x.Length; i++)
             {
