@@ -28,6 +28,9 @@ namespace WindowsFormsApp1
         Graphics mirror_graph { get; set; }
         Rectangle moving_length { get; set; }
         Rectangle sample { get; set; }
+        Rectangle f_line { get; set; }
+        Rectangle f_s_line { get; set; }
+        Rectangle s_line { get; set; }
         System.Windows.Forms.DataVisualization.Charting.Series ser { get; set; }
         long tic { get; set; }
         Complex[] Y_c = null;
@@ -111,6 +114,7 @@ namespace WindowsFormsApp1
         public Form3()
         {
             InitializeComponent();
+            DoubleBuffered = true;
 
             chart1.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.Bright;
             chart1.ChartAreas[0].AxisX.LabelStyle.Format = "{F0}";
@@ -146,11 +150,6 @@ namespace WindowsFormsApp1
 
         }
 
-        private void label2_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void button2_Click_1(object sender, EventArgs e)
         {
             chart1.Series.Clear();
@@ -170,10 +169,11 @@ namespace WindowsFormsApp1
             int base_x = tableLayoutPanel3.Width / 9; // единицы измерения длинны
             int base_y = tableLayoutPanel3.Height / 9; // единицы измерения длинны
             moving_length = new Rectangle(8 * base_x, 4 * base_y, base_x / 5, base_y);
+            s_line = new Rectangle((int)(base_x * 21 / 10.0), (int)(base_y * 4.5), moving_length.Left - (int)(base_x * 21 / 10.0), 1);
             graphics.FillRectangle(red_brush, moving_length);
             chart3.Series.Clear();
             ser = chart3.Series.Add("New plot");
-            ser.BorderWidth = 3;
+            ser.BorderWidth = 2;
             chart3.ChartAreas[0].AxisX.Maximum = 0.05;
             chart3.ChartAreas[0].AxisX.Minimum = -0.05;
             chart3.ChartAreas[0].AxisY.Maximum = 1.1;
@@ -187,29 +187,37 @@ namespace WindowsFormsApp1
 
         private void timer1_Tick(object sender, EventArgs e)
         {
+            int base_x = tableLayoutPanel3.Width / 9; // единицы измерения длинны
+            int base_y = tableLayoutPanel3.Height / 9; // единицы измерения длинны
+
             Graphics graphics = tableLayoutPanel3.CreateGraphics();
+            mirror_graph = tableLayoutPanel3.CreateGraphics();
+            mirror_graph.TranslateTransform((int)(base_x * 4.5), (int)(base_y * 4.5));
+            mirror_graph.RotateTransform(45);
+
             SolidBrush white_brush = new SolidBrush(Color.WhiteSmoke);
             SolidBrush red_brush = new SolidBrush(Color.Red);
             SolidBrush black_brush = new SolidBrush(Color.Black);
-            Pen green_pen = new Pen(Color.SpringGreen);
-            int base_x = tableLayoutPanel3.Width / 9; // единицы измерения длинны
-            int base_y = tableLayoutPanel3.Height / 9; // единицы измерения длинны
-            graphics.FillRectangle(black_brush, new Rectangle(-base_x / 20, (int)(-base_y / 1.5), base_x / 10, (int)(base_y * 1.5)));
+            SolidBrush green_brush = new SolidBrush(Color.LightGreen);
+            Pen green_pen = new Pen(Color.LightGreen, 3);
+
             graphics.FillRectangle(white_brush, moving_length);
+            mirror_graph.FillRectangle(white_brush, new Rectangle(-base_x / 10, (int)(-base_y / 1.5), base_x / 5, (int)(base_y * 1.5)));
+            graphics.FillRectangle(white_brush, f_line);
+            graphics.FillRectangle(white_brush, s_line);
+            s_line = new Rectangle((int)(base_x * 4.5), (int)(base_y * 4.5) - 3, moving_length.Left - (int)(base_x * 4.5) - 2, 7);
             moving_length = new Rectangle(tableLayoutPanel3.Width * 8 / 9 - (int)(tableLayoutPanel3.Width / 9 * tic / NumOfPoints)
                 , moving_length.Top, moving_length.Width, moving_length.Height);
+
             ser.Points.AddXY(x[tic], Y_c[tic].Re / koef);
+
             graphics.FillRectangle(red_brush, moving_length);
-            if (NumOfPoints > 8000)
-                tic += 16;
-            else if (NumOfPoints > 4000)
-                tic += 8;
-            else if (NumOfPoints > 2000)
-                tic += 4;
-            else if (NumOfPoints > 1000)
-                tic += 2;
-            else
-                tic++;
+            graphics.FillRectangle(green_brush, f_s_line);
+            graphics.DrawRectangle(green_pen, f_line);
+            graphics.DrawRectangle(green_pen, s_line);
+            mirror_graph.FillRectangle(black_brush, new Rectangle(-base_x / 10, (int)(-base_y / 1.5), base_x / 5, (int)(base_y * 1.5)));
+
+            tic += 2;
             if (tic >= NumOfPoints)
             {
                 timer1.Enabled = false;
@@ -226,11 +234,6 @@ namespace WindowsFormsApp1
             }
         }
 
-        private void chart1_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void tableLayoutPanel3_Paint(object sender, PaintEventArgs e)
         {
             DoubleBuffered = true;
@@ -244,19 +247,12 @@ namespace WindowsFormsApp1
             graphics.FillRectangle(blue_brush, new Rectangle(4 * base_x, 8 * base_y - base_y / 5, base_x, base_y / 5));
             graphics.FillRectangle(black_brush, new Rectangle(base_x, 4 * base_y, base_x, base_y));
             graphics.FillRectangle(red_brush, new Rectangle(2 * base_x, 4 * base_y + (int)(base_y * 0.4), base_x / 10, base_y / 5));
+            f_line = new Rectangle((int)(base_x * 4.5) - 3, (int)(base_y * 6 / 5.0) + 1, 7, (int)(8 * base_y - base_y / 5) - (int)(base_y * 6 / 5.0) - 3);
+            f_s_line = new Rectangle(base_x * 21 / 10, (int)(base_y * 4.5), (int)(base_x * 4.5) - base_x * 21 / 10, 3);
             graphics.TranslateTransform((int)(base_x * 4.5), (int)(base_y * 4.5));
             graphics.RotateTransform(45);
             mirror_graph = graphics;
             graphics.FillRectangle(black_brush, new Rectangle(-base_x / 20, (int)(-base_y / 1.5), base_x / 10, (int)(base_y * 1.5)));
-        }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {
         }
 
         private void tableLayoutPanel2_Paint(object sender, PaintEventArgs e)
@@ -300,11 +296,6 @@ namespace WindowsFormsApp1
         private void button5_Click(object sender, EventArgs e)
         {
             this.Close();
-        }
-
-        private void label4_Click(object sender, EventArgs e)
-        {
-
         }
     }
 }

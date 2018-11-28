@@ -30,6 +30,7 @@ namespace WindowsFormsApp1
         Rectangle moving_length { get; set; }
         Rectangle sample { get; set; }
         Rectangle f_line { get; set; }
+        Rectangle f_s_line { get; set; }
         Rectangle s_line { get; set; }
         System.Windows.Forms.DataVisualization.Charting.Series ser { get; set; }
         long tic { get; set; }
@@ -227,20 +228,22 @@ namespace WindowsFormsApp1
             SolidBrush red_brush = new SolidBrush(Color.Red);
             SolidBrush black_brush = new SolidBrush(Color.Black);
             SolidBrush green_brush = new SolidBrush(Color.LightGreen);
+            Pen green_pen = new Pen(Color.LightGreen, 3);
 
             graphics.FillRectangle(white_brush, moving_length);
             mirror_graph.FillRectangle(white_brush, new Rectangle(-base_x / 10, (int)(-base_y / 1.5), base_x / 5, (int)(base_y * 1.5)));
             graphics.FillRectangle(white_brush, f_line);
             graphics.FillRectangle(white_brush, s_line);
-            s_line = new Rectangle((int)(base_x * 21 / 10.0), (int)(base_y * 4.5) - 1, moving_length.Left - (int)(base_x * 21 / 10.0), 3);
+            s_line = new Rectangle((int)(base_x * 4.5), (int)(base_y * 4.5) - 3, moving_length.Left - (int)(base_x * 4.5) - 2, 7);
             moving_length = new Rectangle(tableLayoutPanel3.Width * 8 / 9 - (int)(tableLayoutPanel3.Width / 9 * tic / NumOfPoints)
                 , moving_length.Top, moving_length.Width, moving_length.Height);
 
             ser.Points.AddXY(x[tic], Y_c[tic].Re / koef);
 
             graphics.FillRectangle(red_brush, moving_length);
-            graphics.FillRectangle(green_brush, f_line);
-            graphics.FillRectangle(green_brush, s_line);
+            graphics.FillRectangle(green_brush, f_s_line);
+            graphics.DrawRectangle(green_pen, f_line);
+            graphics.DrawRectangle(green_pen, s_line);
             mirror_graph.FillRectangle(black_brush, new Rectangle(-base_x / 10, (int)(-base_y / 1.5), base_x / 5, (int)(base_y * 1.5)));
 
             if (NumOfPoints > 8000)
@@ -324,7 +327,8 @@ namespace WindowsFormsApp1
             graphics.FillRectangle(blue_brush, new Rectangle(4 * base_x, 8 * base_y - base_y / 5, base_x, base_y / 5));
             graphics.FillRectangle(black_brush, new Rectangle(base_x, 4 * base_y, base_x, base_y));
             graphics.FillRectangle(red_brush, new Rectangle(2 * base_x, 4 * base_y + (int)(base_y * 0.4), base_x / 10, base_y / 5));
-            f_line = new Rectangle((int)(base_x * 4.5) - 1, (int)(base_y * 6 / 5.0), 3, (int)(8 * base_y - base_y / 5) - (int)(base_y * 6 / 5.0));
+            f_line = new Rectangle((int)(base_x * 4.5) - 3, (int)(base_y * 6 / 5.0) + 1, 7, (int)(8 * base_y - base_y / 5) - (int)(base_y * 6 / 5.0) - 3);
+            f_s_line = new Rectangle(base_x * 21 / 10, (int)(base_y * 4.5), (int)(base_x * 4.5) - base_x * 21 / 10 , 3);
             graphics.TranslateTransform((int)(base_x * 4.5), (int)(base_y * 4.5));
             graphics.RotateTransform(45);
             graphics.FillRectangle(black_brush, new Rectangle(-base_x / 10, (int)(-base_y / 1.5), base_x / 5, (int)(base_y * 1.5)));
