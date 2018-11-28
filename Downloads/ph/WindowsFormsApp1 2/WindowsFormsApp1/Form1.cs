@@ -104,31 +104,25 @@ namespace WindowsFormsApp1
         public Form1()
         {
             InitializeComponent();
-            Size resolution = System.Windows.Forms.Screen.PrimaryScreen.Bounds.Size;
-            tableLayoutPanel1.Width = (int)(resolution.Width * (15.0 / 16.0));
-            tableLayoutPanel1.Height = (int)(resolution.Height * (10.0 / 11.0));
 
-            chart1.Height = (int)(tableLayoutPanel1.Height * tableLayoutPanel1.RowStyles[0].Height / 100);
-            chart1.Width = (int)(tableLayoutPanel1.Width * tableLayoutPanel1.ColumnStyles[2].Width / 100);
-            chart1.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.SemiTransparent;
-            chart1.ChartAreas[0].AxisX.LabelStyle.Format = "{F2}";
+            chart1.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.Bright;
+            chart1.ChartAreas[0].AxisX.LabelStyle.Format = "{F0}";
             chart1.ChartAreas[0].AxisX.Title = "волновое число(см -1)";
+            chart1.ChartAreas[0].AxisX.TitleFont = new Font(chart1.ChartAreas[0].AxisX.TitleFont.Name, 10,
+                chart1.ChartAreas[0].AxisX.TitleFont.Style, chart1.ChartAreas[0].AxisX.TitleFont.Unit);
 
-            chart2.Height = (int)(tableLayoutPanel1.Height * tableLayoutPanel1.RowStyles[0].Height / 100);
-            chart2.Width = (int)(tableLayoutPanel1.Width * tableLayoutPanel1.ColumnStyles[2].Width / 100);
-            chart2.ChartAreas[0].AxisX.LabelStyle.Format = "{F2}";
+            chart2.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.Bright;
+            chart2.ChartAreas[0].AxisX.LabelStyle.Format = "{F0}";
             chart2.ChartAreas[0].AxisX.Title = "волновое число(см -1)";
+            chart2.ChartAreas[0].AxisX.TitleFont = new Font(chart2.ChartAreas[0].AxisX.TitleFont.Name, 10,
+                chart2.ChartAreas[0].AxisX.TitleFont.Style, chart2.ChartAreas[0].AxisX.TitleFont.Unit);
 
-            chart3.Height = (int)(tableLayoutPanel1.Height * tableLayoutPanel1.RowStyles[1].Height / 100);
-            chart3.Width = (int)(tableLayoutPanel1.Width * tableLayoutPanel1.ColumnStyles[2].Width / 100);
+            chart3.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.Bright;
             chart3.ChartAreas[0].AxisX.LabelStyle.Format = "{F2}";
             chart3.ChartAreas[0].AxisX.Title = "см";
+            chart3.ChartAreas[0].AxisX.TitleFont = new Font(chart3.ChartAreas[0].AxisX.TitleFont.Name, 10,
+                chart3.ChartAreas[0].AxisX.TitleFont.Style, chart3.ChartAreas[0].AxisX.TitleFont.Unit);
 
-            tableLayoutPanel3.Height = (int)(tableLayoutPanel1.Height * tableLayoutPanel1.RowStyles[1].Height / 100);
-            tableLayoutPanel3.Width = (int)(tableLayoutPanel1.Width * tableLayoutPanel1.ColumnStyles[1].Width / 100);
-            //NumOfPoints = (int)Math.Pow(2, trackBar1.Value);
-            //XStart = Convert.ToDouble(textBox2.Text);
-            //XEnd = Convert.ToDouble(textBox4.Text);
             amplitude = Convert.ToDouble(textBox1.Text);
             sigma_G = Convert.ToDouble(textBox5.Text);
             sigma_K = Convert.ToDouble(textBox6.Text);
@@ -146,11 +140,6 @@ namespace WindowsFormsApp1
         }
 
         private void Form1_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label2_Click(object sender, EventArgs e)
         {
 
         }
@@ -175,34 +164,6 @@ namespace WindowsFormsApp1
             }
             button1.Enabled = false;
         }
-
-
-        //private void textBox2_TextChanged(object sender, EventArgs e)
-        //{
-        //    double buf;
-        //    if (textBox2.Text.Length == 0) return;
-        //    else if (!double.TryParse(textBox2.Text, out buf)) return;
-        //    XStart = buf;
-        //    x = ArrayBuilder.CreateVector(XStart, XEnd, NumOfPoints);
-        //    button1.Enabled = false;
-        //}
-
-        //private void textBox4_TextChanged(object sender, EventArgs e)
-        //{
-        //    double buf;
-        //    if (textBox4.Text.Length == 0) return;
-        //    else if (!double.TryParse(textBox4.Text, out buf)) return;
-        //    XEnd = buf;
-        //    x = ArrayBuilder.CreateVector(XStart, XEnd, NumOfPoints);
-        //    button1.Enabled = false;
-        //}
-
-        //private void trackBar1_Scroll(object sender, EventArgs e)
-        //{
-        //    NumOfPoints = (int)Math.Pow(2, trackBar1.Value);
-        //    x = ArrayBuilder.CreateVector(XStart, XEnd, NumOfPoints);
-        //    button1.Enabled = false;
-        //}
 
         private void button2_Click_1(object sender, EventArgs e)
         {
@@ -231,6 +192,7 @@ namespace WindowsFormsApp1
             chart3.ChartAreas[0].AxisY.Maximum = 1.1;
             chart3.ChartAreas[0].AxisY.Minimum = 0;
             ser.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
+            ser.BorderWidth = 2;
             Initialize_Empty();
             tic = 0;
             timer1.Interval = Math.Max(1, (int)(1500.0 / NumOfPoints));
@@ -349,11 +311,6 @@ namespace WindowsFormsApp1
             button1.Enabled = false;
         }
 
-        private void chart1_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void tableLayoutPanel3_Paint(object sender, PaintEventArgs e)
         {
             DoubleBuffered = true;
@@ -373,23 +330,6 @@ namespace WindowsFormsApp1
             graphics.FillRectangle(black_brush, new Rectangle(-base_x / 10, (int)(-base_y / 1.5), base_x / 5, (int)(base_y * 1.5)));
         }
 
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (comboBox1.Text == "First Preset")
-            {
-                textBox8.Text = "90";
-            }
-            if (comboBox1.Text == "Second Preset")
-            {
-                textBox8.Text = "100";
-            }
-        }
-
         private void tableLayoutPanel2_Paint(object sender, PaintEventArgs e)
         {
 
@@ -406,6 +346,7 @@ namespace WindowsFormsApp1
             chart3.Series.Clear();
             ser = chart3.Series.Add("Acorr");
             ser.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
+            ser.BorderWidth = 2;
             Initialize_Filled();
             tic = 0;
             timer1.Enabled = true;
@@ -422,14 +363,15 @@ namespace WindowsFormsApp1
             Functions.complex_re_paint(chart2, x_w, K, 1, sigma_K, omega_K, "K");
         }
 
-        private void tableLayoutPanel8_Paint(object sender, PaintEventArgs e)
+        private void label5_Click(object sender, EventArgs e)
         {
 
         }
 
-        private void label4_Click(object sender, EventArgs e)
+        private void button5_Click(object sender, EventArgs e)
         {
-
+            this.Close();
         }
+        
     }
 }

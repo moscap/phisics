@@ -111,28 +111,25 @@ namespace WindowsFormsApp1
         public Form3()
         {
             InitializeComponent();
-            Size resolution = System.Windows.Forms.Screen.PrimaryScreen.Bounds.Size;
-            tableLayoutPanel1.Width = (int)(resolution.Width * (15.0 / 16.0));
-            tableLayoutPanel1.Height = (int)(resolution.Height * (10.0 / 11.0));
 
-            chart1.Height = (int)(tableLayoutPanel1.Height * tableLayoutPanel1.RowStyles[0].Height / 100);
-            chart1.Width = (int)(tableLayoutPanel1.Width * tableLayoutPanel1.ColumnStyles[2].Width / 100);
-            chart1.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.SemiTransparent;
-            chart1.ChartAreas[0].AxisX.LabelStyle.Format = "{F2}";
+            chart1.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.Bright;
+            chart1.ChartAreas[0].AxisX.LabelStyle.Format = "{F0}";
             chart1.ChartAreas[0].AxisX.Title = "волновое число(см -1)";
+            chart1.ChartAreas[0].AxisX.TitleFont = new Font(chart1.ChartAreas[0].AxisX.TitleFont.Name, 10, 
+                chart1.ChartAreas[0].AxisX.TitleFont.Style, chart1.ChartAreas[0].AxisX.TitleFont.Unit);
 
-            chart2.Height = (int)(tableLayoutPanel1.Height * tableLayoutPanel1.RowStyles[0].Height / 100);
-            chart2.Width = (int)(tableLayoutPanel1.Width * tableLayoutPanel1.ColumnStyles[2].Width / 100);
-            chart2.ChartAreas[0].AxisX.LabelStyle.Format = "{F2}";
+            chart2.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.Bright;
+            chart2.ChartAreas[0].AxisX.LabelStyle.Format = "{F0}";
             chart2.ChartAreas[0].AxisX.Title = "волновое число(см -1)";
+            chart2.ChartAreas[0].AxisX.TitleFont = new Font(chart2.ChartAreas[0].AxisX.TitleFont.Name, 10,
+                chart2.ChartAreas[0].AxisX.TitleFont.Style, chart2.ChartAreas[0].AxisX.TitleFont.Unit);
 
-            chart3.Height = (int)(tableLayoutPanel1.Height * tableLayoutPanel1.RowStyles[1].Height / 100);
-            chart3.Width = (int)(tableLayoutPanel1.Width * tableLayoutPanel1.ColumnStyles[2].Width / 100);
+            chart3.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.Bright;
             chart3.ChartAreas[0].AxisX.LabelStyle.Format = "{F2}";
             chart3.ChartAreas[0].AxisX.Title = "см";
+            chart3.ChartAreas[0].AxisX.TitleFont = new Font(chart3.ChartAreas[0].AxisX.TitleFont.Name, 10,
+                chart3.ChartAreas[0].AxisX.TitleFont.Style, chart3.ChartAreas[0].AxisX.TitleFont.Unit);
 
-            tableLayoutPanel3.Height = (int)(tableLayoutPanel1.Height * tableLayoutPanel1.RowStyles[1].Height / 100);
-            tableLayoutPanel3.Width = (int)(tableLayoutPanel1.Width * tableLayoutPanel1.ColumnStyles[1].Width / 100);
             graphics = tableLayoutPanel3.CreateGraphics();
             button1.Enabled = false;
             Parse();
@@ -153,37 +150,6 @@ namespace WindowsFormsApp1
         {
 
         }
-
-        // дальше проверка длинны это проверка того что ты не удалили все из текст бокса
-        // а проверка приведения, это проверка того что в текст боксе число
-
-
-        //private void textBox2_TextChanged(object sender, EventArgs e)
-        //{
-        //    double buf;
-        //    if (textBox2.Text.Length == 0) return;
-        //    else if (!double.TryParse(textBox2.Text, out buf)) return;
-        //    XStart = buf;
-        //    x = ArrayBuilder.CreateVector(XStart, XEnd, NumOfPoints);
-        //    button1.Enabled = false;
-        //}
-
-        //private void textBox4_TextChanged(object sender, EventArgs e)
-        //{
-        //    double buf;
-        //    if (textBox4.Text.Length == 0) return;
-        //    else if (!double.TryParse(textBox4.Text, out buf)) return;
-        //    XEnd = buf;
-        //    x = ArrayBuilder.CreateVector(XStart, XEnd, NumOfPoints);
-        //    button1.Enabled = false;
-        //}
-
-        //private void trackBar1_Scroll(object sender, EventArgs e)
-        //{
-        //    NumOfPoints = (int)Math.Pow(2, trackBar1.Value);
-        //    x = ArrayBuilder.CreateVector(XStart, XEnd, NumOfPoints);
-        //    button1.Enabled = false;
-        //}
 
         private void button2_Click_1(object sender, EventArgs e)
         {
@@ -207,8 +173,9 @@ namespace WindowsFormsApp1
             graphics.FillRectangle(red_brush, moving_length);
             chart3.Series.Clear();
             ser = chart3.Series.Add("New plot");
-            chart3.ChartAreas[0].AxisX.Maximum = 0.04;
-            chart3.ChartAreas[0].AxisX.Minimum = -0.04;
+            ser.BorderWidth = 3;
+            chart3.ChartAreas[0].AxisX.Maximum = 0.05;
+            chart3.ChartAreas[0].AxisX.Minimum = -0.05;
             chart3.ChartAreas[0].AxisY.Maximum = 1.1;
             chart3.ChartAreas[0].AxisY.Minimum = 0;
             ser.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
@@ -307,6 +274,7 @@ namespace WindowsFormsApp1
             chart2.Series.Clear();
             chart3.Series.Clear();
             ser = chart3.Series.Add("Acorr");
+            ser.BorderWidth = 3;
             ser.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
             Initialize_Filled();
             tic = 0;
@@ -327,6 +295,11 @@ namespace WindowsFormsApp1
         private void tableLayoutPanel8_Paint(object sender, PaintEventArgs e)
         {
 
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
 
         private void label4_Click(object sender, EventArgs e)

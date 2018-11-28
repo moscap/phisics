@@ -101,11 +101,12 @@ namespace WindowsFormsApp1
             var ser = paint_obj.Series.Add(name);
             paint_obj.ChartAreas[0].AxisX.Maximum = 4000;
             paint_obj.ChartAreas[0].AxisX.Minimum = 400;
-            paint_obj.ChartAreas[0].AxisX.IntervalOffset = 100;
+            paint_obj.ChartAreas[0].AxisX.IntervalOffset = 600;
             paint_obj.ChartAreas[0].AxisX.MajorGrid.Enabled = false;
-            paint_obj.ChartAreas[0].AxisX.Interval = 500;
+            paint_obj.ChartAreas[0].AxisX.Interval = 1000;
             paint_obj.ChartAreas[0].AxisY.Maximum = 1.1;
             ser.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
+            ser.BorderWidth = 3;
             for (int i = 0; i < x.Length; i++)
             {
                     ser.Points.AddXY(x[i], y[i].Re / koef);
