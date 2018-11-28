@@ -45,7 +45,7 @@ namespace WindowsFormsApp1
         // измение массива х возлагатся на метод, в котором изменяеются его параметры
         void Initialize_Empty()
         {
-            G = new Complex[NumOfPoints];
+            //G = new Complex[NumOfPoints];
             Y_c = new Complex[NumOfPoints];
             x = ArrayBuilder.CreateVector(
                 - Math.PI / ((x_w[1867] - x_w[0]) / NumOfPoints),
@@ -53,10 +53,10 @@ namespace WindowsFormsApp1
                 NumOfPoints);
             XEnd = x[1867];
             XStart = x[0];
-            for (int i = 0; i < NumOfPoints; i++)
-            {
-                G[i] = new Complex(Functions.func_gauss(x_w[i], sigma_G, omega_G), 0);
-            }
+            //for (int i = 0; i < NumOfPoints; i++)
+            //{
+            //    G[i] = new Complex(Functions.func_gauss(x_w[i], sigma_G, omega_G), 0);
+            //}
             for (int i = 0; i < NumOfPoints; i++)
             {
                 var mag = G[i].Magnitude;
@@ -97,17 +97,26 @@ namespace WindowsFormsApp1
         void Parse()
         {
             K = new Complex[1868];
+            G = new Complex[1868];
             x_w = new double[1868];
-            StreamReader file = new StreamReader("./sp.txt");
+            StreamReader file = new StreamReader("./sp1.txt");
             string buf;
             for (int i = 0; (buf = file.ReadLine()) != null; ++i)
             {
-                string[] vals = buf.Split(';');
+                string[] vals = buf.Split(',');
                 x_w[i] = Convert.ToDouble(vals[0]);
-                K[i] = new Complex(1 - Convert.ToDouble(vals[1]), 0);
+                K[i] = new Complex(Convert.ToDouble(vals[2]), 0);
+                G[i] = new Complex(Convert.ToDouble(vals[1]), 0);
             }
-            sigma_G = 350;
-            omega_G = 3200;
+            Complex k_k = new Complex(K.Max(t => t.Re), 0);
+            Complex k_g = new Complex(G.Max(t => t.Re), 0);
+            for (int i = 0; i < NumOfPoints; ++i)
+            {
+                K[i] = Complex.Divide(K[i], k_k);
+                G[i] = Complex.Divide(G[i], k_g);
+            }
+            //sigma_G = 350;
+            //omega_G = 3200;
         }
 
         
@@ -127,6 +136,8 @@ namespace WindowsFormsApp1
             chart2.ChartAreas[0].AxisX.Title = "волновое число(см -1)";
             chart2.ChartAreas[0].AxisX.TitleFont = new Font(chart2.ChartAreas[0].AxisX.TitleFont.Name, 10,
                 chart2.ChartAreas[0].AxisX.TitleFont.Style, chart2.ChartAreas[0].AxisX.TitleFont.Unit);
+            chart2.ChartAreas[0].AxisY.TitleFont = new Font(chart2.ChartAreas[0].AxisY.TitleFont.Name, 10,
+                chart2.ChartAreas[0].AxisY.TitleFont.Style, chart2.ChartAreas[0].AxisY.TitleFont.Unit);
 
             chart3.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.Bright;
             chart3.ChartAreas[0].AxisX.LabelStyle.Format = "{F2}";
@@ -152,6 +163,7 @@ namespace WindowsFormsApp1
 
         private void button2_Click_1(object sender, EventArgs e)
         {
+            chart2.ChartAreas[0].AxisY.Title = "";
             chart1.Series.Clear();
             chart2.Series.Clear();
             Initialize_Empty();
@@ -174,8 +186,8 @@ namespace WindowsFormsApp1
             chart3.Series.Clear();
             ser = chart3.Series.Add("New plot");
             ser.BorderWidth = 2;
-            chart3.ChartAreas[0].AxisX.Maximum = 0.05;
-            chart3.ChartAreas[0].AxisX.Minimum = -0.05;
+            chart3.ChartAreas[0].AxisX.Maximum = 0.1;
+            chart3.ChartAreas[0].AxisX.Minimum = -0.1;
             chart3.ChartAreas[0].AxisY.Maximum = 1.1;
             chart3.ChartAreas[0].AxisY.Minimum = 0;
             ser.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
@@ -285,6 +297,7 @@ namespace WindowsFormsApp1
 
         private void button3_Click(object sender, EventArgs e)
         {
+            chart2.ChartAreas[0].AxisY.Title = "пропускание";
             Functions.complex_re_paint(chart2, x_w, K, 1, 1, 1, "K");
         }
 
