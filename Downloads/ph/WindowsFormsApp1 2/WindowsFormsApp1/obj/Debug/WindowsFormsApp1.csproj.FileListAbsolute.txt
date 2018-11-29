@@ -780,3 +780,7 @@ D:\GitHub\moscap\phisics\phisics\Downloads\ph\WindowsFormsApp1 2\WindowsFormsApp
 D:\GitHub\moscap\phisics\phisics\Downloads\ph\WindowsFormsApp1 2\WindowsFormsApp1\bin\Debug\WindowsFormsApp1.application
 D:\GitHub\moscap\phisics\phisics\Downloads\ph\WindowsFormsApp1 2\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.exe.manifest
 D:\GitHub\moscap\phisics\phisics\Downloads\ph\WindowsFormsApp1 2\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.application
+F:\старый комп\Users\mosca\source\repos\phisics\Downloads\ph\WindowsFormsApp1 2\WindowsFormsApp1\bin\Debug\WindowsFormsApp1.exe.manifest
+F:\старый комп\Users\mosca\source\repos\phisics\Downloads\ph\WindowsFormsApp1 2\WindowsFormsApp1\bin\Debug\WindowsFormsApp1.application
+F:\старый комп\Users\mosca\source\repos\phisics\Downloads\ph\WindowsFormsApp1 2\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.exe.manifest
+F:\старый комп\Users\mosca\source\repos\phisics\Downloads\ph\WindowsFormsApp1 2\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.application

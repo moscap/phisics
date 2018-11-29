@@ -211,6 +211,7 @@ namespace WindowsFormsApp1
             SolidBrush red_brush = new SolidBrush(Color.Red);
             SolidBrush black_brush = new SolidBrush(Color.Black);
             SolidBrush green_brush = new SolidBrush(Color.LightGreen);
+            SolidBrush yellow_brush = new SolidBrush(Color.Yellow);
             Pen green_pen = new Pen(Color.LightGreen, 3);
 
             graphics.FillRectangle(white_brush, moving_length);
@@ -227,6 +228,10 @@ namespace WindowsFormsApp1
             graphics.FillRectangle(green_brush, f_s_line);
             graphics.DrawRectangle(green_pen, f_line);
             graphics.DrawRectangle(green_pen, s_line);
+            if (!sample.IsEmpty)
+            {
+                graphics.FillRectangle(yellow_brush, sample);
+            }
             mirror_graph.FillRectangle(black_brush, new Rectangle(-base_x / 10, (int)(-base_y / 1.5), base_x / 5, (int)(base_y * 1.5)));
 
             tic += 2;
