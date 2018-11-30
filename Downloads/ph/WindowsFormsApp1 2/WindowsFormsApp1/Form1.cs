@@ -109,19 +109,19 @@ namespace WindowsFormsApp1
             chart1.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.Bright;
             chart1.ChartAreas[0].AxisX.LabelStyle.Format = "{F0}";
             chart1.ChartAreas[0].AxisX.Title = "волновое число(см -1)";
-            chart1.ChartAreas[0].AxisX.TitleFont = new Font(chart1.ChartAreas[0].AxisX.TitleFont.Name, 10,
+            chart1.ChartAreas[0].AxisX.TitleFont = new Font(chart1.ChartAreas[0].AxisX.TitleFont.Name, 14,
                 chart1.ChartAreas[0].AxisX.TitleFont.Style, chart1.ChartAreas[0].AxisX.TitleFont.Unit);
 
             chart2.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.Bright;
             chart2.ChartAreas[0].AxisX.LabelStyle.Format = "{F0}";
             chart2.ChartAreas[0].AxisX.Title = "волновое число(см -1)";
-            chart2.ChartAreas[0].AxisX.TitleFont = new Font(chart2.ChartAreas[0].AxisX.TitleFont.Name, 10,
+            chart2.ChartAreas[0].AxisX.TitleFont = new Font(chart2.ChartAreas[0].AxisX.TitleFont.Name, 14,
                 chart2.ChartAreas[0].AxisX.TitleFont.Style, chart2.ChartAreas[0].AxisX.TitleFont.Unit);
 
             chart3.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.Bright;
             chart3.ChartAreas[0].AxisX.LabelStyle.Format = "{F2}";
             chart3.ChartAreas[0].AxisX.Title = "см";
-            chart3.ChartAreas[0].AxisX.TitleFont = new Font(chart3.ChartAreas[0].AxisX.TitleFont.Name, 10,
+            chart3.ChartAreas[0].AxisX.TitleFont = new Font(chart3.ChartAreas[0].AxisX.TitleFont.Name, 14,
                 chart3.ChartAreas[0].AxisX.TitleFont.Style, chart3.ChartAreas[0].AxisX.TitleFont.Unit);
 
             amplitude = Convert.ToDouble(textBox1.Text);
@@ -132,12 +132,17 @@ namespace WindowsFormsApp1
             x = ArrayBuilder.CreateVector(XStart, XEnd, NumOfPoints);
             graphics = tableLayoutPanel3.CreateGraphics();
             button1.Enabled = false;
+            button4.Enabled = false;
+            button3.Enabled = false;
+            button6.Enabled = false;
         }
 
         private void button1_Click_1(object sender, EventArgs e)
         {
             chart2.Series.Clear();
-            Functions.complex_re_paint(chart1, x_w, G, 1, sigma_G, omega_G, "G");
+            Functions.complex_re_paint(chart2, x_w, G, 1, sigma_G, omega_G, "G");
+            button1.Enabled = false;
+            button6.Enabled = true;
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -179,6 +184,7 @@ namespace WindowsFormsApp1
             if (!sample.IsEmpty)
             {
                 graphics.FillRectangle(smoke_brush, sample);
+                sample = new Rectangle();
             }
             SolidBrush red_brush = new SolidBrush(Color.Red);
             int base_x = tableLayoutPanel3.Width / 9; // единицы измерения длинны
@@ -213,9 +219,8 @@ namespace WindowsFormsApp1
             omega_G = buf;
             button1.Enabled = false;
         }
-   
 
-        private void timer1_Tick(object sender, EventArgs e)
+        private void tic_graph()
         {
             int base_x = tableLayoutPanel3.Width / 9; // единицы измерения длинны
             int base_y = tableLayoutPanel3.Height / 9; // единицы измерения длинны
@@ -245,11 +250,39 @@ namespace WindowsFormsApp1
             graphics.FillRectangle(green_brush, f_s_line);
             graphics.DrawRectangle(green_pen, f_line);
             graphics.DrawRectangle(green_pen, s_line);
+
             if (!sample.IsEmpty)
             {
                 graphics.FillRectangle(yellow_brush, sample);
             }
             mirror_graph.FillRectangle(black_brush, new Rectangle(-base_x / 10, (int)(-base_y / 1.5), base_x / 5, (int)(base_y * 1.5)));
+
+        }
+
+        private void clear_rays()
+        {
+            int base_x = tableLayoutPanel3.Width / 9; // единицы измерения длинны
+            int base_y = tableLayoutPanel3.Height / 9; // единицы измерения длинны
+
+            SolidBrush white_brush = new SolidBrush(Color.WhiteSmoke);
+            SolidBrush black_brush = new SolidBrush(Color.Black);
+            Pen white_pen = new Pen(Color.WhiteSmoke, 3);
+
+            graphics.FillRectangle(white_brush, f_s_line);
+            graphics.DrawRectangle(white_pen, f_line);
+            graphics.DrawRectangle(white_pen, s_line);
+            mirror_graph.FillRectangle(black_brush, new Rectangle(-base_x / 10, (int)(-base_y / 1.5), base_x / 5, (int)(base_y * 1.5)));
+            if (!sample.IsEmpty)
+            {
+                SolidBrush yellow_brush = new SolidBrush(Color.Yellow);
+                graphics.FillRectangle(yellow_brush, sample);
+            }
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            tic_graph();
+            SolidBrush white_brush = new SolidBrush(Color.WhiteSmoke);
 
             if (NumOfPoints > 8000)
                 tic += 16;
@@ -264,15 +297,16 @@ namespace WindowsFormsApp1
             if (tic >= NumOfPoints)
             {
                 timer1.Enabled = false;
-                if (button1.Enabled)
+                if (button6.Enabled)
                 {
-                    Functions.complex_re_paint(chart2, x_w, G_K, 1, sigma_G, omega_G, "GK");
-                    button1.Enabled = false;
+                    button6.Enabled = false;
+                    button4.Enabled = true;
+                    clear_rays();
                 }
                 else
                 {
-                    Functions.complex_re_paint(chart2, x_w, G, 1, sigma_G, omega_G, "G");
                     button1.Enabled = true;
+                    clear_rays();
                 }
             }
         }
@@ -346,6 +380,7 @@ namespace WindowsFormsApp1
 
         private void button6_Click(object sender, EventArgs e)
         {
+            Functions.complex_re_paint(chart1, x_w, G, 1, sigma_G, omega_G, "G");
             SolidBrush smoke_brush = new SolidBrush(Color.WhiteSmoke);
             if (!moving_length.IsEmpty)
             {
@@ -368,13 +403,17 @@ namespace WindowsFormsApp1
 
         private void button4_Click(object sender, EventArgs e)
         {
-            chart2.Series.Clear();
-            Functions.complex_re_paint(chart1, x_w, G_K, 1, sigma_G, omega_G, "GK");
+            Functions.complex_re_paint(chart2, x_w, G_K, 1, sigma_G, omega_G, "GK");
+            button4.Enabled = false;
+            button3.Enabled = true;
         }
 
         private void button3_Click(object sender, EventArgs e)
-        {
+        { 
+            Functions.complex_re_paint(chart1, x_w, G_K, 1, sigma_G, omega_G, "GK");
+            chart2.Series.Clear();
             Functions.complex_re_paint(chart2, x_w, K, 1, sigma_K, omega_K, "K");
+            button3.Enabled = false;
         }
 
         private void label5_Click(object sender, EventArgs e)

@@ -128,21 +128,21 @@ namespace WindowsFormsApp1
             chart1.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.Bright;
             chart1.ChartAreas[0].AxisX.LabelStyle.Format = "{F0}";
             chart1.ChartAreas[0].AxisX.Title = "волновое число(см -1)";
-            chart1.ChartAreas[0].AxisX.TitleFont = new Font(chart1.ChartAreas[0].AxisX.TitleFont.Name, 10, 
+            chart1.ChartAreas[0].AxisX.TitleFont = new Font(chart1.ChartAreas[0].AxisX.TitleFont.Name, 14, 
                 chart1.ChartAreas[0].AxisX.TitleFont.Style, chart1.ChartAreas[0].AxisX.TitleFont.Unit);
 
             chart2.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.Bright;
             chart2.ChartAreas[0].AxisX.LabelStyle.Format = "{F0}";
             chart2.ChartAreas[0].AxisX.Title = "волновое число(см -1)";
-            chart2.ChartAreas[0].AxisX.TitleFont = new Font(chart2.ChartAreas[0].AxisX.TitleFont.Name, 10,
+            chart2.ChartAreas[0].AxisX.TitleFont = new Font(chart2.ChartAreas[0].AxisX.TitleFont.Name, 14,
                 chart2.ChartAreas[0].AxisX.TitleFont.Style, chart2.ChartAreas[0].AxisX.TitleFont.Unit);
-            chart2.ChartAreas[0].AxisY.TitleFont = new Font(chart2.ChartAreas[0].AxisY.TitleFont.Name, 10,
+            chart2.ChartAreas[0].AxisY.TitleFont = new Font(chart2.ChartAreas[0].AxisY.TitleFont.Name, 14,
                 chart2.ChartAreas[0].AxisY.TitleFont.Style, chart2.ChartAreas[0].AxisY.TitleFont.Unit);
 
             chart3.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.Bright;
             chart3.ChartAreas[0].AxisX.LabelStyle.Format = "{F2}";
             chart3.ChartAreas[0].AxisX.Title = "см";
-            chart3.ChartAreas[0].AxisX.TitleFont = new Font(chart3.ChartAreas[0].AxisX.TitleFont.Name, 10,
+            chart3.ChartAreas[0].AxisX.TitleFont = new Font(chart3.ChartAreas[0].AxisX.TitleFont.Name, 14,
                 chart3.ChartAreas[0].AxisX.TitleFont.Style, chart3.ChartAreas[0].AxisX.TitleFont.Unit);
 
             graphics = tableLayoutPanel3.CreateGraphics();
@@ -302,7 +302,9 @@ namespace WindowsFormsApp1
 
         private void button3_Click(object sender, EventArgs e)
         {
-            chart2.ChartAreas[0].AxisY.Title = "пропускание";
+            chart2.ChartAreas[0].AxisY.Title = "пропyскание";
+            chart2.ChartAreas[0].AxisY.TitleFont = new Font(chart2.ChartAreas[0].AxisY.TitleFont.Name, 12,
+                chart2.ChartAreas[0].AxisY.TitleFont.Style, chart2.ChartAreas[0].AxisY.TitleFont.Unit);
             Functions.complex_re_paint(chart2, x_w, K, 1, 1, 1, "K");
         }
 
