@@ -196,7 +196,7 @@ namespace WindowsFormsApp1
             ser = chart3.Series.Add("New plot");
             chart3.ChartAreas[0].AxisX.Maximum = XEnd;
             chart3.ChartAreas[0].AxisX.Minimum = XStart;
-            chart3.ChartAreas[0].AxisY.Maximum = 1.1;
+            chart3.ChartAreas[0].AxisY.Maximum = 1.15;
             chart3.ChartAreas[0].AxisY.Minimum = 0;
             ser.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
             ser.BorderWidth = 2;
@@ -263,6 +263,7 @@ namespace WindowsFormsApp1
         {
             int base_x = tableLayoutPanel3.Width / 9; // единицы измерения длинны
             int base_y = tableLayoutPanel3.Height / 9; // единицы измерения длинны
+            Graphics graphics = tableLayoutPanel3.CreateGraphics();
 
             SolidBrush white_brush = new SolidBrush(Color.WhiteSmoke);
             SolidBrush black_brush = new SolidBrush(Color.Black);

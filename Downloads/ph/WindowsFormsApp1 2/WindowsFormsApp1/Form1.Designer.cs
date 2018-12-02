@@ -35,6 +35,7 @@
             System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea5 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
             System.Windows.Forms.DataVisualization.Charting.Legend legend5 = new System.Windows.Forms.DataVisualization.Charting.Legend();
             System.Windows.Forms.DataVisualization.Charting.Series series5 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Title title2 = new System.Windows.Forms.DataVisualization.Charting.Title();
             System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea6 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
             System.Windows.Forms.DataVisualization.Charting.Legend legend6 = new System.Windows.Forms.DataVisualization.Charting.Legend();
             System.Windows.Forms.DataVisualization.Charting.Series series6 = new System.Windows.Forms.DataVisualization.Charting.Series();
@@ -61,11 +62,14 @@
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
+            this.label2 = new System.Windows.Forms.Label();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.chart2)).BeginInit();
             this.tableLayoutPanel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.chart3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
+            this.tableLayoutPanel4.SuspendLayout();
             this.SuspendLayout();
             // 
             // textBox1
@@ -77,7 +81,7 @@
             this.textBox1.Location = new System.Drawing.Point(3, 3);
             this.textBox1.Multiline = true;
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(66, 38);
+            this.textBox1.Size = new System.Drawing.Size(66, 34);
             this.textBox1.TabIndex = 4;
             this.textBox1.Text = "1";
             this.textBox1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
@@ -92,17 +96,18 @@
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 30F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.Controls.Add(this.chart2, 2, 0);
-            this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel2, 0, 1);
-            this.tableLayoutPanel1.Controls.Add(this.chart3, 2, 1);
-            this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel3, 1, 1);
-            this.tableLayoutPanel1.Controls.Add(this.chart1, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.chart2, 2, 1);
+            this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel2, 0, 2);
+            this.tableLayoutPanel1.Controls.Add(this.chart3, 2, 2);
+            this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel3, 1, 2);
+            this.tableLayoutPanel1.Controls.Add(this.chart1, 0, 1);
+            this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel4, 0, 0);
             this.tableLayoutPanel1.Location = new System.Drawing.Point(12, 12);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 2;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel1.RowCount = 3;
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 45F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 45F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(1240, 725);
             this.tableLayoutPanel1.TabIndex = 12;
             // 
@@ -117,14 +122,14 @@
             legend4.Enabled = false;
             legend4.Name = "Legend1";
             this.chart2.Legends.Add(legend4);
-            this.chart2.Location = new System.Drawing.Point(623, 3);
+            this.chart2.Location = new System.Drawing.Point(623, 75);
             this.chart2.Name = "chart2";
             series4.ChartArea = "ChartArea1";
             series4.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
             series4.Legend = "Legend1";
             series4.Name = "Series1";
             this.chart2.Series.Add(series4);
-            this.chart2.Size = new System.Drawing.Size(614, 356);
+            this.chart2.Size = new System.Drawing.Size(614, 320);
             this.chart2.TabIndex = 12;
             this.chart2.Text = "chart2";
             // 
@@ -152,8 +157,7 @@
             this.tableLayoutPanel2.Controls.Add(this.button4, 2, 6);
             this.tableLayoutPanel2.Controls.Add(this.button3, 0, 7);
             this.tableLayoutPanel2.Controls.Add(this.textBox5, 0, 1);
-            this.tableLayoutPanel2.Controls.Add(this.button5, 2, 7);
-            this.tableLayoutPanel2.Location = new System.Drawing.Point(3, 365);
+            this.tableLayoutPanel2.Location = new System.Drawing.Point(3, 401);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 8;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
@@ -164,7 +168,7 @@
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(242, 357);
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(242, 321);
             this.tableLayoutPanel2.TabIndex = 4;
             this.tableLayoutPanel2.Paint += new System.Windows.Forms.PaintEventHandler(this.tableLayoutPanel2_Paint);
             // 
@@ -175,9 +179,9 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tableLayoutPanel2.SetColumnSpan(this.button6, 2);
             this.button6.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.button6.Location = new System.Drawing.Point(3, 267);
+            this.button6.Location = new System.Drawing.Point(3, 243);
             this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(124, 38);
+            this.button6.Size = new System.Drawing.Size(124, 34);
             this.button6.TabIndex = 30;
             this.button6.Text = "Образец";
             this.button6.UseVisualStyleBackColor = true;
@@ -191,10 +195,10 @@
             this.label5.AutoSize = true;
             this.tableLayoutPanel2.SetColumnSpan(this.label5, 2);
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label5.Location = new System.Drawing.Point(72, 88);
+            this.label5.Location = new System.Drawing.Point(72, 80);
             this.label5.Margin = new System.Windows.Forms.Padding(0);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(170, 44);
+            this.label5.Size = new System.Drawing.Size(170, 40);
             this.label5.TabIndex = 26;
             this.label5.Text = "Ширина спектра\r\nобразца";
             this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -207,9 +211,9 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tableLayoutPanel2.SetColumnSpan(this.button2, 2);
             this.button2.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.button2.Location = new System.Drawing.Point(3, 223);
+            this.button2.Location = new System.Drawing.Point(3, 203);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(124, 38);
+            this.button2.Size = new System.Drawing.Size(124, 34);
             this.button2.TabIndex = 24;
             this.button2.Text = "Старт";
             this.button2.UseVisualStyleBackColor = true;
@@ -223,9 +227,9 @@
             this.label7.AutoSize = true;
             this.tableLayoutPanel2.SetColumnSpan(this.label7, 2);
             this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label7.Location = new System.Drawing.Point(75, 176);
+            this.label7.Location = new System.Drawing.Point(75, 160);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(164, 44);
+            this.label7.Size = new System.Drawing.Size(164, 40);
             this.label7.TabIndex = 23;
             this.label7.Text = "Смещение \r\nспектра образца";
             this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -236,10 +240,10 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.textBox8.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.textBox8.Location = new System.Drawing.Point(3, 179);
+            this.textBox8.Location = new System.Drawing.Point(3, 163);
             this.textBox8.Multiline = true;
             this.textBox8.Name = "textBox8";
-            this.textBox8.Size = new System.Drawing.Size(66, 38);
+            this.textBox8.Size = new System.Drawing.Size(66, 34);
             this.textBox8.TabIndex = 22;
             this.textBox8.Text = "1900";
             this.textBox8.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
@@ -253,9 +257,9 @@
             this.label6.AutoSize = true;
             this.tableLayoutPanel2.SetColumnSpan(this.label6, 2);
             this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label6.Location = new System.Drawing.Point(75, 132);
+            this.label6.Location = new System.Drawing.Point(75, 120);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(164, 44);
+            this.label6.Size = new System.Drawing.Size(164, 40);
             this.label6.TabIndex = 21;
             this.label6.Text = "Смещение \r\nспектра ист-ника";
             this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -266,10 +270,10 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.textBox7.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.textBox7.Location = new System.Drawing.Point(3, 135);
+            this.textBox7.Location = new System.Drawing.Point(3, 123);
             this.textBox7.Multiline = true;
             this.textBox7.Name = "textBox7";
-            this.textBox7.Size = new System.Drawing.Size(66, 38);
+            this.textBox7.Size = new System.Drawing.Size(66, 34);
             this.textBox7.TabIndex = 20;
             this.textBox7.Text = "2000";
             this.textBox7.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
@@ -281,10 +285,10 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.textBox6.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.textBox6.Location = new System.Drawing.Point(3, 91);
+            this.textBox6.Location = new System.Drawing.Point(3, 83);
             this.textBox6.Multiline = true;
             this.textBox6.Name = "textBox6";
-            this.textBox6.Size = new System.Drawing.Size(66, 38);
+            this.textBox6.Size = new System.Drawing.Size(66, 34);
             this.textBox6.TabIndex = 18;
             this.textBox6.Text = "50";
             this.textBox6.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
@@ -298,9 +302,9 @@
             this.label4.AutoSize = true;
             this.tableLayoutPanel2.SetColumnSpan(this.label4, 2);
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label4.Location = new System.Drawing.Point(75, 44);
+            this.label4.Location = new System.Drawing.Point(75, 40);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(164, 44);
+            this.label4.Size = new System.Drawing.Size(164, 40);
             this.label4.TabIndex = 17;
             this.label4.Text = "Ширина спектра \r\nисточника";
             this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -315,7 +319,7 @@
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label1.Location = new System.Drawing.Point(75, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(164, 44);
+            this.label1.Size = new System.Drawing.Size(164, 40);
             this.label1.TabIndex = 13;
             this.label1.Text = "А. спектра \r\nобразца";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -326,9 +330,9 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.button1.Location = new System.Drawing.Point(133, 223);
+            this.button1.Location = new System.Drawing.Point(133, 203);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(106, 38);
+            this.button1.Size = new System.Drawing.Size(106, 34);
             this.button1.TabIndex = 25;
             this.button1.Text = "Спектр";
             this.button1.UseVisualStyleBackColor = true;
@@ -340,9 +344,9 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.button4.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.button4.Location = new System.Drawing.Point(133, 267);
+            this.button4.Location = new System.Drawing.Point(133, 243);
             this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(106, 38);
+            this.button4.Size = new System.Drawing.Size(106, 34);
             this.button4.TabIndex = 28;
             this.button4.Text = "Спектр";
             this.button4.UseVisualStyleBackColor = true;
@@ -355,9 +359,9 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tableLayoutPanel2.SetColumnSpan(this.button3, 2);
             this.button3.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.button3.Location = new System.Drawing.Point(3, 311);
+            this.button3.Location = new System.Drawing.Point(3, 283);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(124, 43);
+            this.button3.Size = new System.Drawing.Size(124, 35);
             this.button3.TabIndex = 27;
             this.button3.Text = "Расчет";
             this.button3.UseVisualStyleBackColor = true;
@@ -369,10 +373,10 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.textBox5.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.textBox5.Location = new System.Drawing.Point(3, 47);
+            this.textBox5.Location = new System.Drawing.Point(3, 43);
             this.textBox5.Multiline = true;
             this.textBox5.Name = "textBox5";
-            this.textBox5.Size = new System.Drawing.Size(66, 38);
+            this.textBox5.Size = new System.Drawing.Size(66, 34);
             this.textBox5.TabIndex = 12;
             this.textBox5.Text = "350";
             this.textBox5.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
@@ -383,12 +387,12 @@
             this.button5.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.button5.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.button5.Location = new System.Drawing.Point(133, 311);
+            this.button5.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.button5.Location = new System.Drawing.Point(1060, 3);
             this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(106, 43);
+            this.button5.Size = new System.Drawing.Size(171, 60);
             this.button5.TabIndex = 31;
-            this.button5.Text = "Назад";
+            this.button5.Text = "Меню";
             this.button5.UseVisualStyleBackColor = true;
             this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
@@ -403,15 +407,20 @@
             legend5.Enabled = false;
             legend5.Name = "Legend1";
             this.chart3.Legends.Add(legend5);
-            this.chart3.Location = new System.Drawing.Point(623, 365);
+            this.chart3.Location = new System.Drawing.Point(623, 401);
             this.chart3.Name = "chart3";
             series5.ChartArea = "ChartArea1";
             series5.Legend = "Legend1";
             series5.Name = "Series1";
             this.chart3.Series.Add(series5);
-            this.chart3.Size = new System.Drawing.Size(614, 357);
+            this.chart3.Size = new System.Drawing.Size(614, 321);
             this.chart3.TabIndex = 13;
             this.chart3.Text = "chart3";
+            title2.DockedToChartArea = "ChartArea1";
+            title2.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            title2.Name = "Title1";
+            title2.Text = "Интерферограмма";
+            this.chart3.Titles.Add(title2);
             // 
             // tableLayoutPanel3
             // 
@@ -420,11 +429,11 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tableLayoutPanel3.ColumnCount = 1;
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel3.Location = new System.Drawing.Point(251, 365);
+            this.tableLayoutPanel3.Location = new System.Drawing.Point(251, 401);
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
             this.tableLayoutPanel3.RowCount = 1;
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel3.Size = new System.Drawing.Size(366, 357);
+            this.tableLayoutPanel3.Size = new System.Drawing.Size(366, 321);
             this.tableLayoutPanel3.TabIndex = 14;
             this.tableLayoutPanel3.Paint += new System.Windows.Forms.PaintEventHandler(this.tableLayoutPanel3_Paint);
             // 
@@ -442,14 +451,14 @@
             legend6.Name = "Legend1";
             legend6.TableStyle = System.Windows.Forms.DataVisualization.Charting.LegendTableStyle.Tall;
             this.chart1.Legends.Add(legend6);
-            this.chart1.Location = new System.Drawing.Point(3, 3);
+            this.chart1.Location = new System.Drawing.Point(3, 75);
             this.chart1.Name = "chart1";
             series6.ChartArea = "ChartArea1";
             series6.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
             series6.Legend = "Legend1";
             series6.Name = "Series1";
             this.chart1.Series.Add(series6);
-            this.chart1.Size = new System.Drawing.Size(614, 356);
+            this.chart1.Size = new System.Drawing.Size(614, 320);
             this.chart1.TabIndex = 11;
             this.chart1.Text = "chart1";
             // 
@@ -457,6 +466,44 @@
             // 
             this.timer1.Interval = 10;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
+            // tableLayoutPanel4
+            // 
+            this.tableLayoutPanel4.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tableLayoutPanel4.ColumnCount = 7;
+            this.tableLayoutPanel1.SetColumnSpan(this.tableLayoutPanel4, 3);
+            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 14F));
+            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 14F));
+            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 14.5F));
+            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 15F));
+            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 14.5F));
+            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 14F));
+            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 14F));
+            this.tableLayoutPanel4.Controls.Add(this.label2, 2, 0);
+            this.tableLayoutPanel4.Controls.Add(this.button5, 6, 0);
+            this.tableLayoutPanel4.Location = new System.Drawing.Point(3, 3);
+            this.tableLayoutPanel4.Name = "tableLayoutPanel4";
+            this.tableLayoutPanel4.RowCount = 1;
+            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel4.Size = new System.Drawing.Size(1234, 66);
+            this.tableLayoutPanel4.TabIndex = 15;
+            // 
+            // label2
+            // 
+            this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label2.AutoSize = true;
+            this.tableLayoutPanel4.SetColumnSpan(this.label2, 3);
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label2.Location = new System.Drawing.Point(347, 0);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(535, 66);
+            this.label2.TabIndex = 0;
+            this.label2.Text = "Влияние характеристик спектра на результаты исследования";
+            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // Form1
             // 
@@ -477,6 +524,8 @@
             this.tableLayoutPanel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.chart3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).EndInit();
+            this.tableLayoutPanel4.ResumeLayout(false);
+            this.tableLayoutPanel4.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -505,6 +554,8 @@
         private System.Windows.Forms.Button button6;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel4;
+        private System.Windows.Forms.Label label2;
     }
 }
 
