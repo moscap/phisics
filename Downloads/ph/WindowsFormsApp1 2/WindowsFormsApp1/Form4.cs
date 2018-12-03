@@ -23,8 +23,8 @@ namespace WindowsFormsApp1
         double XEnd;
         double[] x = null;
         double[] x_w = null;
-        double sigma_G = 350, sigma_K = 40, omega_G = 2000;
-        double omega_K = 1900;
+        double sigma_G = 285, sigma_K = 40, omega_G = 3220;
+        double omega_K = 3120;
         Graphics graphics { get; set; }
         Graphics mirror_graph { get; set; }
         Rectangle moving_length { get; set; }
@@ -383,7 +383,7 @@ namespace WindowsFormsApp1
 
         private void button6_Click(object sender, EventArgs e)
         {
-            button6.Enabled = false;
+            //button6.Enabled = false;
             Functions.complex_re_paint_2(chart1, x_w, G, 1, sigma_G, omega_G, "G");
             SolidBrush smoke_brush = new SolidBrush(Color.WhiteSmoke);
             if (!moving_length.IsEmpty)
@@ -424,9 +424,9 @@ namespace WindowsFormsApp1
 
         private void trackBar1_Scroll(object sender, EventArgs e)
         {
-            double step = Math.Pow(2, 19 - trackBar1.Value);
+            double step = Math.Pow(2, 18 - trackBar1.Value);
             label1.Text = "Шаг:\n1 / " + step;
-            NumOfPoints = (int)Math.Pow(2, 12 - trackBar1.Value + trackBar2.Value);
+            NumOfPoints = (int)Math.Pow(2, 11 - trackBar1.Value + trackBar2.Value);
             x = ArrayBuilder.CreateVector(XStart, XEnd, NumOfPoints);
             button1.Enabled = false;
             button4.Enabled = false;
@@ -445,7 +445,7 @@ namespace WindowsFormsApp1
             width = 1.0 / width;
             XEnd = width / 2;
             XStart = -width / 2;
-            NumOfPoints = (int)Math.Pow(2, 12 - trackBar1.Value + trackBar2.Value);
+            NumOfPoints = (int)Math.Pow(2, 11 - trackBar1.Value + trackBar2.Value);
             x = ArrayBuilder.CreateVector(XStart, XEnd, NumOfPoints);
             button1.Enabled = false;
             button4.Enabled = false;
