@@ -23,8 +23,8 @@ namespace WindowsFormsApp1
         double XEnd;
         double[] x = null;
         double[] x_w = null;
-        double sigma_G = 285, sigma_K = 40, omega_G = 3220;
-        double omega_K = 3120;
+        double sigma_G = 285, sigma_K = 40, omega_G = 2500;
+        double omega_K = 2400;
         Graphics graphics { get; set; }
         Graphics mirror_graph { get; set; }
         Rectangle moving_length { get; set; }
