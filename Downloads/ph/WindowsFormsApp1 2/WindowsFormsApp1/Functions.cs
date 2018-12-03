@@ -112,6 +112,33 @@ namespace WindowsFormsApp1
                     ser.Points.AddXY(x[i], y[i].Re / koef);
             }
         }
+        public static void complex_re_paint_2(object obj, double[] x, Complex[] y, double koef = 1.0, double sigma = 10, double offset = 0, string name = "New plot!")
+        {
+            var paint_obj = obj as System.Windows.Forms.DataVisualization.Charting.Chart;
+            var ser = paint_obj.Series.Add(name);
+            paint_obj.ChartAreas[0].AxisX.Maximum = 4000;
+            paint_obj.ChartAreas[0].AxisX.Minimum = 400;
+            paint_obj.ChartAreas[0].AxisX.IntervalOffset = 600;
+            paint_obj.ChartAreas[0].AxisX.MajorGrid.Enabled = false;
+            paint_obj.ChartAreas[0].AxisX.Interval = 1000;
+            paint_obj.ChartAreas[0].AxisY.Maximum = 1.1;
+            ser.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
+            ser.MarkerSize = 8;
+            ser.MarkerStyle = System.Windows.Forms.DataVisualization.Charting.MarkerStyle.Circle;
+            ser.BorderWidth = 2;
+            for(int i = x.Length - 1; (i >= 0) ; --i)
+            {
+                ser.Points.AddXY(2 * x[0] - x[i], y[y.Length - i - 1].Re / koef);
+            }
+            for (int i = 0; i < x.Length; i++)
+            {
+                ser.Points.AddXY(x[i], y[i].Re / koef);
+            }
+            for (int i = 0; (i < x.Length) && ((x[x.Length - 1] + x[i] - x[0])) <= 5000; ++i)
+            {
+                ser.Points.AddXY(x[x.Length - 1] + x[i] - x[0], y[i].Re / koef);
+            }
+        }
         public static void complex_re_paint_for_ch2(object obj, double[] x, Complex[] y, double koef = 1.0, double sigma = 10, double offset = 0, string name = "New plot!")
         {
             var paint_obj = obj as System.Windows.Forms.DataVisualization.Charting.Chart;

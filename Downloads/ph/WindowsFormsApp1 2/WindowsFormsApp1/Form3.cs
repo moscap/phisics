@@ -193,7 +193,7 @@ namespace WindowsFormsApp1
             ser.BorderWidth = 2;
             chart3.ChartAreas[0].AxisX.Maximum = 0.1;
             chart3.ChartAreas[0].AxisX.Minimum = -0.1;
-            chart3.ChartAreas[0].AxisY.Maximum = 1.15;
+            chart3.ChartAreas[0].AxisY.Maximum = 1.2;
             chart3.ChartAreas[0].AxisY.Minimum = 0;
             ser.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
             tic = 0;

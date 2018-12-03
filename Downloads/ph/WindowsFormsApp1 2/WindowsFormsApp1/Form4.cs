@@ -15,16 +15,16 @@ using AForge.Math;
 
 namespace WindowsFormsApp1
 {
-    public partial class Form1 : Form
+    public partial class Form4 : Form
     {
-        public int NumOfPoints = 1024;
-        double XStart = -0.1;
-        double XEnd = 0.1;
+        public int NumOfPoints;
+        public int NumOfPoints_N = 8192;
+        double XStart;
+        double XEnd;
         double[] x = null;
         double[] x_w = null;
-        double amplitude;
-        double sigma_G, sigma_K, omega_G;
-        double omega_K { get; set; }
+        double sigma_G = 350, sigma_K = 40, omega_G = 2000;
+        double omega_K = 1900;
         Graphics graphics { get; set; }
         Graphics mirror_graph { get; set; }
         Rectangle moving_length { get; set; }
@@ -35,6 +35,7 @@ namespace WindowsFormsApp1
         System.Windows.Forms.DataVisualization.Charting.Series ser { get; set; }
         long tic { get; set; }
         Complex[] Y_c = null;
+        Complex[] Y_c_n = null;
         double koef { get; set; }
         Complex[] G = null;
         Complex[] G_K = null;
@@ -49,8 +50,8 @@ namespace WindowsFormsApp1
             G = new Complex[NumOfPoints];
             Y_c = new Complex[NumOfPoints];
             x_w = ArrayBuilder.CreateVector(
-                0,
-                2 * Math.PI / ((XEnd - XStart) / NumOfPoints), 
+                omega_G - Math.PI / ((XEnd - XStart) / NumOfPoints),
+                omega_G + Math.PI / ((XEnd - XStart) / NumOfPoints), 
                 NumOfPoints);
             for (int i = 0; i < NumOfPoints; i++)
             {
@@ -72,15 +73,12 @@ namespace WindowsFormsApp1
         }
         void Initialize_Filled()
         {
-            x_w = ArrayBuilder.CreateVector(
-                0,
-                2 * Math.PI / ((XEnd - XStart) / NumOfPoints),
-                NumOfPoints);
             K = new Complex[NumOfPoints];
             G_K = new Complex[NumOfPoints];
             for (int i = 0; i < NumOfPoints; i++)
             {
-                K[i] = new Complex(1 - amplitude * Functions.func_gauss(x_w[i], sigma_K, omega_K), 0);
+                K[i] = new Complex(1 - Math.Max(Functions.func_gauss(x_w[i], sigma_K, omega_K),
+                  0.7 * Functions.func_gauss(x_w[i], sigma_K, omega_K + 150)), 0);
             }
             for (int i = 0; i < NumOfPoints; i++)
             {
@@ -102,7 +100,7 @@ namespace WindowsFormsApp1
         }
 
         
-        public Form1()
+        public Form4()
         {
             InitializeComponent();
 
@@ -124,11 +122,13 @@ namespace WindowsFormsApp1
             chart3.ChartAreas[0].AxisX.TitleFont = new Font(chart3.ChartAreas[0].AxisX.TitleFont.Name, 14,
                 chart3.ChartAreas[0].AxisX.TitleFont.Style, chart3.ChartAreas[0].AxisX.TitleFont.Unit);
 
-            amplitude = Convert.ToDouble(textBox1.Text);
-            sigma_G = Convert.ToDouble(textBox5.Text);
-            sigma_K = Convert.ToDouble(textBox6.Text);
-            omega_K = Convert.ToDouble(textBox8.Text);
-            omega_G = Convert.ToDouble(textBox7.Text);
+            //amplitude = Convert.ToDouble(textBox1.Text);
+            //sigma_G = Convert.ToDouble(textBox5.Text);
+            //sigma_K = Convert.ToDouble(textBox6.Text);
+            //omega_K = Convert.ToDouble(textBox8.Text);
+            //omega_G = Convert.ToDouble(textBox7.Text);
+            trackBar2_Scroll(this, new EventArgs());
+            trackBar1_Scroll(this, new EventArgs());
             x = ArrayBuilder.CreateVector(XStart, XEnd, NumOfPoints);
             graphics = tableLayoutPanel3.CreateGraphics();
             button1.Enabled = false;
@@ -140,7 +140,7 @@ namespace WindowsFormsApp1
         private void button1_Click_1(object sender, EventArgs e)
         {
             chart2.Series.Clear();
-            Functions.complex_re_paint(chart2, x_w, G, 1, sigma_G, omega_G, "G");
+            Functions.complex_re_paint_2(chart2, x_w, G, 1, sigma_G, omega_G, "G");
             button1.Enabled = false;
             button6.Enabled = true;
         }
@@ -152,24 +152,24 @@ namespace WindowsFormsApp1
 
         // дальше проверка длинны это проверка того что ты не удалили все из текст бокса
         // а проверка приведения, это проверка того что в текст боксе число
-        private void textBox1_TextChanged(object sender, EventArgs e)
-        {
-            double buf;
-            if (textBox1.Text.Length == 0) return;
-            else if (!double.TryParse(textBox1.Text, out buf)) return;
-            amplitude = buf;
-            if (amplitude < 0)
-            {
-                textBox1.Text = 0.ToString();
-                amplitude = 0;
-            }
-            if (amplitude > 1)
-            {
-                textBox1.Text = 1.ToString();
-                amplitude = 1;
-            }
-            button1.Enabled = false;
-        }
+        //private void textBox1_TextChanged(object sender, EventArgs e)
+        //{
+        //    double buf;
+        //    if (textBox1.Text.Length == 0) return;
+        //    else if (!double.TryParse(textBox1.Text, out buf)) return;
+        //    amplitude = buf;
+        //    if (amplitude < 0)
+        //    {
+        //        textBox1.Text = 0.ToString();
+        //        amplitude = 0;
+        //    }
+        //    if (amplitude > 1)
+        //    {
+        //        textBox1.Text = 1.ToString();
+        //        amplitude = 1;
+        //    }
+        //    button1.Enabled = false;
+        //}
 
         private void button2_Click_1(object sender, EventArgs e)
         {
@@ -199,6 +199,8 @@ namespace WindowsFormsApp1
             chart3.ChartAreas[0].AxisY.Maximum = 1.2;
             chart3.ChartAreas[0].AxisY.Minimum = 0;
             ser.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
+            ser.MarkerSize = 4;
+            ser.MarkerStyle = System.Windows.Forms.DataVisualization.Charting.MarkerStyle.Circle;
             ser.BorderWidth = 2;
             Initialize_Empty();
             tic = 0;
@@ -206,19 +208,19 @@ namespace WindowsFormsApp1
             timer1.Enabled = true;
         }
 
-        private void textBox7_TextChanged(object sender, EventArgs e)
-        {
-            double buf;
-            if (textBox7.Text.Length == 0) return;
-            else if (!double.TryParse(textBox7.Text, out buf)) return;
-            if (buf <= 0)
-            {
-                textBox6.Text = (20).ToString();
-                buf = 20;
-            }
-            omega_G = buf;
-            button1.Enabled = false;
-        }
+        //private void textBox7_TextChanged(object sender, EventArgs e)
+        //{
+        //    double buf;
+        //    if (textBox7.Text.Length == 0) return;
+        //    else if (!double.TryParse(textBox7.Text, out buf)) return;
+        //    if (buf <= 0)
+        //    {
+        //        textBox6.Text = (20).ToString();
+        //        buf = 20;
+        //    }
+        //    omega_G = buf;
+        //    button1.Enabled = false;
+        //}
 
         private void tic_graph()
         {
@@ -285,13 +287,13 @@ namespace WindowsFormsApp1
             tic_graph();
             SolidBrush white_brush = new SolidBrush(Color.WhiteSmoke);
 
-            if (NumOfPoints > 8000)
-                tic += 16;
-            else if (NumOfPoints > 4000)
-                tic += 8;
-            else if (NumOfPoints > 2000)
-                tic += 4;
-            else if (NumOfPoints > 1000)
+            //if (NumOfPoints > 8000)
+            //    tic += 16;
+            //else if (NumOfPoints > 4000)
+            //    tic += 8;
+            //else if (NumOfPoints > 2000)
+            //    tic += 4;
+            if (NumOfPoints > 1000)
                 tic += 2;
             else
                 tic++;
@@ -312,47 +314,47 @@ namespace WindowsFormsApp1
             }
         }
     
-        private void textBox5_TextChanged_1(object sender, EventArgs e)
-        {
-            double buf;
-            if (textBox5.Text.Length == 0) return;
-            else if (!double.TryParse(textBox5.Text, out buf)) return;
-            if (buf <= 0)
-            {
-                textBox5.Text = (60).ToString();
-                buf = 60;
-            }
-            sigma_G = buf;
-            button1.Enabled = false;
-        }
+        //private void textBox5_TextChanged_1(object sender, EventArgs e)
+        //{
+        //    double buf;
+        //    if (textBox5.Text.Length == 0) return;
+        //    else if (!double.TryParse(textBox5.Text, out buf)) return;
+        //    if (buf <= 0)
+        //    {
+        //        textBox5.Text = (60).ToString();
+        //        buf = 60;
+        //    }
+        //    sigma_G = buf;
+        //    button1.Enabled = false;
+        //}
 
-        private void textBox6_TextChanged(object sender, EventArgs e)
-        {
-            double buf;
-            if (textBox6.Text.Length == 0) return;
-            else if (!double.TryParse(textBox6.Text, out buf)) return;
-            if (buf <= 0)
-            {
-                textBox6.Text = (60).ToString();
-                buf = 60;
-            }
-            sigma_K = buf;
-            button1.Enabled = false;
-        }
+        //private void textBox6_TextChanged(object sender, EventArgs e)
+        //{
+        //    double buf;
+        //    if (textBox6.Text.Length == 0) return;
+        //    else if (!double.TryParse(textBox6.Text, out buf)) return;
+        //    if (buf <= 0)
+        //    {
+        //        textBox6.Text = (60).ToString();
+        //        buf = 60;
+        //    }
+        //    sigma_K = buf;
+        //    button1.Enabled = false;
+        //}
 
-        private void textBox8_TextChanged_2(object sender, EventArgs e)
-        {
-            double buf;
-            if (textBox8.Text.Length == 0) return;
-            else if (!double.TryParse(textBox8.Text, out buf)) return;
-            if (buf <= 0)
-            {
-                textBox8.Text = (30).ToString();
-                buf = 30;
-            }
-            omega_K = buf;
-            button1.Enabled = false;
-        }
+        //private void textBox8_TextChanged_2(object sender, EventArgs e)
+        //{
+        //    double buf;
+        //    if (textBox8.Text.Length == 0) return;
+        //    else if (!double.TryParse(textBox8.Text, out buf)) return;
+        //    if (buf <= 0)
+        //    {
+        //        textBox8.Text = (30).ToString();
+        //        buf = 30;
+        //    }
+        //    omega_K = buf;
+        //    button1.Enabled = false;
+        //}
 
         private void tableLayoutPanel3_Paint(object sender, PaintEventArgs e)
         {
@@ -381,7 +383,7 @@ namespace WindowsFormsApp1
 
         private void button6_Click(object sender, EventArgs e)
         {
-            Functions.complex_re_paint(chart1, x_w, G, 1, sigma_G, omega_G, "G");
+            Functions.complex_re_paint_2(chart1, x_w, G, 1, sigma_G, omega_G, "G");
             SolidBrush smoke_brush = new SolidBrush(Color.WhiteSmoke);
             if (!moving_length.IsEmpty)
             {
@@ -396,6 +398,8 @@ namespace WindowsFormsApp1
             chart3.Series.Clear();
             ser = chart3.Series.Add("Acorr");
             ser.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
+            ser.MarkerSize = 4;
+            ser.MarkerStyle = System.Windows.Forms.DataVisualization.Charting.MarkerStyle.Circle;
             ser.BorderWidth = 2;
             Initialize_Filled();
             tic = 0;
@@ -404,17 +408,48 @@ namespace WindowsFormsApp1
 
         private void button4_Click(object sender, EventArgs e)
         {
-            Functions.complex_re_paint(chart2, x_w, G_K, 1, sigma_G, omega_G, "GK");
+            Functions.complex_re_paint_2(chart2, x_w, G_K, 1, sigma_G, omega_G, "GK");
             button4.Enabled = false;
             button3.Enabled = true;
         }
 
         private void button3_Click(object sender, EventArgs e)
         { 
-            Functions.complex_re_paint(chart1, x_w, G_K, 1, sigma_G, omega_G, "GK");
+            Functions.complex_re_paint_2(chart1, x_w, G_K, 1, sigma_G, omega_G, "GK");
             chart2.Series.Clear();
-            Functions.complex_re_paint(chart2, x_w, K, 1, sigma_K, omega_K, "K");
+            Functions.complex_re_paint_2(chart2, x_w, K, 1, sigma_K, omega_K, "K");
             button3.Enabled = false;
+        }
+
+        private void trackBar1_Scroll(object sender, EventArgs e)
+        {
+            double step = Math.Pow(2, 19 - trackBar1.Value);
+            label1.Text = "Шаг:\n1 / " + step;
+            NumOfPoints = (int)Math.Pow(2, 12 - trackBar1.Value + trackBar2.Value);
+            x = ArrayBuilder.CreateVector(XStart, XEnd, NumOfPoints);
+            button1.Enabled = false;
+            button4.Enabled = false;
+            button3.Enabled = false;
+            button6.Enabled = false;
+        }
+
+        private void trackBar2_Scroll(object sender, EventArgs e)
+        {
+            double width = Math.Pow(2, 7 - trackBar2.Value);
+            label4.Text = "Ширина:\n1 / " + width;
+            //if (trackBar2.Value != 5)
+            //    label4.Text = "Ширина:\n1 / " + width;
+            //else
+            //    label4.Text = "Ширина:\n1";
+            width = 1.0 / width;
+            XEnd = width / 2;
+            XStart = -width / 2;
+            NumOfPoints = (int)Math.Pow(2, 12 - trackBar1.Value + trackBar2.Value);
+            x = ArrayBuilder.CreateVector(XStart, XEnd, NumOfPoints);
+            button1.Enabled = false;
+            button4.Enabled = false;
+            button3.Enabled = false;
+            button6.Enabled = false;
         }
 
         private void label5_Click(object sender, EventArgs e)
