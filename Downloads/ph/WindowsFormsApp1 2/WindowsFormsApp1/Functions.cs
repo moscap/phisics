@@ -122,8 +122,8 @@ namespace WindowsFormsApp1
             paint_obj.ChartAreas[0].AxisX.MajorGrid.Enabled = false;
             paint_obj.ChartAreas[0].AxisX.Interval = 1000;
             paint_obj.ChartAreas[0].AxisY.Maximum = 1.1;
-            ser.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
-            ser.MarkerSize = 8;
+            ser.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            ser.MarkerSize = 10;
             ser.MarkerStyle = System.Windows.Forms.DataVisualization.Charting.MarkerStyle.Circle;
             ser.BorderWidth = 2;
             for(int i = x.Length - 1; (i >= 0) ; --i)

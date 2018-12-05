@@ -50,9 +50,16 @@ namespace WindowsFormsApp1
             G = new Complex[NumOfPoints];
             Y_c = new Complex[NumOfPoints];
             x_w = ArrayBuilder.CreateVector(
-                omega_G - Math.PI / ((XEnd - XStart) / NumOfPoints),
-                omega_G + Math.PI / ((XEnd - XStart) / NumOfPoints), 
+                omega_G - 0.5 / ((XEnd - XStart) / NumOfPoints),
+                omega_G + 0.5 / ((XEnd - XStart) / NumOfPoints), 
                 NumOfPoints);
+            if(x_w[0] < 0)
+            {
+               x_w = ArrayBuilder.CreateVector(
+               0,
+               1.0 / ((XEnd - XStart) / NumOfPoints),
+               NumOfPoints);
+            }
             for (int i = 0; i < NumOfPoints; i++)
             {
                 G[i] = new Complex(Functions.func_gauss(x_w[i], sigma_G, omega_G), 0);
@@ -199,7 +206,7 @@ namespace WindowsFormsApp1
             chart3.ChartAreas[0].AxisY.Maximum = 1.2;
             chart3.ChartAreas[0].AxisY.Minimum = 0;
             ser.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
-            ser.MarkerSize = 4;
+            ser.MarkerSize = 6;
             ser.MarkerStyle = System.Windows.Forms.DataVisualization.Charting.MarkerStyle.Circle;
             ser.BorderWidth = 2;
             Initialize_Empty();
@@ -296,7 +303,7 @@ namespace WindowsFormsApp1
             if (NumOfPoints > 1000)
                 tic += 2;
             else
-                tic++;
+            tic++;
             if (tic >= NumOfPoints)
             {
                 timer1.Enabled = false;
@@ -399,7 +406,7 @@ namespace WindowsFormsApp1
             chart3.Series.Clear();
             ser = chart3.Series.Add("Acorr");
             ser.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
-            ser.MarkerSize = 4;
+            ser.MarkerSize = 6;
             ser.MarkerStyle = System.Windows.Forms.DataVisualization.Charting.MarkerStyle.Circle;
             ser.BorderWidth = 2;
             Initialize_Filled();
@@ -424,9 +431,9 @@ namespace WindowsFormsApp1
 
         private void trackBar1_Scroll(object sender, EventArgs e)
         {
-            double step = Math.Pow(2, 18 - trackBar1.Value);
+            double step = Math.Pow(2, 25 - trackBar1.Value);
             label1.Text = "Шаг:\n1 / " + step;
-            NumOfPoints = (int)Math.Pow(2, 11 - trackBar1.Value + trackBar2.Value);
+            NumOfPoints = (int)Math.Pow(2, 14 - trackBar1.Value + trackBar2.Value);
             x = ArrayBuilder.CreateVector(XStart, XEnd, NumOfPoints);
             button1.Enabled = false;
             button4.Enabled = false;
@@ -436,7 +443,7 @@ namespace WindowsFormsApp1
 
         private void trackBar2_Scroll(object sender, EventArgs e)
         {
-            double width = Math.Pow(2, 7 - trackBar2.Value);
+            double width = Math.Pow(2, 11 - trackBar2.Value);
             label4.Text = "Ширина:\n1 / " + width;
             //if (trackBar2.Value != 5)
             //    label4.Text = "Ширина:\n1 / " + width;
@@ -445,7 +452,7 @@ namespace WindowsFormsApp1
             width = 1.0 / width;
             XEnd = width / 2;
             XStart = -width / 2;
-            NumOfPoints = (int)Math.Pow(2, 11 - trackBar1.Value + trackBar2.Value);
+            NumOfPoints = (int)Math.Pow(2, 14 - trackBar1.Value + trackBar2.Value);
             x = ArrayBuilder.CreateVector(XStart, XEnd, NumOfPoints);
             button1.Enabled = false;
             button4.Enabled = false;

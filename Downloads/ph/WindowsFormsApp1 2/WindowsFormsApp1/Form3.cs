@@ -48,8 +48,8 @@ namespace WindowsFormsApp1
             //G = new Complex[NumOfPoints];
             Y_c = new Complex[NumOfPoints];
             x = ArrayBuilder.CreateVector(
-                - Math.PI / ((x_w[1867] - x_w[0]) / NumOfPoints),
-                Math.PI / ((x_w[1867] - x_w[0]) / NumOfPoints), 
+                - 0.5 / ((x_w[1867] - x_w[0]) / NumOfPoints),
+                0.5 / ((x_w[1867] - x_w[0]) / NumOfPoints), 
                 NumOfPoints);
             XEnd = x[1867];
             XStart = x[0];
@@ -73,7 +73,6 @@ namespace WindowsFormsApp1
         }
         void Initialize_Filled()
         {
-
             G_K = new Complex[NumOfPoints];
             for (int i = 0; i < NumOfPoints; i++)
             {
@@ -191,8 +190,8 @@ namespace WindowsFormsApp1
             chart3.Series.Clear();
             ser = chart3.Series.Add("New plot");
             ser.BorderWidth = 2;
-            chart3.ChartAreas[0].AxisX.Maximum = 0.1;
-            chart3.ChartAreas[0].AxisX.Minimum = -0.1;
+            chart3.ChartAreas[0].AxisX.Maximum = XEnd;
+            chart3.ChartAreas[0].AxisX.Minimum = XStart;
             chart3.ChartAreas[0].AxisY.Maximum = 1.2;
             chart3.ChartAreas[0].AxisY.Minimum = 0;
             ser.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
@@ -276,11 +275,15 @@ namespace WindowsFormsApp1
                     button6.Enabled = false;
                     button4.Enabled = true;
                     clear_rays();
+                    chart3.ChartAreas[0].AxisX.Maximum = 0.03;
+                    chart3.ChartAreas[0].AxisX.Minimum = -0.03;
                 }
                 else
                 {
                     button1.Enabled = true;
                     clear_rays();
+                    chart3.ChartAreas[0].AxisX.Maximum = 0.03;
+                    chart3.ChartAreas[0].AxisX.Minimum = -0.03;
                 }
             }
         }
@@ -327,6 +330,8 @@ namespace WindowsFormsApp1
             ser.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
             Initialize_Filled();
             tic = 0;
+            chart3.ChartAreas[0].AxisX.Maximum = XEnd;
+            chart3.ChartAreas[0].AxisX.Minimum = XStart;
             timer1.Enabled = true;
         }
 

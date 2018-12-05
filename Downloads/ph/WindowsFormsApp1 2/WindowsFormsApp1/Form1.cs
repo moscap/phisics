@@ -18,8 +18,8 @@ namespace WindowsFormsApp1
     public partial class Form1 : Form
     {
         public int NumOfPoints = 1024;
-        double XStart = -0.1;
-        double XEnd = 0.1;
+        double XStart = -0.02;
+        double XEnd = 0.02;
         double[] x = null;
         double[] x_w = null;
         double amplitude;
@@ -50,7 +50,7 @@ namespace WindowsFormsApp1
             Y_c = new Complex[NumOfPoints];
             x_w = ArrayBuilder.CreateVector(
                 0,
-                2 * Math.PI / ((XEnd - XStart) / NumOfPoints), 
+                1.0 / ((XEnd - XStart) / NumOfPoints), 
                 NumOfPoints);
             for (int i = 0; i < NumOfPoints; i++)
             {
@@ -74,7 +74,7 @@ namespace WindowsFormsApp1
         {
             x_w = ArrayBuilder.CreateVector(
                 0,
-                2 * Math.PI / ((XEnd - XStart) / NumOfPoints),
+                1.0 / ((XEnd - XStart) / NumOfPoints),
                 NumOfPoints);
             K = new Complex[NumOfPoints];
             G_K = new Complex[NumOfPoints];
@@ -119,7 +119,7 @@ namespace WindowsFormsApp1
                 chart2.ChartAreas[0].AxisX.TitleFont.Style, chart2.ChartAreas[0].AxisX.TitleFont.Unit);
 
             chart3.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.Bright;
-            chart3.ChartAreas[0].AxisX.LabelStyle.Format = "{F2}";
+            chart3.ChartAreas[0].AxisX.LabelStyle.Format = "{F3}";
             chart3.ChartAreas[0].AxisX.Title = "см";
             chart3.ChartAreas[0].AxisX.TitleFont = new Font(chart3.ChartAreas[0].AxisX.TitleFont.Name, 14,
                 chart3.ChartAreas[0].AxisX.TitleFont.Style, chart3.ChartAreas[0].AxisX.TitleFont.Unit);
