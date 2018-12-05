@@ -69,7 +69,7 @@ namespace WindowsFormsApp1
                 var mag = G[i].Magnitude;
                 Y_c[i] = new Complex(mag * mag, 0);
             }
-            Functions.FastDFT(Y_c, 1);
+            Functions.DFT(Y_c, 1);
             Complex add_k = new Complex(Y_c[0].Re, 0);
             for (int i = 0; i < NumOfPoints; i++)
             {
@@ -96,7 +96,7 @@ namespace WindowsFormsApp1
                 var mag = G_K[i].Magnitude;
                 Y_c[i] = new Complex(mag * mag, 0);
             }
-            Functions.FastDFT(Y_c, 1);
+            Functions.DFT(Y_c, 1);
             Complex add_k = new Complex(Y_c[0].Re, 0);
             for (int i = 0; i < NumOfPoints; i++)
             {
@@ -124,7 +124,7 @@ namespace WindowsFormsApp1
                 chart2.ChartAreas[0].AxisX.TitleFont.Style, chart2.ChartAreas[0].AxisX.TitleFont.Unit);
 
             chart3.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.Bright;
-            chart3.ChartAreas[0].AxisX.LabelStyle.Format = "{F2}";
+            chart3.ChartAreas[0].AxisX.LabelStyle.Format = "{F3}";
             chart3.ChartAreas[0].AxisX.Title = "см";
             chart3.ChartAreas[0].AxisX.TitleFont = new Font(chart3.ChartAreas[0].AxisX.TitleFont.Name, 14,
                 chart3.ChartAreas[0].AxisX.TitleFont.Style, chart3.ChartAreas[0].AxisX.TitleFont.Unit);
@@ -183,6 +183,7 @@ namespace WindowsFormsApp1
             chart1.Series.Clear();
             chart2.Series.Clear();
             button1.Enabled = false;
+            Graphics graphics = tableLayoutPanel3.CreateGraphics();
             SolidBrush smoke_brush = new SolidBrush(Color.WhiteSmoke);
             if (!moving_length.IsEmpty)
             {
@@ -300,10 +301,11 @@ namespace WindowsFormsApp1
             //    tic += 8;
             //else if (NumOfPoints > 2000)
             //    tic += 4;
-            if (NumOfPoints > 1000)
+            if (NumOfPoints > 700)
                 tic += 2;
             else
-            tic++;
+                tic++;
+
             if (tic >= NumOfPoints)
             {
                 timer1.Enabled = false;
@@ -431,9 +433,12 @@ namespace WindowsFormsApp1
 
         private void trackBar1_Scroll(object sender, EventArgs e)
         {
-            double step = Math.Pow(2, 25 - trackBar1.Value);
-            label1.Text = "Шаг:\n1 / " + step;
-            NumOfPoints = (int)Math.Pow(2, 14 - trackBar1.Value + trackBar2.Value);
+            //double step = Math.Pow(2, 25 - trackBar1.Value);
+            //label1.Text = "Шаг:\n1 / " + step;
+            //NumOfPoints = (int)Math.Pow(2, 14 - trackBar1.Value + trackBar2.Value);
+            double step = 1.0 / (18000 - trackBar1.Value);
+            label1.Text = "Шаг:\n" + step * 10 + "мм";
+            NumOfPoints = (int)((XEnd - XStart) / step);
             x = ArrayBuilder.CreateVector(XStart, XEnd, NumOfPoints);
             button1.Enabled = false;
             button4.Enabled = false;
@@ -443,16 +448,21 @@ namespace WindowsFormsApp1
 
         private void trackBar2_Scroll(object sender, EventArgs e)
         {
-            double width = Math.Pow(2, 11 - trackBar2.Value);
-            label4.Text = "Ширина:\n1 / " + width;
-            //if (trackBar2.Value != 5)
-            //    label4.Text = "Ширина:\n1 / " + width;
-            //else
-            //    label4.Text = "Ширина:\n1";
-            width = 1.0 / width;
-            XEnd = width / 2;
-            XStart = -width / 2;
-            NumOfPoints = (int)Math.Pow(2, 14 - trackBar1.Value + trackBar2.Value);
+            //double width = Math.Pow(2, 11 - trackBar2.Value);
+            //label4.Text = "Ширина:\n1 / " + width;
+            ////if (trackBar2.Value != 5)
+            ////    label4.Text = "Ширина:\n1 / " + width;
+            ////else
+            ////    label4.Text = "Ширина:\n1";
+            //width = 1.0 / width;
+            //XEnd = width / 2;
+            //XStart = -width / 2;
+            //NumOfPoints = (int)Math.Pow(2, 14 - trackBar1.Value + trackBar2.Value);
+            double width = trackBar2.Value / 2000.0;
+            label4.Text = "Ширина:\n" + width * 20 + "мм";
+            XEnd = width;
+            XStart = -width;
+            NumOfPoints = (int)((XEnd - XStart) / (1.0 / trackBar1.Value));
             x = ArrayBuilder.CreateVector(XStart, XEnd, NumOfPoints);
             button1.Enabled = false;
             button4.Enabled = false;
