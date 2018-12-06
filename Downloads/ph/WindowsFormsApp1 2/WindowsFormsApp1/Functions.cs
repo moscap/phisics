@@ -104,7 +104,7 @@ namespace WindowsFormsApp1
             paint_obj.ChartAreas[0].AxisX.IntervalOffset = 600;
             paint_obj.ChartAreas[0].AxisX.MajorGrid.Enabled = false;
             paint_obj.ChartAreas[0].AxisX.Interval = 1000;
-            paint_obj.ChartAreas[0].AxisY.Maximum = 1.1;
+            paint_obj.ChartAreas[0].AxisY.Maximum = 1.2;
             ser.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
             ser.BorderWidth = 3;
             for (int i = 0; i < x.Length; i++)
@@ -121,7 +121,7 @@ namespace WindowsFormsApp1
             paint_obj.ChartAreas[0].AxisX.IntervalOffset = 600;
             paint_obj.ChartAreas[0].AxisX.MajorGrid.Enabled = false;
             paint_obj.ChartAreas[0].AxisX.Interval = 1000;
-            paint_obj.ChartAreas[0].AxisY.Maximum = 1.1;
+            paint_obj.ChartAreas[0].AxisY.Maximum = 1.2;
             ser.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
             ser.MarkerSize = 10;
             ser.MarkerStyle = System.Windows.Forms.DataVisualization.Charting.MarkerStyle.Circle;

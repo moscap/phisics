@@ -125,8 +125,8 @@ namespace WindowsFormsApp1
                 chart3.ChartAreas[0].AxisX.TitleFont.Style, chart3.ChartAreas[0].AxisX.TitleFont.Unit);
 
             amplitude = Convert.ToDouble(textBox1.Text);
-            sigma_G = Convert.ToDouble(textBox5.Text);
-            sigma_K = Convert.ToDouble(textBox6.Text);
+            sigma_G = Convert.ToDouble(textBox5.Text) / 6;
+            sigma_K = Convert.ToDouble(textBox6.Text) / 6;
             omega_K = Convert.ToDouble(textBox8.Text);
             omega_G = Convert.ToDouble(textBox7.Text);
             x = ArrayBuilder.CreateVector(XStart, XEnd, NumOfPoints);
@@ -139,6 +139,8 @@ namespace WindowsFormsApp1
 
         private void button1_Click_1(object sender, EventArgs e)
         {
+            chart2.Titles[0].Text = "Спектр источника";
+            chart2.Titles[0].Visible = true;
             chart2.Series.Clear();
             Functions.complex_re_paint(chart2, x_w, G, 1, sigma_G, omega_G, "G");
             button1.Enabled = false;
@@ -173,6 +175,7 @@ namespace WindowsFormsApp1
 
         private void button2_Click_1(object sender, EventArgs e)
         {
+            chart2.Titles[0].Visible = false;
             chart1.Series.Clear();
             chart2.Series.Clear();
             button1.Enabled = false;
@@ -322,7 +325,7 @@ namespace WindowsFormsApp1
                 textBox5.Text = (60).ToString();
                 buf = 60;
             }
-            sigma_G = buf;
+            sigma_G = buf / 6;
             button1.Enabled = false;
         }
 
@@ -336,7 +339,7 @@ namespace WindowsFormsApp1
                 textBox6.Text = (60).ToString();
                 buf = 60;
             }
-            sigma_K = buf;
+            sigma_K = buf / 6;
             button1.Enabled = false;
         }
 
@@ -367,6 +370,7 @@ namespace WindowsFormsApp1
             graphics.FillRectangle(blue_brush, new Rectangle(4 * base_x, 8 * base_y - base_y / 5, base_x, base_y / 5));
             graphics.FillRectangle(black_brush, new Rectangle(base_x, 4 * base_y, base_x, base_y));
             graphics.FillRectangle(red_brush, new Rectangle(2 * base_x, 4 * base_y + (int)(base_y * 0.4), base_x / 10, base_y / 5));
+            graphics.FillRectangle(red_brush, new Rectangle(8 * base_x, 4 * base_y, base_x / 5, base_y));
             f_line = new Rectangle((int)(base_x * 4.5) - 3, (int)(base_y * 6 / 5.0) + 1, 7, (int)(8 * base_y - base_y / 5) - (int)(base_y * 6 / 5.0) - 3);
             f_s_line = new Rectangle(base_x * 21 / 10, (int)(base_y * 4.5), (int)(base_x * 4.5) - base_x * 21 / 10 , 3);
             graphics.TranslateTransform((int)(base_x * 4.5), (int)(base_y * 4.5));
@@ -382,6 +386,7 @@ namespace WindowsFormsApp1
         private void button6_Click(object sender, EventArgs e)
         {
             //button6.Enabled = false;
+            chart2.Titles[0].Visible = false;
             Functions.complex_re_paint(chart1, x_w, G, 1, sigma_G, omega_G, "G");
             SolidBrush smoke_brush = new SolidBrush(Color.WhiteSmoke);
             if (!moving_length.IsEmpty)
@@ -405,13 +410,16 @@ namespace WindowsFormsApp1
 
         private void button4_Click(object sender, EventArgs e)
         {
+            chart2.Titles[0].Text = "Образец + источник";
+            chart2.Titles[0].Visible = true;
             Functions.complex_re_paint(chart2, x_w, G_K, 1, sigma_G, omega_G, "GK");
             button4.Enabled = false;
             button3.Enabled = true;
         }
 
         private void button3_Click(object sender, EventArgs e)
-        { 
+        {
+            chart2.Titles[0].Text = "Спектр пропускания образца";
             Functions.complex_re_paint(chart1, x_w, G_K, 1, sigma_G, omega_G, "GK");
             chart2.Series.Clear();
             Functions.complex_re_paint(chart2, x_w, K, 1, sigma_K, omega_K, "K");
