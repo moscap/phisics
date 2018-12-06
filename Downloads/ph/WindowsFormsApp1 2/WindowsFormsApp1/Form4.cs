@@ -469,7 +469,7 @@ namespace WindowsFormsApp1
             label4.Text = "Ширина:\n" + width * 20 + "мм";
             XEnd = width;
             XStart = -width;
-            NumOfPoints = (int)((XEnd - XStart) / (1.0 / trackBar1.Value));
+            NumOfPoints = (int)((XEnd - XStart) / (1.0 / (18000 - trackBar1.Value)));
             x = ArrayBuilder.CreateVector(XStart, XEnd, NumOfPoints);
             button1.Enabled = false;
             button4.Enabled = false;
