@@ -88,7 +88,7 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 45F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 45F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(1240, 725);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(1020, 725);
             this.tableLayoutPanel1.TabIndex = 12;
             // 
             // tableLayoutPanel3
@@ -103,13 +103,13 @@
             this.tableLayoutPanel3.Controls.Add(this.label3, 1, 2);
             this.tableLayoutPanel3.Controls.Add(this.label4, 0, 1);
             this.tableLayoutPanel3.Controls.Add(this.label2, 1, 0);
-            this.tableLayoutPanel3.Location = new System.Drawing.Point(251, 401);
+            this.tableLayoutPanel3.Location = new System.Drawing.Point(207, 401);
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
             this.tableLayoutPanel3.RowCount = 3;
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 11F));
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 78F));
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 11F));
-            this.tableLayoutPanel3.Size = new System.Drawing.Size(366, 321);
+            this.tableLayoutPanel3.Size = new System.Drawing.Size(300, 321);
             this.tableLayoutPanel3.TabIndex = 14;
             this.tableLayoutPanel3.Paint += new System.Windows.Forms.PaintEventHandler(this.tableLayoutPanel3_Paint);
             // 
@@ -120,9 +120,9 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label3.Location = new System.Drawing.Point(43, 285);
+            this.label3.Location = new System.Drawing.Point(36, 285);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(279, 36);
+            this.label3.Size = new System.Drawing.Size(228, 36);
             this.label3.TabIndex = 1;
             this.label3.Text = "Фотоприемник";
             this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -137,7 +137,7 @@
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label4.Location = new System.Drawing.Point(3, 35);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(34, 250);
+            this.label4.Size = new System.Drawing.Size(27, 250);
             this.label4.TabIndex = 2;
             this.label4.Text = "И\r\nс\r\nт\r\nо\r\nч\r\nн\r\nи\r\nк";
             this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -150,9 +150,9 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label2.Location = new System.Drawing.Point(43, 0);
+            this.label2.Location = new System.Drawing.Point(36, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(279, 35);
+            this.label2.Size = new System.Drawing.Size(228, 35);
             this.label2.TabIndex = 0;
             this.label2.Text = "Интерферометр";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -168,14 +168,14 @@
             legend1.Enabled = false;
             legend1.Name = "Legend1";
             this.chart2.Legends.Add(legend1);
-            this.chart2.Location = new System.Drawing.Point(623, 75);
+            this.chart2.Location = new System.Drawing.Point(513, 75);
             this.chart2.Name = "chart2";
             series1.ChartArea = "ChartArea1";
             series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
             series1.Legend = "Legend1";
             series1.Name = "Series1";
             this.chart2.Series.Add(series1);
-            this.chart2.Size = new System.Drawing.Size(614, 320);
+            this.chart2.Size = new System.Drawing.Size(504, 320);
             this.chart2.TabIndex = 12;
             this.chart2.Text = "chart2";
             title1.DockedToChartArea = "ChartArea1";
@@ -206,7 +206,7 @@
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 17F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 17F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 15F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(242, 321);
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(198, 321);
             this.tableLayoutPanel2.TabIndex = 4;
             this.tableLayoutPanel2.Paint += new System.Windows.Forms.PaintEventHandler(this.tableLayoutPanel2_Paint);
             // 
@@ -218,7 +218,7 @@
             this.button3.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.button3.Location = new System.Drawing.Point(3, 273);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(124, 45);
+            this.button3.Size = new System.Drawing.Size(100, 45);
             this.button3.TabIndex = 27;
             this.button3.Text = "Расчет ";
             this.button3.UseVisualStyleBackColor = true;
@@ -230,9 +230,9 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.button4.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.button4.Location = new System.Drawing.Point(133, 219);
+            this.button4.Location = new System.Drawing.Point(109, 219);
             this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(106, 48);
+            this.button4.Size = new System.Drawing.Size(86, 48);
             this.button4.TabIndex = 28;
             this.button4.Text = "Спектр";
             this.button4.UseVisualStyleBackColor = true;
@@ -246,7 +246,7 @@
             this.button6.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.button6.Location = new System.Drawing.Point(3, 219);
             this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(124, 48);
+            this.button6.Size = new System.Drawing.Size(100, 48);
             this.button6.TabIndex = 30;
             this.button6.Text = "Образец";
             this.button6.UseVisualStyleBackColor = true;
@@ -258,9 +258,9 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.button1.Location = new System.Drawing.Point(133, 165);
+            this.button1.Location = new System.Drawing.Point(109, 165);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(106, 48);
+            this.button1.Size = new System.Drawing.Size(86, 48);
             this.button1.TabIndex = 25;
             this.button1.Text = "Спектр";
             this.button1.UseVisualStyleBackColor = true;
@@ -274,7 +274,7 @@
             this.button2.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.button2.Location = new System.Drawing.Point(3, 165);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(124, 48);
+            this.button2.Size = new System.Drawing.Size(100, 48);
             this.button2.TabIndex = 24;
             this.button2.Text = "Старт";
             this.button2.UseVisualStyleBackColor = true;
@@ -301,7 +301,7 @@
             series2.Legend = "Legend1";
             series2.Name = "Series1";
             this.chart1.Series.Add(series2);
-            this.chart1.Size = new System.Drawing.Size(614, 320);
+            this.chart1.Size = new System.Drawing.Size(504, 320);
             this.chart1.TabIndex = 11;
             this.chart1.Text = "chart1";
             // 
@@ -316,14 +316,14 @@
             legend3.Enabled = false;
             legend3.Name = "Legend1";
             this.chart3.Legends.Add(legend3);
-            this.chart3.Location = new System.Drawing.Point(623, 401);
+            this.chart3.Location = new System.Drawing.Point(513, 401);
             this.chart3.Name = "chart3";
             this.chart3.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.Fire;
             series3.ChartArea = "ChartArea1";
             series3.Legend = "Legend1";
             series3.Name = "Series1";
             this.chart3.Series.Add(series3);
-            this.chart3.Size = new System.Drawing.Size(614, 321);
+            this.chart3.Size = new System.Drawing.Size(504, 321);
             this.chart3.TabIndex = 13;
             this.chart3.Text = "chart3";
             title2.DockedToChartArea = "ChartArea1";
@@ -358,7 +358,7 @@
             this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 66F));
             this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 66F));
             this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 66F));
-            this.tableLayoutPanel4.Size = new System.Drawing.Size(1234, 66);
+            this.tableLayoutPanel4.Size = new System.Drawing.Size(1014, 66);
             this.tableLayoutPanel4.TabIndex = 15;
             // 
             // label1
@@ -369,9 +369,9 @@
             this.label1.AutoSize = true;
             this.tableLayoutPanel4.SetColumnSpan(this.label1, 3);
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label1.Location = new System.Drawing.Point(347, 0);
+            this.label1.Location = new System.Drawing.Point(285, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(535, 66);
+            this.label1.Size = new System.Drawing.Size(440, 66);
             this.label1.TabIndex = 0;
             this.label1.Text = "Спектр воды";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -382,9 +382,9 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.button5.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.button5.Location = new System.Drawing.Point(1060, 3);
+            this.button5.Location = new System.Drawing.Point(872, 3);
             this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(171, 60);
+            this.button5.Size = new System.Drawing.Size(139, 60);
             this.button5.TabIndex = 31;
             this.button5.Text = "Меню";
             this.button5.UseVisualStyleBackColor = true;
@@ -400,7 +400,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.ClientSize = new System.Drawing.Size(1264, 749);
+            this.ClientSize = new System.Drawing.Size(1044, 749);
             this.Controls.Add(this.tableLayoutPanel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.MaximizeBox = false;

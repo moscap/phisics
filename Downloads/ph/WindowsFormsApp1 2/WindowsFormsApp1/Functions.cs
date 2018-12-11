@@ -95,6 +95,19 @@ namespace WindowsFormsApp1
                 ser.Points.AddXY(x[i], y[i].Magnitude / koef);
             }
         }
+        public static void complex_re_paint_min_max(object obj, double[] x, Complex[] y, double koef = 1.0, double sigma = 10, double offset = 0, string name = "New plot!")
+        {
+            var paint_obj = obj as System.Windows.Forms.DataVisualization.Charting.Chart;
+            var ser = paint_obj.Series.Add(name);
+            paint_obj.ChartAreas[0].AxisX.Minimum = x.Min();
+            paint_obj.ChartAreas[0].AxisX.Maximum = x.Max();
+            ser.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
+            ser.BorderWidth = 3;
+            for (int i = 0; i < x.Length; i++)
+            {
+                ser.Points.AddXY(x[i], y[i].Re / koef);
+            }
+        }
         public static void complex_re_paint(object obj, double[] x, Complex[] y, double koef = 1.0, double sigma = 10,double offset = 0, string name = "New plot!")
         {
             var paint_obj = obj as System.Windows.Forms.DataVisualization.Charting.Chart;
@@ -105,7 +118,7 @@ namespace WindowsFormsApp1
             paint_obj.ChartAreas[0].AxisX.MajorGrid.Enabled = false;
             paint_obj.ChartAreas[0].AxisX.Interval = 1000;
             paint_obj.ChartAreas[0].AxisY.Maximum = 1.2;
-            ser.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
+            ser.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.FastLine;
             ser.BorderWidth = 3;
             for (int i = 0; i < x.Length; i++)
             {
