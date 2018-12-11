@@ -7,39 +7,24 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using OxyPlot;
-using LiveCharts;
-using LiveCharts.WinForms;
-using LiveCharts.Wpf;
-using MathNet.Numerics;
-using AForge.Math;
 
 namespace WindowsFormsApp1
 {
-    public partial class Form2 : Form
+    public partial class Form5 : Form
     {
-        public Form2()
+        public Form5()
         {
             InitializeComponent();
+            this.ControlBox = false;
+            this.WindowState = FormWindowState.Maximized; 
             Size resolution = System.Windows.Forms.Screen.PrimaryScreen.Bounds.Size;
             tableLayoutPanel1.Width = (int)(resolution.Width * (15.0 / 16.0));
             tableLayoutPanel1.Height = (int)(resolution.Height * (10.0 / 11.0));
         }
-        private void Form2_Load(object sender, EventArgs e)
+
+        private void label1_Click(object sender, EventArgs e)
         {
 
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            Form1 form1 = new Form1();
-            form1.Show();
-        }
-
-        private void button3_Click(object sender, EventArgs e)
-        {
-            Form3 form3 = new Form3();
-            form3.Show();
         }
 
         private void button4_Click(object sender, EventArgs e)
@@ -47,13 +32,19 @@ namespace WindowsFormsApp1
             this.Close();
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void button1_Click(object sender, EventArgs e)
         {
-            Form5 form5 = new Form5();
-            form5.Show();
+            Form7 form7 = new Form7();
+            form7.Show();
         }
 
-        private void label1_Click(object sender, EventArgs e)
+        private void button2_Click(object sender, EventArgs e)
+        {
+            Form4 form4 = new Form4();
+            form4.Show();
+        }
+
+        private void tableLayoutPanel1_Paint(object sender, PaintEventArgs e)
         {
 
         }

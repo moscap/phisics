@@ -786,3 +786,12 @@ F:\старый комп\Users\mosca\source\repos\phisics\Downloads\ph\WindowsFo
 F:\старый комп\Users\mosca\source\repos\phisics\Downloads\ph\WindowsFormsApp1 2\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.application
 D:\GitHub\moscap\phisics\phisics\Downloads\ph\WindowsFormsApp1 2\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.Form4.resources
 F:\старый комп\Users\mosca\source\repos\phisics\Downloads\ph\WindowsFormsApp1 2\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.Form4.resources
+C:\Users\danil\Source\Repos\DanilKonon\phisics\Downloads\ph\WindowsFormsApp1 2\WindowsFormsApp1\bin\Debug\WindowsFormsApp1.exe.manifest
+C:\Users\danil\Source\Repos\DanilKonon\phisics\Downloads\ph\WindowsFormsApp1 2\WindowsFormsApp1\bin\Debug\WindowsFormsApp1.application
+C:\Users\danil\Source\Repos\DanilKonon\phisics\Downloads\ph\WindowsFormsApp1 2\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.Form4.resources
+C:\Users\danil\Source\Repos\DanilKonon\phisics\Downloads\ph\WindowsFormsApp1 2\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.Form3.resources
+C:\Users\danil\Source\Repos\DanilKonon\phisics\Downloads\ph\WindowsFormsApp1 2\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.exe.manifest
+C:\Users\danil\Source\Repos\DanilKonon\phisics\Downloads\ph\WindowsFormsApp1 2\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.application
+C:\Users\danil\Source\Repos\DanilKonon\phisics\Downloads\ph\WindowsFormsApp1 2\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.Form5.resources
+C:\Users\danil\Source\Repos\DanilKonon\phisics\Downloads\ph\WindowsFormsApp1 2\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.Form6.resources
+C:\Users\danil\Source\Repos\DanilKonon\phisics\Downloads\ph\WindowsFormsApp1 2\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.Form7.resources

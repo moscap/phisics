@@ -23,7 +23,7 @@ namespace WindowsFormsApp1
         double XEnd;
         double[] x = null;
         double[] x_w = null;
-        double sigma_G = 160, sigma_K = 40, omega_G = 2500;
+        double sigma_G = 700, sigma_K = 40, omega_G = 2500;
         double omega_K = 2400;
         Graphics graphics { get; set; }
         Graphics mirror_graph { get; set; }
@@ -209,8 +209,9 @@ namespace WindowsFormsApp1
             chart3.ChartAreas[0].AxisX.Minimum = XStart;
             chart3.ChartAreas[0].AxisY.Maximum = 1.2;
             chart3.ChartAreas[0].AxisY.Minimum = 0;
-            ser.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
-            ser.MarkerSize = 6;
+            ser.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.FastLine;
+            // ser.Bubb
+            ser.MarkerSize = 3;
             ser.MarkerStyle = System.Windows.Forms.DataVisualization.Charting.MarkerStyle.Circle;
             ser.BorderWidth = 2;
             Initialize_Empty();
@@ -440,9 +441,6 @@ namespace WindowsFormsApp1
 
         private void trackBar1_Scroll(object sender, EventArgs e)
         {
-            //double step = Math.Pow(2, 25 - trackBar1.Value);
-            //label1.Text = "Шаг:\n1 / " + step;
-            //NumOfPoints = (int)Math.Pow(2, 14 - trackBar1.Value + trackBar2.Value);
             double step = 1.0 / (18000 - trackBar1.Value);
             label1.Text = "Шаг:\n" + step * 10 + "мм";
             NumOfPoints = (int)((XEnd - XStart) / step);
@@ -455,16 +453,6 @@ namespace WindowsFormsApp1
 
         private void trackBar2_Scroll(object sender, EventArgs e)
         {
-            //double width = Math.Pow(2, 11 - trackBar2.Value);
-            //label4.Text = "Ширина:\n1 / " + width;
-            ////if (trackBar2.Value != 5)
-            ////    label4.Text = "Ширина:\n1 / " + width;
-            ////else
-            ////    label4.Text = "Ширина:\n1";
-            //width = 1.0 / width;
-            //XEnd = width / 2;
-            //XStart = -width / 2;
-            //NumOfPoints = (int)Math.Pow(2, 14 - trackBar1.Value + trackBar2.Value);
             double width = trackBar2.Value / 2000.0;
             label4.Text = "Ширина:\n" + width * 20 + "мм";
             XEnd = width;
