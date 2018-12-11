@@ -23,7 +23,7 @@ namespace WindowsFormsApp1
         double XEnd;
         double[] x = null;
         double[] x_w = null;
-        double sigma_G = 700, sigma_K = 40, omega_G = 2500;
+        double sigma_G = 380, sigma_K = 40, omega_G = 2500;
         double omega_K = 2400;
         Graphics graphics { get; set; }
         Graphics mirror_graph { get; set; }
@@ -209,9 +209,9 @@ namespace WindowsFormsApp1
             chart3.ChartAreas[0].AxisX.Minimum = XStart;
             chart3.ChartAreas[0].AxisY.Maximum = 1.2;
             chart3.ChartAreas[0].AxisY.Minimum = 0;
-            ser.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.FastLine;
+            ser.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
             // ser.Bubb
-            ser.MarkerSize = 3;
+            ser.MarkerSize = 6;
             ser.MarkerStyle = System.Windows.Forms.DataVisualization.Charting.MarkerStyle.Circle;
             ser.BorderWidth = 2;
             Initialize_Empty();

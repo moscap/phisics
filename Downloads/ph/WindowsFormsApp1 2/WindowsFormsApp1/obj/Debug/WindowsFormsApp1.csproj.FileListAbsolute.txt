@@ -795,3 +795,6 @@ C:\Users\danil\Source\Repos\DanilKonon\phisics\Downloads\ph\WindowsFormsApp1 2\W
 C:\Users\danil\Source\Repos\DanilKonon\phisics\Downloads\ph\WindowsFormsApp1 2\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.Form5.resources
 C:\Users\danil\Source\Repos\DanilKonon\phisics\Downloads\ph\WindowsFormsApp1 2\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.Form6.resources
 C:\Users\danil\Source\Repos\DanilKonon\phisics\Downloads\ph\WindowsFormsApp1 2\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.Form7.resources
+F:\старый комп\Users\mosca\source\repos\phisics\Downloads\ph\WindowsFormsApp1 2\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.Form5.resources
+F:\старый комп\Users\mosca\source\repos\phisics\Downloads\ph\WindowsFormsApp1 2\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.Form6.resources
+F:\старый комп\Users\mosca\source\repos\phisics\Downloads\ph\WindowsFormsApp1 2\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.Form7.resources
