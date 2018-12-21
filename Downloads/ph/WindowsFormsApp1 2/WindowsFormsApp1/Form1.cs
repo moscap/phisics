@@ -426,6 +426,11 @@ namespace WindowsFormsApp1
             button3.Enabled = false;
         }
 
+        private void label3_Click(object sender, EventArgs e)
+        {
+
+        }
+
         private void label5_Click(object sender, EventArgs e)
         {
 

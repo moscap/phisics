@@ -13,6 +13,7 @@ using LiveCharts.WinForms;
 using LiveCharts.Wpf;
 using AForge.Math;
 using System.IO;
+using System.Windows.Forms.DataVisualization.Charting;
 
 namespace WindowsFormsApp1
 {
@@ -39,7 +40,7 @@ namespace WindowsFormsApp1
         double koef { get; set; }
         Complex[] K = null;
         Complex[] K_full = null;
-
+        bool FirstTime = true;
         // Created full (501) K, x_w_full
         void Whole_Parse()
         {
@@ -76,6 +77,13 @@ namespace WindowsFormsApp1
                 K_full[i] = K_full[x_w_full.Length - i - 1];
                 K_full[x_w_full.Length - i - 1] = ctmp;
             }
+            int length_x_w = x_w_full.Length;
+            x = ArrayBuilder.CreateVector(
+                -0.5 / ((x_w_full[length_x_w - 1] - x_w_full[0]) / length_x_w),
+                0.5 / ((x_w_full[length_x_w - 1] -x_w_full[0]) / length_x_w),
+                length_x_w);
+            XEnd = x[length_x_w - 1];
+            XStart = x[0];
             //x = ArrayBuilder.CreateVector(
             //    -0.5 / ((x_w_full[NumOfPoints - 1] - x_w_full[0]) / NumOfPoints),
             //    0.5 / ((x_w_full[NumOfPoints - 1] - x_w_full[0]) / NumOfPoints),
@@ -145,24 +153,24 @@ namespace WindowsFormsApp1
             InitializeComponent();
             Timer timer1 = new Timer();
             this.ControlBox = false;
-            Size resolution = System.Windows.Forms.Screen.PrimaryScreen.Bounds.Size;
-            tableLayoutPanel1.Width = (int)(resolution.Width * (15.0 / 16.0));
-            tableLayoutPanel1.Height = (int)(resolution.Height * (10.0 / 11.0));
             this.WindowState = FormWindowState.Maximized;
 
             chart1.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.Bright;
+            chart1.ChartAreas[0].Name = "ChartArea0";
             chart1.ChartAreas[0].AxisX.LabelStyle.Format = "{F0}";
             chart1.ChartAreas[0].AxisX.Title = "волновое число(см -1)";
             chart1.ChartAreas[0].AxisX.TitleFont = new Font(chart1.ChartAreas[0].AxisX.TitleFont.Name, 14,
                 chart1.ChartAreas[0].AxisX.TitleFont.Style, chart1.ChartAreas[0].AxisX.TitleFont.Unit);
 
             chart2.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.Bright;
+            chart2.ChartAreas[0].Name = "ChartArea0";
             chart2.ChartAreas[0].AxisX.LabelStyle.Format = "{F0}";
             chart2.ChartAreas[0].AxisX.Title = "волновое число(см -1)";
             chart2.ChartAreas[0].AxisX.TitleFont = new Font(chart2.ChartAreas[0].AxisX.TitleFont.Name, 14,
                 chart2.ChartAreas[0].AxisX.TitleFont.Style, chart2.ChartAreas[0].AxisX.TitleFont.Unit);
 
             chart3.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.Bright;
+            chart3.ChartAreas[0].Name = "ChartArea0";
             chart3.ChartAreas[0].AxisX.LabelStyle.Format = "{F3}";
             chart3.ChartAreas[0].AxisX.Title = "см";
             chart3.ChartAreas[0].AxisX.TitleFont = new Font(chart3.ChartAreas[0].AxisX.TitleFont.Name, 14,
@@ -177,6 +185,14 @@ namespace WindowsFormsApp1
             x_w = x_w_full;
             K = K_full;
             Initialize_Filled();
+            string interv = String.Format("Интервал: {0:0.00000}", XEnd - XStart);
+            label1.Text = interv;
+            FirstTime = false;
+            chart1.Titles.Clear();
+            Title tit = chart1.Titles.Add("Спектр солнца");
+            tit.Font = new System.Drawing.Font("Arial", 14);
+            chart1.Titles[0].Visible = true;
+            tit.DockedToChartArea = "ChartArea0";
             Functions.complex_re_paint_min_max(chart1, x_w, K, name: "Sun spectrum wave number");
         }
 
@@ -250,7 +266,7 @@ namespace WindowsFormsApp1
             tic_graph();
             SolidBrush white_brush = new SolidBrush(Color.WhiteSmoke);
 
-            if (NumOfPoints > 500)
+            if (NumOfPoints > 300)
                 tic += 2;
             else
                 tic++;
@@ -282,7 +298,12 @@ namespace WindowsFormsApp1
         private void trackBar1_Scroll(object sender, EventArgs e)
         {
             step = (int)trackBar1.Value;
-            label1.Text = "Шаг:\n" + step;
+            if (FirstTime != true)
+            {
+                Initialize_New_Data();
+                string interv = String.Format("Интервал: {0:0.00000}", XEnd - XStart);
+                label1.Text = interv;
+            }
         }
 
         private void button5_Click_1(object sender, EventArgs e)
@@ -321,7 +342,7 @@ namespace WindowsFormsApp1
             chart2.Titles[0].Visible = false;
             chart2.ChartAreas[0].AxisY.Title = "";
             chart2.Series.Clear();
-            Initialize_New_Data();
+            // Initialize_New_Data();
             button1.Enabled = false;
             SolidBrush smoke_brush = new SolidBrush(Color.WhiteSmoke);
             if (!moving_length.IsEmpty)
@@ -363,14 +384,27 @@ namespace WindowsFormsApp1
 
         private void button1_Click(object sender, EventArgs e)
         {
-            chart2.Titles[0].Text = "Спектр солнца";
+            chart2.Titles.Clear();
+            Title tit = chart2.Titles.Add("Измеренный спектр солнца");
+            tit.Font = new System.Drawing.Font("Arial", 14);
             chart2.Titles[0].Visible = true;
+            tit.DockedToChartArea = "ChartArea0";
             chart2.Series.Clear();
             Functions.complex_re_paint_min_max(chart2, x_w, K, name: "K");
             button1.Enabled = true;
         }
 
         private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void tableLayoutPanel2_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void label1_Click_1(object sender, EventArgs e)
         {
 
         }
