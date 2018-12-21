@@ -221,9 +221,9 @@ namespace WindowsFormsApp1
             mirror_graph.FillRectangle(white_brush, new Rectangle(-base_x / 10, (int)(-base_y / 1.5), base_x / 5, (int)(base_y * 1.5)));
             graphics.FillRectangle(white_brush, f_line);
             graphics.FillRectangle(white_brush, s_line);
-            s_line = new Rectangle((int)(base_x * 4.5), (int)(base_y * 4.5) - 3, moving_length.Left - (int)(base_x * 4.5) - 2, 7);
             moving_length = new Rectangle(tableLayoutPanel3.Width * 8 / 9 - (int)(tableLayoutPanel3.Width / 9 * tic / NumOfPoints)
                 , moving_length.Top, moving_length.Width, moving_length.Height);
+            s_line = new Rectangle((int)(base_x * 4.5), (int)(base_y * 4.5) - 3, moving_length.Left - (int)(base_x * 4.5) - 2, 7);
 
             ser.Points.AddXY(x[tic], Y_c[tic].Re / koef);
 
@@ -339,6 +339,8 @@ namespace WindowsFormsApp1
 
         private void button2_Click(object sender, EventArgs e)
         {
+            Graphics graphics = tableLayoutPanel3.CreateGraphics();
+            DoubleBuffered = true;
             chart2.Titles[0].Visible = false;
             chart2.ChartAreas[0].AxisY.Title = "";
             chart2.Series.Clear();

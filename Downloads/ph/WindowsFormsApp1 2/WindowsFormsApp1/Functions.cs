@@ -24,22 +24,22 @@ namespace WindowsFormsApp1
             double new_x = x - offset;
             return Math.Exp(-new_x * new_x / (sigma * sigma * 2.0)); // / (Math.Sqrt(2.0 * Math.PI) * sigma);
         }
-        public static double func_rect(double x, double start, double end)
-        {
-            // Returns rect that is non-zero from -5 to 5.
-            if (x < start || x > end)
-            {
-                return 0;
-            }
-            else
-            {
-                return 5;
-            }
-        }
-        public static double trans_func_rect(double x, double start, double end)
-        {
-            return Math.Abs((end - start) * 5 *  Trig.Sinc(x * ((end - start) / 2.0) / Math.PI));
-        }
+        //public static double func_rect(double x, double start, double end)
+        //{
+        //    // Returns rect that is non-zero from -5 to 5.
+        //    if (x < start || x > end)
+        //    {
+        //        return 0;
+        //    }
+        //    else
+        //    {
+        //        return 5;
+        //    }
+        //}
+        //public static double trans_func_rect(double x, double start, double end)
+        //{
+        //    return Math.Abs((end - start) * 5 *  Trig.Sinc(x * ((end - start) / 2.0) / Math.PI));
+        //}
         // приводим к нормальному виду
         public static void FlipFlop<T>(T[] f)
         {
@@ -172,18 +172,18 @@ namespace WindowsFormsApp1
                 ser.Points.AddXY(x[x.Length - 1] + x[i] - x[0], y[i].Re / koef);
             }
         }
-        public static void complex_re_paint_for_ch2(object obj, double[] x, Complex[] y, double koef = 1.0, double sigma = 10, double offset = 0, string name = "New plot!")
-        {
-            var paint_obj = obj as System.Windows.Forms.DataVisualization.Charting.Chart;
-            var ser = paint_obj.Series.Add(name);
-            paint_obj.ChartAreas[0].AxisX.Maximum = 4000;
-            paint_obj.ChartAreas[0].AxisX.Minimum = 400;
-            ser.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
-            for (int i = 0; i < x.Length; i++)
-            {
-                ser.Points.AddXY(x[i], y[i].Re / koef);
-            }
-        }
+        //public static void complex_re_paint_for_ch2(object obj, double[] x, Complex[] y, double koef = 1.0, double sigma = 10, double offset = 0, string name = "New plot!")
+        //{
+        //    var paint_obj = obj as System.Windows.Forms.DataVisualization.Charting.Chart;
+        //    var ser = paint_obj.Series.Add(name);
+        //    paint_obj.ChartAreas[0].AxisX.Maximum = 4000;
+        //    paint_obj.ChartAreas[0].AxisX.Minimum = 400;
+        //    ser.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
+        //    for (int i = 0; i < x.Length; i++)
+        //    {
+        //        ser.Points.AddXY(x[i], y[i].Re / koef);
+        //    }
+        //}
         
     }
 }
