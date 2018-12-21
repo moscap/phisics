@@ -86,15 +86,6 @@ namespace WindowsFormsApp1
             }
             FourierTransform.DFT(x, dir);
         }
-        public static void complex_magnitude_paint(object obj, double[] x, Complex[] y, double koef = 1.0)
-        {
-            var paint_obj = obj as System.Windows.Forms.DataVisualization.Charting.Chart;
-            var ser = paint_obj.Series.Add("New plot");
-            for (int i = 0; i < x.Length; i++)
-            {
-                ser.Points.AddXY(x[i], y[i].Magnitude / koef);
-            }
-        }
         public static void complex_re_paint_min_max(object obj, double[] x, Complex[] y, double koef = 1.0, double sigma = 10, double offset = 0, string name = "New plot!")
         {
             var paint_obj = obj as System.Windows.Forms.DataVisualization.Charting.Chart;
@@ -152,6 +143,35 @@ namespace WindowsFormsApp1
                 ser.Points.AddXY(x[x.Length - 1] + x[i] - x[0], y[i].Re / koef);
             }
         }
+
+        public static void complex_re_paint_2_n(object obj, double[] x, Complex[] y, double koef = 1.0, double sigma = 10, double offset = 0, string name = "New plot!")
+        {
+            var paint_obj = obj as System.Windows.Forms.DataVisualization.Charting.Chart;
+            var ser = paint_obj.Series.Add(name);
+            paint_obj.ChartAreas[0].AxisX.Maximum = 4000;
+            paint_obj.ChartAreas[0].AxisX.Minimum = 400;
+            paint_obj.ChartAreas[0].AxisX.IntervalOffset = 600;
+            paint_obj.ChartAreas[0].AxisX.MajorGrid.Enabled = false;
+            paint_obj.ChartAreas[0].AxisX.Interval = 1000;
+            paint_obj.ChartAreas[0].AxisY.Maximum = 1.2;
+            ser.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Point;
+            ser.MarkerSize = 10;
+            ser.MarkerStyle = System.Windows.Forms.DataVisualization.Charting.MarkerStyle.Circle;
+            ser.MarkerColor = System.Drawing.Color.Brown;
+            ser.BorderWidth = 2;
+            for (int i = x.Length - 1; (i >= 0); --i)
+            {
+                ser.Points.AddXY(2 * x[0] - x[i], y[y.Length - i - 1].Re / koef);
+            }
+            for (int i = 0; i < x.Length; i++)
+            {
+                ser.Points.AddXY(x[i], y[i].Re / koef);
+            }
+            for (int i = 0; (i < x.Length) && ((x[x.Length - 1] + x[i] - x[0])) <= 5000; ++i)
+            {
+                ser.Points.AddXY(x[x.Length - 1] + x[i] - x[0], y[i].Re / koef);
+            }
+        }
         public static void complex_re_paint_for_ch2(object obj, double[] x, Complex[] y, double koef = 1.0, double sigma = 10, double offset = 0, string name = "New plot!")
         {
             var paint_obj = obj as System.Windows.Forms.DataVisualization.Charting.Chart;
@@ -164,109 +184,6 @@ namespace WindowsFormsApp1
                 ser.Points.AddXY(x[i], y[i].Re / koef);
             }
         }
-        public static void complex_im_paint(object obj, double[] x, Complex[] y, double koef = 1.0)
-        {
-            var paint_obj = obj as System.Windows.Forms.DataVisualization.Charting.Chart;
-            var ser = paint_obj.Series.Add("New plot");
-            for (int i = 0; i < x.Length; i++)
-            {
-                ser.Points.AddXY(x[i], y[i].Im / koef);
-            }
-
-        }
-        public static void complex_re_paint_chart(object obj, double[] x, Complex[] y, double koef = 1.0)
-        {
-            var paint_obj = obj as System.Windows.Forms.DataVisualization.Charting.Chart;
-            var ser = paint_obj.Series.Add("New plot");
-            ser.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
-            for (int i = 0; i < x.Length; i++)
-            {
-                ser.Points.AddXY(x[i], y[i].Re / koef);
-            }
-        }
-        public static void double_paint(object obj, double[] x, double[] y, double koef = 1.0)
-        {
-            LiveCharts.WinForms.CartesianChart paint_obj = obj as LiveCharts.WinForms.CartesianChart;
-            LiveCharts.Defaults.ObservablePoint[] mas = new LiveCharts.Defaults.ObservablePoint[x.Length];
-            for (int i = 0; i < x.Length; i++)
-            {
-                mas[i] = (new LiveCharts.Defaults.ObservablePoint
-                {
-                    X = x[i],
-                    Y = y[i] / koef
-                });
-            }
-            var ListPoints = new ChartValues<LiveCharts.Defaults.ObservablePoint>();
-            ListPoints.AddRange(mas);
-            paint_obj.Series.Add(new LineSeries
-            { 
-                Values = ListPoints,
-                PointGeometrySize = 0
-            });
-
-        }
-        public static void double_paint_with_func(object obj, double[] x, double[] y, Func<double, double> f, double koef = 1.0)
-        {
-            LiveCharts.WinForms.CartesianChart paint_obj = obj as LiveCharts.WinForms.CartesianChart;
-            LiveCharts.Defaults.ObservablePoint[] mas = new LiveCharts.Defaults.ObservablePoint[x.Length];
-            for (int i = 0; i < x.Length; i++)
-            {
-                mas[i] = (new LiveCharts.Defaults.ObservablePoint
-                {
-                    X = x[i],
-                    Y = f(y[i]) / koef
-                });
-            }
-            var ListPoints = new ChartValues<LiveCharts.Defaults.ObservablePoint>();
-            ListPoints.AddRange(mas);
-            paint_obj.Series.Add(new LineSeries
-            {
-                Values = ListPoints,
-                PointGeometrySize = 0
-            });
-
-        }
-        public static void complex_magnitude_paint_with_func(object obj, double[] x, Complex[] y, Func<double, double> f, double koef = 1.0)
-        {
-            LiveCharts.WinForms.CartesianChart paint_obj = obj as LiveCharts.WinForms.CartesianChart;
-            LiveCharts.Defaults.ObservablePoint[] mas = new LiveCharts.Defaults.ObservablePoint[x.Length];
-            for (int i = 0; i < x.Length; i++)
-            {
-                mas[i] = (new LiveCharts.Defaults.ObservablePoint
-                {
-                    X = x[i],
-                    Y = f(y[i].Magnitude) / koef
-                });
-            }
-            var ListPoints = new ChartValues<LiveCharts.Defaults.ObservablePoint>();
-            ListPoints.AddRange(mas);
-            paint_obj.Series.Add(new LineSeries
-            {
-                Values = ListPoints,
-                PointGeometrySize = 0
-            });
-
-        }
-        public static void complex_re_paint_with_func(object obj, double[] x, Complex[] y, Func<double, double> f, double koef = 1.0)
-        {
-            LiveCharts.Wpf.CartesianChart paint_obj = obj as LiveCharts.Wpf.CartesianChart;
-            LiveCharts.Defaults.ObservablePoint[] mas = new LiveCharts.Defaults.ObservablePoint[x.Length];
-            for (int i = 0; i < x.Length; i++)
-            {
-                mas[i] = (new LiveCharts.Defaults.ObservablePoint
-                {
-                    X = x[i],
-                    Y = f(y[i].Re) / koef
-                });
-            }
-            var ListPoints = new ChartValues<LiveCharts.Defaults.ObservablePoint>();
-            ListPoints.AddRange(mas);
-            paint_obj.Series.Add(new LineSeries
-            {
-                Values = ListPoints,
-                PointGeometrySize = 0
-            });
-
-        }
+        
     }
 }

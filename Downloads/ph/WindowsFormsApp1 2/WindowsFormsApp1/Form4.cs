@@ -21,11 +21,11 @@ namespace WindowsFormsApp1
     public partial class Form4 : Form
     {
         public int NumOfPoints;
-        public int NumOfPoints_N = 8192;
         double XStart;
         double XEnd;
         double[] x = null;
         double[] x_w = null;
+        double[] x_w_n = null;
         double sigma_G = 550, sigma_K = 40, omega_G = 2500;
         double omega_K = 2400;
         Graphics graphics { get; set; }
@@ -38,16 +38,31 @@ namespace WindowsFormsApp1
         System.Windows.Forms.DataVisualization.Charting.Series ser { get; set; }
         long tic { get; set; }
         Complex[] Y_c = null;
-        Complex[] Y_c_n = null;
         double koef { get; set; }
         Complex[] G = null;
         Complex[] G_K = null;
         Complex[] K = null;
+        Complex[] K_n = null;
 
         // приводим к нормальному виду
         // здесь выполняется все кроме пересоздания массива при
         // изменении числа точек и изменения параметров
         // измение массива х возлагатся на метод, в котором изменяеются его параметры
+        void Init_norm()
+        {
+            K_n = new Complex[NumOfPoints];
+            x_w_n = ArrayBuilder.CreateVector(
+                omega_G - 0.5 / ((XEnd - XStart) / NumOfPoints),
+                omega_G + 0.5 / ((XEnd - XStart) / NumOfPoints),
+                NumOfPoints);
+            for (int i = 0; i < NumOfPoints; i++)
+            {
+                K_n[i] = new Complex(1 - Math.Max(Functions.func_gauss(x_w_n[i], sigma_K, omega_K),
+                  0.7 * Functions.func_gauss(x_w_n[i], sigma_K, omega_K + 150)), 0);
+            }
+
+            
+        }
         void Initialize_Empty()
         {
             G = new Complex[NumOfPoints];
@@ -56,7 +71,9 @@ namespace WindowsFormsApp1
                 omega_G - 0.5 / ((XEnd - XStart) / NumOfPoints),
                 omega_G + 0.5 / ((XEnd - XStart) / NumOfPoints), 
                 NumOfPoints);
-            if(x_w[0] < 0)
+
+
+            if (x_w[0] < 0)
             {
                x_w = ArrayBuilder.CreateVector(
                0,
@@ -136,6 +153,11 @@ namespace WindowsFormsApp1
             trackBar1_Scroll(this, new EventArgs());
             x = ArrayBuilder.CreateVector(XStart, XEnd, NumOfPoints);
             graphics = tableLayoutPanel3.CreateGraphics();
+
+            button2.Enabled = false;
+            Init_norm();
+            button2.Enabled = true;
+
             button1.Enabled = false;
             button4.Enabled = false;
             button3.Enabled = false;
@@ -356,7 +378,8 @@ namespace WindowsFormsApp1
             chart2.Titles[0].Text = "Спектр пропускания образца";
             Functions.complex_re_paint_2(chart1, x_w, G_K, 1, sigma_G, omega_G, "GK");
             chart2.Series.Clear();
-            Functions.complex_re_paint_2(chart2, x_w, K, 1, sigma_K, omega_K, "K");
+            Functions.complex_re_paint_2_n(chart2, x_w, K, 1, sigma_K, omega_K, "K");
+            Functions.complex_re_paint(chart2, x_w_n, K_n, 1, sigma_K, omega_K, "K_n");
             button3.Enabled = false;
         }
 
