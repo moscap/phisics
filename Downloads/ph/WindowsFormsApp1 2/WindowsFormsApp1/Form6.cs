@@ -188,7 +188,8 @@ namespace WindowsFormsApp1
             x_w = x_w_full;
             K = K_full;
             Initialize_Filled();
-            label1.Text = "Интервал:\n" + (XEnd - XStart);
+            string interv = String.Format("Интервал: {0:0.00000}", XEnd - XStart);
+            label1.Text = interv;
             FirstTime = false;
             chart1.Titles.Clear();
             Title tit = chart1.Titles.Add("Спектр солнца");
@@ -303,7 +304,8 @@ namespace WindowsFormsApp1
             if (FirstTime != true)
             {
                 Initialize_New_Data();
-                label1.Text = "Интервал:" + (XEnd - XStart);
+                string interv = String.Format("Интервал: {0:0.00000}", XEnd - XStart);
+                label1.Text = interv;
             }
         }
 

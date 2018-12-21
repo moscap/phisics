@@ -12,6 +12,9 @@ using LiveCharts;
 using LiveCharts.WinForms;
 using LiveCharts.Wpf;
 using AForge.Math;
+// using System.Drawing.Pen;
+using System.Drawing.Drawing2D;
+
 
 namespace WindowsFormsApp1
 {
@@ -23,7 +26,7 @@ namespace WindowsFormsApp1
         double XEnd;
         double[] x = null;
         double[] x_w = null;
-        double sigma_G = 700, sigma_K = 40, omega_G = 2500;
+        double sigma_G = 550, sigma_K = 40, omega_G = 2500;
         double omega_K = 2400;
         Graphics graphics { get; set; }
         Graphics mirror_graph { get; set; }
@@ -209,9 +212,9 @@ namespace WindowsFormsApp1
             chart3.ChartAreas[0].AxisX.Minimum = XStart;
             chart3.ChartAreas[0].AxisY.Maximum = 1.2;
             chart3.ChartAreas[0].AxisY.Minimum = 0;
-            ser.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.FastLine;
+            ser.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
             // ser.Bubb
-            ser.MarkerSize = 3;
+            ser.MarkerSize = 4;
             ser.MarkerStyle = System.Windows.Forms.DataVisualization.Charting.MarkerStyle.Circle;
             ser.BorderWidth = 2;
             Initialize_Empty();
@@ -282,7 +285,7 @@ namespace WindowsFormsApp1
             SolidBrush white_brush = new SolidBrush(Color.WhiteSmoke);
             SolidBrush black_brush = new SolidBrush(Color.Black);
             Pen white_pen = new Pen(Color.WhiteSmoke, 3);
-
+            white_pen.EndCap = System.Drawing.Drawing2D.LineCap.ArrowAnchor;
             graphics.FillRectangle(white_brush, f_s_line);
             graphics.DrawRectangle(white_pen, f_line);
             graphics.DrawRectangle(white_pen, s_line);
@@ -290,6 +293,7 @@ namespace WindowsFormsApp1
             if (!sample.IsEmpty)
             {
                 SolidBrush yellow_brush = new SolidBrush(Color.Yellow);
+
                 graphics.FillRectangle(yellow_brush, sample);
             }
         }
