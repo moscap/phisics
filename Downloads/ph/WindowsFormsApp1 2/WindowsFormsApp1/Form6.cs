@@ -213,13 +213,11 @@ namespace WindowsFormsApp1
             SolidBrush white_brush = new SolidBrush(Color.WhiteSmoke);
             SolidBrush red_brush = new SolidBrush(Color.Red);
             SolidBrush black_brush = new SolidBrush(Color.Black);
-            SolidBrush green_brush = new SolidBrush(Color.LightGreen);
+            SolidBrush green_brush = new SolidBrush(Color.Red);
             SolidBrush yellow_brush = new SolidBrush(Color.Yellow);
             Pen green_pen = new Pen(Color.LightGreen, 3);
 
             graphics.FillRectangle(white_brush, moving_length);
-            mirror_graph.FillRectangle(white_brush, new Rectangle(-base_x / 10, (int)(-base_y / 1.5), base_x / 5, (int)(base_y * 1.5)));
-            graphics.FillRectangle(white_brush, f_line);
             graphics.FillRectangle(white_brush, s_line);
             moving_length = new Rectangle(tableLayoutPanel3.Width * 8 / 9 - (int)(2.3 * tableLayoutPanel3.Width / 9 * tic / NumOfPoints)
                 , moving_length.Top, moving_length.Width, moving_length.Height);
@@ -228,8 +226,6 @@ namespace WindowsFormsApp1
             ser.Points.AddXY(x[tic], Y_c[tic].Re / koef);
 
             graphics.FillRectangle(red_brush, moving_length);
-            graphics.FillRectangle(green_brush, f_s_line);
-            graphics.DrawRectangle(green_pen, f_line);
             graphics.DrawRectangle(green_pen, s_line);
 
             if (!sample.IsEmpty)
@@ -238,27 +234,6 @@ namespace WindowsFormsApp1
             }
             mirror_graph.FillRectangle(black_brush, new Rectangle(-base_x / 10, (int)(-base_y / 1.5), base_x / 5, (int)(base_y * 1.5)));
 
-        }
-
-        private void clear_rays()
-        {
-            int base_x = tableLayoutPanel3.Width / 9; // единицы измерения длинны
-            int base_y = tableLayoutPanel3.Height / 9; // единицы измерения длинны
-            Graphics graphics = tableLayoutPanel3.CreateGraphics();
-
-            SolidBrush white_brush = new SolidBrush(Color.WhiteSmoke);
-            SolidBrush black_brush = new SolidBrush(Color.Black);
-            Pen white_pen = new Pen(Color.WhiteSmoke, 3);
-
-            graphics.FillRectangle(white_brush, f_s_line);
-            graphics.DrawRectangle(white_pen, f_line);
-            graphics.DrawRectangle(white_pen, s_line);
-            mirror_graph.FillRectangle(black_brush, new Rectangle(-base_x / 10, (int)(-base_y / 1.5), base_x / 5, (int)(base_y * 1.5)));
-            if (!sample.IsEmpty)
-            {
-                SolidBrush yellow_brush = new SolidBrush(Color.Yellow);
-                graphics.FillRectangle(yellow_brush, sample);
-            }
         }
 
         private void timer1_Tick(object sender, EventArgs e)
@@ -320,16 +295,62 @@ namespace WindowsFormsApp1
             SolidBrush blue_brush = new SolidBrush(Color.Blue);
             SolidBrush red_brush = new SolidBrush(Color.Red);
             Pen green_pen = new Pen(Color.DarkGreen, 3);
+
+            Pen red_pen = new Pen(Color.Red, 7);
+            Pen r_pen = new Pen(Color.Red, 3);
+
+            red_pen.StartCap = System.Drawing.Drawing2D.LineCap.ArrowAnchor;
+
             int base_x = tableLayoutPanel3.Width / 9; // единицы измерения длинны
             int base_y = tableLayoutPanel3.Height / 9; // единицы измерения длинны
+
+            Point p1 = new Point(4 * base_x, 8 * base_y - base_y / 3);
+            Point p2 = new Point(5 * base_x, 8 * base_y - base_y / 3);
+            Point p3 = new Point((int)(4.5 * base_x), (int)(8.2 * base_y));
+            Point[] points = new Point[] { p1, p2, p3 };
+            graphics.FillPolygon(blue_brush, points);
+
+            Point l1 = new Point((int)(4 * base_x), (int)(2.4 * base_y));
+            Point l2 = new Point((int)(4 * base_x), 3 * base_y);
+            Point l3 = new Point((int)(5 * base_x), (int)(2.4 * base_y));
+            Point l4 = new Point((int)(5 * base_x), (int)(3 * base_y));
+            Point l11 = new Point((int)(4 * base_x), (int)(6 * base_y));
+            Point l21 = new Point((int)(4 * base_x), (int)(6.6 * base_y));
+            Point l31 = new Point((int)(5 * base_x), (int)(6 * base_y));
+            Point l41 = new Point((int)(5 * base_x), (int)(6.6 * base_y));
+            Point l12 = new Point((int)(2.9 * base_x), 5 * base_y);
+            Point l22 = new Point((int)(3.5 * base_x), 5 * base_y);
+            Point l13 = new Point((int)(5 * base_x), 5 * base_y);
+            Point l23 = new Point((int)(5.6 * base_x), 5 * base_y);
+            Point l33 = new Point((int)(5 * base_x), (int)(4 * base_y));
+            Point l43 = new Point((int)(5.6 * base_x), (int)(4 * base_y));
+
+
+
+
+            graphics.DrawLine(red_pen, l1, l2);
+            graphics.DrawLine(red_pen, l4, l3);
+            graphics.DrawLine(red_pen, l21, l11);
+            graphics.DrawLine(red_pen, l41, l31);
+            graphics.DrawLine(red_pen, l22, l12);
+            graphics.DrawLine(red_pen, l13, l23);
+            graphics.DrawLine(red_pen, l43, l33);
+
+            f_line = new Rectangle((int)(base_x * 4.5) - 3, (int)(base_y * 6 / 5.0) + 1, 7, (int)(8 * base_y - base_y / 3) - (int)(base_y * 6 / 5.0) - 3);
+            f_s_line = new Rectangle(base_x * 21 / 10, (int)(base_y * 4.5), (int)(base_x * 4.5) - base_x * 21 / 10, 3);
+            moving_length = new Rectangle(8 * base_x, 4 * base_y, base_x / 5, base_y);
+            s_line = new Rectangle((int)(base_x * 4.5), (int)(base_y * 4.5) - 3, moving_length.Left - (int)(base_x * 4.5) - 2, 7);
+            graphics.DrawRectangle(r_pen, f_line);
+            graphics.FillRectangle(red_brush, f_s_line);
+            graphics.DrawRectangle(r_pen, s_line);
+
             graphics.DrawRectangle(green_pen, new Rectangle(1, base_y - 4, base_x * 9 - 2, base_y * 8 + 6));
             graphics.FillRectangle(black_brush, new Rectangle(4 * base_x, base_y, base_x, base_y / 5));
-            graphics.FillRectangle(blue_brush, new Rectangle(4 * base_x, 8 * base_y - base_y / 5, base_x, base_y / 5));
+            graphics.FillRectangle(blue_brush, new Rectangle(4 * base_x, 8 * base_y, base_x, base_y / 5));
             graphics.FillRectangle(black_brush, new Rectangle(base_x, 4 * base_y, base_x, base_y));
             graphics.FillRectangle(red_brush, new Rectangle(2 * base_x, 4 * base_y + (int)(base_y * 0.4), base_x / 10, base_y / 5));
             graphics.FillRectangle(red_brush, new Rectangle(8 * base_x, 4 * base_y, base_x / 5, base_y));
-            f_line = new Rectangle((int)(base_x * 4.5) - 3, (int)(base_y * 6 / 5.0) + 1, 7, (int)(8 * base_y - base_y / 5) - (int)(base_y * 6 / 5.0) - 3);
-            f_s_line = new Rectangle(base_x * 21 / 10, (int)(base_y * 4.5), (int)(base_x * 4.5) - base_x * 21 / 10, 3);
+
             graphics.TranslateTransform((int)(base_x * 4.5), (int)(base_y * 4.5));
             graphics.RotateTransform(45);
             graphics.FillRectangle(black_brush, new Rectangle(-base_x / 10, (int)(-base_y / 1.5), base_x / 5, (int)(base_y * 1.5)));
