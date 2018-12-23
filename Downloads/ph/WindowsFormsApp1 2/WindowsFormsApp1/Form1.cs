@@ -236,14 +236,14 @@ namespace WindowsFormsApp1
             SolidBrush red_brush = new SolidBrush(Color.Red);
             SolidBrush black_brush = new SolidBrush(Color.Black);
             SolidBrush green_brush = new SolidBrush(Color.LightGreen);
-            SolidBrush yellow_brush = new SolidBrush(Color.Yellow);
-            Pen green_pen = new Pen(Color.LightGreen, 3);
+            SolidBrush yellow_brush = new SolidBrush(Color.LightGray);
+            Pen green_pen = new Pen(Color.Red, 3);
 
             graphics.FillRectangle(white_brush, moving_length);
             mirror_graph.FillRectangle(white_brush, new Rectangle(-base_x / 10, (int)(-base_y / 1.5), base_x / 5, (int)(base_y * 1.5)));
             graphics.FillRectangle(white_brush, f_line);
             graphics.FillRectangle(white_brush, s_line);
-            moving_length = new Rectangle(tableLayoutPanel3.Width * 8 / 9 - (int)(tableLayoutPanel3.Width / 9 * tic / NumOfPoints)
+            moving_length = new Rectangle(tableLayoutPanel3.Width * 8 / 9 - (int)(2.3 * tableLayoutPanel3.Width / 9 * tic / NumOfPoints)
                 , moving_length.Top, moving_length.Width, moving_length.Height);
             s_line = new Rectangle((int)(base_x * 4.5), (int)(base_y * 4.5) - 3, moving_length.Left - (int)(base_x * 4.5) - 2, 7);
 

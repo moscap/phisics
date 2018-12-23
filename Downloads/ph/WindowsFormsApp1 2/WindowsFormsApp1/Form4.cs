@@ -144,7 +144,7 @@ namespace WindowsFormsApp1
                 chart2.ChartAreas[0].AxisX.TitleFont.Style, chart2.ChartAreas[0].AxisX.TitleFont.Unit);
 
             chart3.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.Bright;
-            chart3.ChartAreas[0].AxisX.LabelStyle.Format = "{F3}";
+            chart3.ChartAreas[0].AxisX.LabelStyle.Format = "{F1}";
             chart3.ChartAreas[0].AxisX.Title = "мкм";
             chart3.ChartAreas[0].AxisX.TitleFont = new Font(chart3.ChartAreas[0].AxisX.TitleFont.Name, 14,
                 chart3.ChartAreas[0].AxisX.TitleFont.Style, chart3.ChartAreas[0].AxisX.TitleFont.Unit);
@@ -209,7 +209,7 @@ namespace WindowsFormsApp1
             chart3.ChartAreas[0].AxisX.Minimum = XStart * 1000;
             chart3.ChartAreas[0].AxisY.Maximum = 1.2;
             chart3.ChartAreas[0].AxisY.Minimum = 0;
-            ser.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            ser.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Point;
             // ser.Bubb
             ser.MarkerSize = 4;
             ser.MarkerStyle = System.Windows.Forms.DataVisualization.Charting.MarkerStyle.Circle;
@@ -355,7 +355,7 @@ namespace WindowsFormsApp1
             chart2.Series.Clear();
             chart3.Series.Clear();
             ser = chart3.Series.Add("Acorr");
-            ser.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
+            ser.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Point;
             ser.MarkerSize = 6;
             ser.MarkerStyle = System.Windows.Forms.DataVisualization.Charting.MarkerStyle.Circle;
             ser.BorderWidth = 2;
