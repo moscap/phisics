@@ -89,7 +89,8 @@
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(459, 92);
             this.button1.TabIndex = 1;
-            this.button1.Text = "Влияние характеристик спектрометра \r\nна солнечный спектр\r\n\r\n";
+            this.button1.Text = "Влияние характеристик спектрометра \r\nна измерение солнечного спектра\r\n\r\n\r\n";
+            this.button1.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
@@ -135,7 +136,7 @@
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(145, 31);
             this.button4.TabIndex = 0;
-            this.button4.Text = "Выход";
+            this.button4.Text = "Меню";
             this.button4.UseVisualStyleBackColor = true;
             this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
@@ -143,8 +144,10 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.tableLayoutPanel1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "Form5";
             this.Text = "Form5";
             this.tableLayoutPanel1.ResumeLayout(false);

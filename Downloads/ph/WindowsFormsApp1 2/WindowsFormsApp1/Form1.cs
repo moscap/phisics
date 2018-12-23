@@ -119,8 +119,8 @@ namespace WindowsFormsApp1
                 chart2.ChartAreas[0].AxisX.TitleFont.Style, chart2.ChartAreas[0].AxisX.TitleFont.Unit);
 
             chart3.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.Bright;
-            chart3.ChartAreas[0].AxisX.LabelStyle.Format = "{F3}";
-            chart3.ChartAreas[0].AxisX.Title = "см";
+            chart3.ChartAreas[0].AxisX.LabelStyle.Format = "{F1}";
+            chart3.ChartAreas[0].AxisX.Title = "мкм";
             chart3.ChartAreas[0].AxisX.TitleFont = new Font(chart3.ChartAreas[0].AxisX.TitleFont.Name, 14,
                 chart3.ChartAreas[0].AxisX.TitleFont.Style, chart3.ChartAreas[0].AxisX.TitleFont.Unit);
 
@@ -175,6 +175,7 @@ namespace WindowsFormsApp1
 
         private void button2_Click_1(object sender, EventArgs e)
         {
+            Graphics graphics = tableLayoutPanel3.CreateGraphics();
             chart2.Titles[0].Visible = false;
             chart1.Series.Clear();
             chart2.Series.Clear();
@@ -197,8 +198,8 @@ namespace WindowsFormsApp1
             graphics.FillRectangle(red_brush, moving_length);
             chart3.Series.Clear();
             ser = chart3.Series.Add("New plot");
-            chart3.ChartAreas[0].AxisX.Maximum = XEnd;
-            chart3.ChartAreas[0].AxisX.Minimum = XStart;
+            chart3.ChartAreas[0].AxisX.Maximum = XEnd * 1000;
+            chart3.ChartAreas[0].AxisX.Minimum = XStart * 1000;
             chart3.ChartAreas[0].AxisY.Maximum = 1.2;
             chart3.ChartAreas[0].AxisY.Minimum = 0;
             ser.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
@@ -214,10 +215,14 @@ namespace WindowsFormsApp1
             double buf;
             if (textBox7.Text.Length == 0) return;
             else if (!double.TryParse(textBox7.Text, out buf)) return;
-            if (buf <= 0)
+            if (buf <= 1000)
             {
-                textBox6.Text = (20).ToString();
-                buf = 20;
+                textBox7.Text = (1000).ToString();
+                buf = 1000;
+            } else if(buf > 3500)
+            {
+                textBox7.Text = (3500).ToString();
+                buf = 3500;
             }
             omega_G = buf;
             button1.Enabled = false;
@@ -235,7 +240,7 @@ namespace WindowsFormsApp1
             SolidBrush white_brush = new SolidBrush(Color.WhiteSmoke);
             SolidBrush red_brush = new SolidBrush(Color.Red);
             SolidBrush black_brush = new SolidBrush(Color.Black);
-            SolidBrush green_brush = new SolidBrush(Color.LightGreen);
+            SolidBrush green_brush = new SolidBrush(Color.Red);
             SolidBrush yellow_brush = new SolidBrush(Color.LightGray);
             Pen green_pen = new Pen(Color.Red, 3);
 
@@ -247,7 +252,7 @@ namespace WindowsFormsApp1
                 , moving_length.Top, moving_length.Width, moving_length.Height);
             s_line = new Rectangle((int)(base_x * 4.5), (int)(base_y * 4.5) - 3, moving_length.Left - (int)(base_x * 4.5) - 2, 7);
 
-            ser.Points.AddXY(x[tic], Y_c[tic].Re / koef);
+            ser.Points.AddXY(x[tic] * 1000, Y_c[tic].Re / koef);
 
             graphics.FillRectangle(red_brush, moving_length);
             graphics.FillRectangle(green_brush, f_s_line);
@@ -305,12 +310,12 @@ namespace WindowsFormsApp1
                 {
                     button6.Enabled = false;
                     button4.Enabled = true;
-                    clear_rays();
+                    //clear_rays();
                 }
                 else
                 {
                     button1.Enabled = true;
-                    clear_rays();
+                    //clear_rays();
                 }
             }
         }
@@ -320,10 +325,15 @@ namespace WindowsFormsApp1
             double buf;
             if (textBox5.Text.Length == 0) return;
             else if (!double.TryParse(textBox5.Text, out buf)) return;
-            if (buf <= 0)
+            if (buf <= 100)
             {
-                textBox5.Text = (60).ToString();
-                buf = 60;
+                textBox5.Text = (100).ToString();
+                buf = 100;
+            }
+            else if (buf > 6000)
+            {
+                textBox5.Text = (6000).ToString();
+                buf = 6000;
             }
             sigma_G = buf / 6;
             button1.Enabled = false;
@@ -334,10 +344,15 @@ namespace WindowsFormsApp1
             double buf;
             if (textBox6.Text.Length == 0) return;
             else if (!double.TryParse(textBox6.Text, out buf)) return;
-            if (buf <= 0)
+            if (buf <= 100)
             {
-                textBox6.Text = (60).ToString();
-                buf = 60;
+                textBox6.Text = (100).ToString();
+                buf = 100;
+            }
+            else if (buf > 6000)
+            {
+                textBox6.Text = (6000).ToString();
+                buf = 6000;
             }
             sigma_K = buf / 6;
             button1.Enabled = false;
@@ -348,10 +363,15 @@ namespace WindowsFormsApp1
             double buf;
             if (textBox8.Text.Length == 0) return;
             else if (!double.TryParse(textBox8.Text, out buf)) return;
-            if (buf <= 0)
+            if (buf <= 1000)
             {
-                textBox8.Text = (30).ToString();
-                buf = 30;
+                textBox8.Text = (1000).ToString();
+                buf = 1000;
+            }
+            else if (buf > 3500)
+            {
+                textBox8.Text = (3500).ToString();
+                buf = 3500;
             }
             omega_K = buf;
             button1.Enabled = false;
@@ -364,8 +384,10 @@ namespace WindowsFormsApp1
             SolidBrush black_brush = new SolidBrush(Color.Black);
             SolidBrush blue_brush = new SolidBrush(Color.Blue);
             SolidBrush red_brush = new SolidBrush(Color.Red);
+            Pen green_pen = new Pen(Color.DarkGreen, 3);
             int base_x = tableLayoutPanel3.Width / 9; // единицы измерения длинны
             int base_y = tableLayoutPanel3.Height / 9; // единицы измерения длинны
+            graphics.DrawRectangle(green_pen, new Rectangle(1, base_y - 4, base_x * 9 - 2, base_y * 8 + 6));
             graphics.FillRectangle(black_brush, new Rectangle(4 * base_x, base_y, base_x, base_y / 5));
             graphics.FillRectangle(blue_brush, new Rectangle(4 * base_x, 8 * base_y - base_y / 5, base_x, base_y / 5));
             graphics.FillRectangle(black_brush, new Rectangle(base_x, 4 * base_y, base_x, base_y));
@@ -386,6 +408,7 @@ namespace WindowsFormsApp1
         private void button6_Click(object sender, EventArgs e)
         {
             //button6.Enabled = false;
+            Graphics graphics = tableLayoutPanel3.CreateGraphics();
             chart2.Titles[0].Visible = false;
             Functions.complex_re_paint(chart1, x_w, G, 1, sigma_G, omega_G, "G");
             SolidBrush smoke_brush = new SolidBrush(Color.WhiteSmoke);
@@ -393,7 +416,7 @@ namespace WindowsFormsApp1
             {
                 graphics.FillRectangle(smoke_brush, moving_length);
             }
-            SolidBrush yellow_brush = new SolidBrush(Color.Yellow);
+            SolidBrush yellow_brush = new SolidBrush(Color.LightGray);
             int base_x = tableLayoutPanel3.Width / 9; // единицы измерения длинны
             int base_y = tableLayoutPanel3.Height / 9; // единицы измерения длинны
             sample = new Rectangle(4 * base_x, 6 * base_y, base_x, base_y);
@@ -405,7 +428,7 @@ namespace WindowsFormsApp1
             ser.BorderWidth = 2;
             Initialize_Filled();
             tic = 0;
-            timer1.Enabled = true;
+            timer1.Enabled = true;            
         }
 
         private void button4_Click(object sender, EventArgs e)

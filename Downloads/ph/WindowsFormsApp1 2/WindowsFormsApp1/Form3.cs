@@ -139,8 +139,8 @@ namespace WindowsFormsApp1
                 chart2.ChartAreas[0].AxisY.TitleFont.Style, chart2.ChartAreas[0].AxisY.TitleFont.Unit);
 
             chart3.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.Bright;
-            chart3.ChartAreas[0].AxisX.LabelStyle.Format = "{F2}";
-            chart3.ChartAreas[0].AxisX.Title = "см";
+            chart3.ChartAreas[0].AxisX.LabelStyle.Format = "{F1}";
+            chart3.ChartAreas[0].AxisX.Title = "мкм";
             chart3.ChartAreas[0].AxisX.TitleFont = new Font(chart3.ChartAreas[0].AxisX.TitleFont.Name, 14,
                 chart3.ChartAreas[0].AxisX.TitleFont.Style, chart3.ChartAreas[0].AxisX.TitleFont.Unit);
 
@@ -193,8 +193,8 @@ namespace WindowsFormsApp1
             chart3.Series.Clear();
             ser = chart3.Series.Add("New plot");
             ser.BorderWidth = 2;
-            chart3.ChartAreas[0].AxisX.Maximum = XEnd;
-            chart3.ChartAreas[0].AxisX.Minimum = XStart;
+            chart3.ChartAreas[0].AxisX.Maximum = XEnd * 1000;
+            chart3.ChartAreas[0].AxisX.Minimum = XStart * 1000;
             chart3.ChartAreas[0].AxisY.Maximum = 1.2;
             chart3.ChartAreas[0].AxisY.Minimum = 0;
             ser.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
@@ -215,9 +215,9 @@ namespace WindowsFormsApp1
             SolidBrush white_brush = new SolidBrush(Color.WhiteSmoke);
             SolidBrush red_brush = new SolidBrush(Color.Red);
             SolidBrush black_brush = new SolidBrush(Color.Black);
-            SolidBrush green_brush = new SolidBrush(Color.LightGreen);
-            SolidBrush yellow_brush = new SolidBrush(Color.Yellow);
-            Pen green_pen = new Pen(Color.LightGreen, 3);
+            SolidBrush green_brush = new SolidBrush(Color.Red);
+            SolidBrush yellow_brush = new SolidBrush(Color.LightGray);
+            Pen green_pen = new Pen(Color.Red, 3);
 
             graphics.FillRectangle(white_brush, moving_length);
             mirror_graph.FillRectangle(white_brush, new Rectangle(-base_x / 10, (int)(-base_y / 1.5), base_x / 5, (int)(base_y * 1.5)));
@@ -227,7 +227,7 @@ namespace WindowsFormsApp1
                 , moving_length.Top, moving_length.Width, moving_length.Height);
             s_line = new Rectangle((int)(base_x * 4.5), (int)(base_y * 4.5) - 3, moving_length.Left - (int)(base_x * 4.5) - 2, 7);
 
-            ser.Points.AddXY(x[tic], Y_c[tic].Re / koef);
+            ser.Points.AddXY(x[tic] * 1000, Y_c[tic].Re / koef);
 
             graphics.FillRectangle(red_brush, moving_length);
             graphics.FillRectangle(green_brush, f_s_line);
@@ -277,16 +277,16 @@ namespace WindowsFormsApp1
                 {
                     button6.Enabled = false;
                     button4.Enabled = true;
-                    clear_rays();
-                    chart3.ChartAreas[0].AxisX.Maximum = 0.03;
-                    chart3.ChartAreas[0].AxisX.Minimum = -0.03;
+                    //clear_rays();
+                    chart3.ChartAreas[0].AxisX.Maximum = 30 ;
+                    chart3.ChartAreas[0].AxisX.Minimum = -30;
                 }
                 else
                 {
                     button1.Enabled = true;
-                    clear_rays();
-                    chart3.ChartAreas[0].AxisX.Maximum = 0.03;
-                    chart3.ChartAreas[0].AxisX.Minimum = -0.03;
+                    //clear_rays();
+                    chart3.ChartAreas[0].AxisX.Maximum = 30;
+                    chart3.ChartAreas[0].AxisX.Minimum = -30;
                 }
             }
         }
@@ -298,8 +298,10 @@ namespace WindowsFormsApp1
             SolidBrush black_brush = new SolidBrush(Color.Black);
             SolidBrush blue_brush = new SolidBrush(Color.Blue);
             SolidBrush red_brush = new SolidBrush(Color.Red);
+            Pen green_pen = new Pen(Color.DarkGreen, 3);
             int base_x = tableLayoutPanel3.Width / 9; // единицы измерения длинны
             int base_y = tableLayoutPanel3.Height / 9; // единицы измерения длинны
+            graphics.DrawRectangle(green_pen, new Rectangle(1, base_y - 4, base_x * 9 - 2, base_y * 8 + 6));
             graphics.FillRectangle(black_brush, new Rectangle(4 * base_x, base_y, base_x, base_y / 5));
             graphics.FillRectangle(blue_brush, new Rectangle(4 * base_x, 8 * base_y - base_y / 5, base_x, base_y / 5));
             graphics.FillRectangle(black_brush, new Rectangle(base_x, 4 * base_y, base_x, base_y));
@@ -321,9 +323,10 @@ namespace WindowsFormsApp1
         private void button6_Click(object sender, EventArgs e)
         {
             //button6.Enabled = false;
+            Graphics graphics = tableLayoutPanel3.CreateGraphics();
             chart2.Titles[0].Visible = false;
             Functions.complex_re_paint(chart1, x_w, G, 1, sigma_G, omega_G, "G");
-            SolidBrush yellow_brush = new SolidBrush(Color.Yellow);
+            SolidBrush yellow_brush = new SolidBrush(Color.LightGray);
             int base_x = tableLayoutPanel3.Width / 9; // единицы измерения длинны
             int base_y = tableLayoutPanel3.Height / 9; // единицы измерения длинны
             sample = new Rectangle(4 * base_x, 6 * base_y, base_x, base_y);
@@ -335,14 +338,14 @@ namespace WindowsFormsApp1
             ser.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
             Initialize_Filled();
             tic = 0;
-            chart3.ChartAreas[0].AxisX.Maximum = XEnd;
-            chart3.ChartAreas[0].AxisX.Minimum = XStart;
+            chart3.ChartAreas[0].AxisX.Maximum = XEnd * 1000;
+            chart3.ChartAreas[0].AxisX.Minimum = XStart * 1000;
             timer1.Enabled = true;
         }
 
         private void button4_Click(object sender, EventArgs e)
         {
-            chart2.Titles[0].Text = "Образец + источник";
+            chart2.Titles[0].Text = "Вода + источник";
             chart2.Titles[0].Visible = true;
             Functions.complex_re_paint(chart2, x_w, G_K, 1, sigma_G, omega_G, "GK");
             button4.Enabled = false;
@@ -351,7 +354,7 @@ namespace WindowsFormsApp1
 
         private void button3_Click(object sender, EventArgs e)
         {
-            chart2.Titles[0].Text = "Спектр пропускания образца";
+            chart2.Titles[0].Text = "Спектр пропускания воды";
             Functions.complex_re_paint(chart1, x_w, G_K, 1, sigma_G, omega_G, "GK");
             chart2.Series.Clear();
             Functions.complex_re_paint(chart2, x_w, K, 1, 1, 1, "K");

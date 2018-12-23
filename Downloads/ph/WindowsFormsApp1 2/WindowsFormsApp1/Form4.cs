@@ -57,8 +57,8 @@ namespace WindowsFormsApp1
                 NumOfPoints);
             for (int i = 0; i < NumOfPoints; i++)
             {
-                K_n[i] = new Complex(1 - Math.Max(Functions.func_gauss(x_w_n[i], sigma_K, omega_K),
-                  0.7 * Functions.func_gauss(x_w_n[i], sigma_K, omega_K + 150)), 0);
+                K_n[i] = new Complex(1 - Math.Max(0.9 * Functions.func_gauss(x_w_n[i], sigma_K, omega_K),
+                  0.65 * Functions.func_gauss(x_w_n[i], sigma_K, omega_K + 150)), 0);
             }
 
             
@@ -104,8 +104,8 @@ namespace WindowsFormsApp1
             G_K = new Complex[NumOfPoints];
             for (int i = 0; i < NumOfPoints; i++)
             {
-                K[i] = new Complex(1 - Math.Max(Functions.func_gauss(x_w[i], sigma_K, omega_K),
-                  0.7 * Functions.func_gauss(x_w[i], sigma_K, omega_K + 150)), 0);
+                K[i] = new Complex(1 - Math.Max(0.9 * Functions.func_gauss(x_w[i], sigma_K, omega_K),
+                  0.65 * Functions.func_gauss(x_w[i], sigma_K, omega_K + 150)), 0);
             }
             for (int i = 0; i < NumOfPoints; i++)
             {
@@ -182,6 +182,8 @@ namespace WindowsFormsApp1
 
         private void button2_Click_1(object sender, EventArgs e)
         {
+            trackBar1.Enabled = false;
+            trackBar2.Enabled = false;
             chart2.Titles[0].Visible = false;
             chart1.Series.Clear();
             chart2.Series.Clear();
@@ -211,7 +213,7 @@ namespace WindowsFormsApp1
             chart3.ChartAreas[0].AxisY.Minimum = 0;
             ser.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Point;
             // ser.Bubb
-            ser.MarkerSize = 4;
+            ser.MarkerSize = 5;
             ser.MarkerStyle = System.Windows.Forms.DataVisualization.Charting.MarkerStyle.Circle;
             ser.BorderWidth = 2;
             Initialize_Empty();
@@ -234,8 +236,8 @@ namespace WindowsFormsApp1
             SolidBrush red_brush = new SolidBrush(Color.Red);
             SolidBrush black_brush = new SolidBrush(Color.Black);
             SolidBrush green_brush = new SolidBrush(Color.LightGreen);
-            SolidBrush yellow_brush = new SolidBrush(Color.Yellow);
-            Pen green_pen = new Pen(Color.LightGreen, 3);
+            SolidBrush yellow_brush = new SolidBrush(Color.LightGray);
+            Pen green_pen = new Pen(Color.Red, 3);
 
             graphics.FillRectangle(white_brush, moving_length);
             mirror_graph.FillRectangle(white_brush, new Rectangle(-base_x / 10, (int)(-base_y / 1.5), base_x / 5, (int)(base_y * 1.5)));
@@ -247,10 +249,12 @@ namespace WindowsFormsApp1
 
             ser.Points.AddXY(x[tic] * 1000, Y_c[tic].Re / koef);
 
+            mirror_graph.FillRectangle(black_brush, new Rectangle(-base_x / 10, (int)(-base_y / 1.5), base_x / 5, (int)(base_y * 1.5)));
+
             graphics.FillRectangle(red_brush, moving_length);
+            graphics.DrawRectangle(green_pen, s_line);
             graphics.FillRectangle(green_brush, f_s_line);
             graphics.DrawRectangle(green_pen, f_line);
-            graphics.DrawRectangle(green_pen, s_line);
 
             if (!sample.IsEmpty)
             {
@@ -276,7 +280,7 @@ namespace WindowsFormsApp1
             mirror_graph.FillRectangle(black_brush, new Rectangle(-base_x / 10, (int)(-base_y / 1.5), base_x / 5, (int)(base_y * 1.5)));
             if (!sample.IsEmpty)
             {
-                SolidBrush yellow_brush = new SolidBrush(Color.Yellow);
+                SolidBrush yellow_brush = new SolidBrush(Color.Gray);
 
                 graphics.FillRectangle(yellow_brush, sample);
             }
@@ -299,13 +303,15 @@ namespace WindowsFormsApp1
                 {
                     button6.Enabled = false;
                     button4.Enabled = true;
-                    clear_rays();
+                    //clear_rays();
                 }
                 else
                 {
                     button1.Enabled = true;
-                    clear_rays();
+                    //clear_rays();
                 }
+                trackBar1.Enabled = true;
+                trackBar2.Enabled = true;
             }
         }
     
@@ -317,10 +323,10 @@ namespace WindowsFormsApp1
             SolidBrush black_brush = new SolidBrush(Color.Black);
             SolidBrush blue_brush = new SolidBrush(Color.Blue);
             SolidBrush red_brush = new SolidBrush(Color.Red);
-            //Pen green_pen = new Pen(Color.Green, 1);
+            Pen green_pen = new Pen(Color.DarkGreen, 3);
             int base_x = tableLayoutPanel3.Width / 9; // единицы измерения длинны
             int base_y = tableLayoutPanel3.Height / 9; // единицы измерения длинны
-            //graphics.DrawRectangle(green_pen, new Rectangle(0, base_y, 9 * base_x, 8 * base_y));
+            graphics.DrawRectangle(green_pen, new Rectangle(1, base_y - 4, base_x * 9 - 2, base_y * 8 + 6));
             graphics.FillRectangle(black_brush, new Rectangle(4 * base_x, base_y, base_x, base_y / 5));
             graphics.FillRectangle(blue_brush, new Rectangle(4 * base_x, 8 * base_y - base_y / 5, base_x, base_y / 5));
             graphics.FillRectangle(black_brush, new Rectangle(base_x, 4 * base_y, base_x, base_y));
@@ -340,14 +346,17 @@ namespace WindowsFormsApp1
 
         private void button6_Click(object sender, EventArgs e)
         {
+            trackBar1.Enabled = false;
+            trackBar2.Enabled = false;
             chart2.Titles[0].Visible = false;
+            Graphics graphics = tableLayoutPanel3.CreateGraphics();
             Functions.complex_re_paint_2(chart1, x_w, G, 1, sigma_G, omega_G, "G");
             SolidBrush smoke_brush = new SolidBrush(Color.WhiteSmoke);
             if (!moving_length.IsEmpty)
             {
                 graphics.FillRectangle(smoke_brush, moving_length);
             }
-            SolidBrush yellow_brush = new SolidBrush(Color.Yellow);
+            SolidBrush yellow_brush = new SolidBrush(Color.LightGray);
             int base_x = tableLayoutPanel3.Width / 9; // единицы измерения длинны
             int base_y = tableLayoutPanel3.Height / 9; // единицы измерения длинны
             sample = new Rectangle(4 * base_x, 6 * base_y, base_x, base_y);
@@ -356,7 +365,7 @@ namespace WindowsFormsApp1
             chart3.Series.Clear();
             ser = chart3.Series.Add("Acorr");
             ser.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Point;
-            ser.MarkerSize = 6;
+            ser.MarkerSize = 5;
             ser.MarkerStyle = System.Windows.Forms.DataVisualization.Charting.MarkerStyle.Circle;
             ser.BorderWidth = 2;
             Initialize_Filled();
@@ -385,8 +394,8 @@ namespace WindowsFormsApp1
 
         private void trackBar1_Scroll(object sender, EventArgs e)
         {
-            double step = 1.0 / (18000 - trackBar1.Value);
-            label1.Text = "Шаг:\n" + step * 1000 + "мкм";
+            double step = 1.0 / ((11 - trackBar1.Value) * 2000);
+            label7.Text = String.Format("{0:0.00}", step * 1000) + "мкм";
             NumOfPoints = (int)((XEnd - XStart) / step);
             x = ArrayBuilder.CreateVector(XStart, XEnd, NumOfPoints);
             button1.Enabled = false;
@@ -397,8 +406,8 @@ namespace WindowsFormsApp1
 
         private void trackBar2_Scroll(object sender, EventArgs e)
         {
-            double width = trackBar2.Value / 2000.0;
-            label4.Text = "Ширина:\n" + width * 2000 + "мкм";
+            double width = trackBar2.Value / 400.0;
+            label8.Text = width * 2000 + "мкм";
             XEnd = width;
             XStart = -width;
             NumOfPoints = (int)((XEnd - XStart) / (1.0 / (18000 - trackBar1.Value)));

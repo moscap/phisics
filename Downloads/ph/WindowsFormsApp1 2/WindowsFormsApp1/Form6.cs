@@ -275,7 +275,8 @@ namespace WindowsFormsApp1
             {
                 timer1.Enabled = false;
                 button1.Enabled = true;
-                clear_rays();
+                //clear_rays();
+                trackBar1.Enabled = true;
             }
         }
 
@@ -318,8 +319,10 @@ namespace WindowsFormsApp1
             SolidBrush black_brush = new SolidBrush(Color.Black);
             SolidBrush blue_brush = new SolidBrush(Color.Blue);
             SolidBrush red_brush = new SolidBrush(Color.Red);
+            Pen green_pen = new Pen(Color.DarkGreen, 3);
             int base_x = tableLayoutPanel3.Width / 9; // единицы измерения длинны
             int base_y = tableLayoutPanel3.Height / 9; // единицы измерения длинны
+            graphics.DrawRectangle(green_pen, new Rectangle(1, base_y - 4, base_x * 9 - 2, base_y * 8 + 6));
             graphics.FillRectangle(black_brush, new Rectangle(4 * base_x, base_y, base_x, base_y / 5));
             graphics.FillRectangle(blue_brush, new Rectangle(4 * base_x, 8 * base_y - base_y / 5, base_x, base_y / 5));
             graphics.FillRectangle(black_brush, new Rectangle(base_x, 4 * base_y, base_x, base_y));
@@ -339,6 +342,7 @@ namespace WindowsFormsApp1
 
         private void button2_Click(object sender, EventArgs e)
         {
+            trackBar1.Enabled = false;
             Graphics graphics = tableLayoutPanel3.CreateGraphics();
             DoubleBuffered = true;
             chart2.Titles[0].Visible = false;

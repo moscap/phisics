@@ -21,9 +21,6 @@ namespace WindowsFormsApp1
         public Form2()
         {
             InitializeComponent();
-            Size resolution = System.Windows.Forms.Screen.PrimaryScreen.Bounds.Size;
-            tableLayoutPanel1.Width = (int)(resolution.Width * (15.0 / 16.0));
-            tableLayoutPanel1.Height = (int)(resolution.Height * (10.0 / 11.0));
         }
         private void Form2_Load(object sender, EventArgs e)
         {
