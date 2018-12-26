@@ -459,6 +459,11 @@ namespace WindowsFormsApp1
             button6.Enabled = false;
         }
 
+        private void chart1_Click(object sender, EventArgs e)
+        {
+
+        }
+
         private void label5_Click(object sender, EventArgs e)
         {
 
