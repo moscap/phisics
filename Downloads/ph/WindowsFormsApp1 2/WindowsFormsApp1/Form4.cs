@@ -198,6 +198,8 @@ namespace WindowsFormsApp1
             {
                 graphics.FillRectangle(smoke_brush, sample);
                 sample = new Rectangle();
+                Pen red_pen = new Pen(Color.Red, 3);
+                graphics.DrawRectangle(red_pen, f_line);
             }
             SolidBrush red_brush = new SolidBrush(Color.Red);
             int base_x = tableLayoutPanel3.Width / 9; // единицы измерения длинны
