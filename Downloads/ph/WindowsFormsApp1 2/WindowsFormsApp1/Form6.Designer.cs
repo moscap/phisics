@@ -130,21 +130,18 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tableLayoutPanel2.ColumnCount = 1;
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 30F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel2.Controls.Add(this.label1, 0, 1);
-            this.tableLayoutPanel2.Controls.Add(this.button1, 0, 3);
             this.tableLayoutPanel2.Controls.Add(this.trackBar1, 0, 0);
+            this.tableLayoutPanel2.Controls.Add(this.button1, 0, 3);
             this.tableLayoutPanel2.Controls.Add(this.button2, 0, 2);
             this.tableLayoutPanel2.Location = new System.Drawing.Point(3, 401);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
-            this.tableLayoutPanel2.RowCount = 6;
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel2.RowCount = 4;
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20.58824F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 30.39216F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 24.5098F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 24.5098F));
             this.tableLayoutPanel2.Size = new System.Drawing.Size(198, 321);
             this.tableLayoutPanel2.TabIndex = 4;
             this.tableLayoutPanel2.Paint += new System.Windows.Forms.PaintEventHandler(this.tableLayoutPanel2_Paint);
@@ -156,12 +153,12 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label1.Location = new System.Drawing.Point(3, 53);
+            this.label1.Location = new System.Drawing.Point(3, 66);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(192, 53);
+            this.label1.Size = new System.Drawing.Size(192, 97);
             this.label1.TabIndex = 33;
             this.label1.Text = "Шаг";
-            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.label1.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             this.label1.Click += new System.EventHandler(this.label1_Click_1);
             // 
             // button1
@@ -170,9 +167,9 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.button1.Location = new System.Drawing.Point(3, 162);
+            this.button1.Location = new System.Drawing.Point(3, 244);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(192, 47);
+            this.button1.Size = new System.Drawing.Size(192, 74);
             this.button1.TabIndex = 25;
             this.button1.Text = "Спектр";
             this.button1.UseVisualStyleBackColor = true;
@@ -188,7 +185,7 @@
             this.trackBar1.Maximum = 20;
             this.trackBar1.Minimum = 1;
             this.trackBar1.Name = "trackBar1";
-            this.trackBar1.Size = new System.Drawing.Size(192, 47);
+            this.trackBar1.Size = new System.Drawing.Size(192, 60);
             this.trackBar1.TabIndex = 31;
             this.trackBar1.Value = 1;
             this.trackBar1.Scroll += new System.EventHandler(this.trackBar1_Scroll);
@@ -199,9 +196,9 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.button2.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.button2.Location = new System.Drawing.Point(3, 109);
+            this.button2.Location = new System.Drawing.Point(3, 166);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(192, 47);
+            this.button2.Size = new System.Drawing.Size(192, 72);
             this.button2.TabIndex = 24;
             this.button2.Text = "Старт";
             this.button2.UseVisualStyleBackColor = true;
@@ -235,6 +232,7 @@
             title2.Name = "Title1";
             title2.Text = "Интерферограмма";
             this.chart3.Titles.Add(title2);
+            this.chart3.Click += new System.EventHandler(this.chart3_Click_1);
             // 
             // tableLayoutPanel3
             // 
@@ -333,6 +331,7 @@
             this.chart1.Size = new System.Drawing.Size(504, 320);
             this.chart1.TabIndex = 11;
             this.chart1.Text = "chart1";
+            this.chart1.Click += new System.EventHandler(this.chart1_Click);
             // 
             // tableLayoutPanel4
             // 

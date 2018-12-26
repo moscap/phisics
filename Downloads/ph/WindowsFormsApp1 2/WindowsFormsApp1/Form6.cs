@@ -26,6 +26,7 @@ namespace WindowsFormsApp1
         double[] x = null;
         double[] x_w = null;
         double[] x_w_full = null;
+        double[] x_wave_length = null;
         Graphics graphics { get; set; }
         Graphics mirror_graph { get; set; }
         Rectangle moving_length { get; set; }
@@ -39,8 +40,10 @@ namespace WindowsFormsApp1
         Complex[] Y_c_n = null;
         double koef { get; set; }
         Complex[] K = null;
-        Complex[] K_full = null;
+        Complex[] K_full = null; // for K_k
+        Complex[] K_full_lambda = null;
         bool FirstTime = true;
+        bool sun_in_wave_num = true;
         // Created full (501) K, x_w_full
         void Whole_Parse()
         {
@@ -63,13 +66,24 @@ namespace WindowsFormsApp1
                 }
             }
             double[] new_x = new double[x_w_full.Length];
+            x_wave_length = new double[x_w_full.Length];
             for (int i = 0; i < K_full.Length; i++)
             {
                 new_x[i] = Math.Pow(10, 7) / x_w_full[i];
             }
-            x_w_full = new_x;
+            x_w_full.CopyTo(x_wave_length, 0);
+            new_x.CopyTo(x_w_full, 0);
+            K_full_lambda = new Complex[K_full.Length];
+            K_full.CopyTo(K_full_lambda, 0);
+            for (int i = 0; i < K_full.Length; i++)
+            {
+                K_full[i] = Complex.Multiply(K_full[i], Math.Pow(x_wave_length[i], 2));
+            }
             for (int i = 0; i <= (x_w_full.Length / 2); i++)
             {
+                //double tmp = x_wave_length[i];
+                //x_wave_length[i] = x_wave_length[x_w_full.Length - i - 1];
+                //x_wave_length[x_w_full.Length - i - 1] = tmp;
                 double tmp = x_w_full[i];
                 x_w_full[i] = x_w_full[x_w_full.Length - i - 1];
                 x_w_full[x_w_full.Length - i - 1] = tmp;
@@ -77,6 +91,8 @@ namespace WindowsFormsApp1
                 K_full[i] = K_full[x_w_full.Length - i - 1];
                 K_full[x_w_full.Length - i - 1] = ctmp;
             }
+            // array with just original values 
+            
             int length_x_w = x_w_full.Length;
             x = ArrayBuilder.CreateVector(
                 -0.5 / ((x_w_full[length_x_w - 1] - x_w_full[0]) / length_x_w),
@@ -171,8 +187,8 @@ namespace WindowsFormsApp1
 
             chart3.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.Bright;
             chart3.ChartAreas[0].Name = "ChartArea0";
-            chart3.ChartAreas[0].AxisX.LabelStyle.Format = "{F3}";
-            chart3.ChartAreas[0].AxisX.Title = "см";
+            chart3.ChartAreas[0].AxisX.LabelStyle.Format = "{F1}";
+            chart3.ChartAreas[0].AxisX.Title = "мкм";
             chart3.ChartAreas[0].AxisX.TitleFont = new Font(chart3.ChartAreas[0].AxisX.TitleFont.Name, 14,
                 chart3.ChartAreas[0].AxisX.TitleFont.Style, chart3.ChartAreas[0].AxisX.TitleFont.Unit);
 
@@ -185,7 +201,7 @@ namespace WindowsFormsApp1
             x_w = x_w_full;
             K = K_full;
             Initialize_Filled();
-            string interv = String.Format("Интервал: {0:0.00000}", XEnd - XStart);
+            string interv = String.Format("Диапазон сканирования:\n {0:0.00} мкм", (XEnd - XStart) * 10000);
             label1.Text = interv;
             FirstTime = false;
             chart1.Titles.Clear();
@@ -215,7 +231,7 @@ namespace WindowsFormsApp1
             SolidBrush black_brush = new SolidBrush(Color.Black);
             SolidBrush green_brush = new SolidBrush(Color.Red);
             SolidBrush yellow_brush = new SolidBrush(Color.Yellow);
-            Pen green_pen = new Pen(Color.LightGreen, 3);
+            Pen green_pen = new Pen(Color.Red, 3);
 
             graphics.FillRectangle(white_brush, moving_length);
             graphics.FillRectangle(white_brush, s_line);
@@ -223,7 +239,7 @@ namespace WindowsFormsApp1
                 , moving_length.Top, moving_length.Width, moving_length.Height);
             s_line = new Rectangle((int)(base_x * 4.5), (int)(base_y * 4.5) - 3, moving_length.Left - (int)(base_x * 4.5) - 2, 7);
 
-            ser.Points.AddXY(x[tic], Y_c[tic].Re / koef);
+            ser.Points.AddXY(x[tic] * 10000, Y_c[tic].Re / koef);
 
             graphics.FillRectangle(red_brush, moving_length);
             graphics.DrawRectangle(green_pen, s_line);
@@ -277,7 +293,7 @@ namespace WindowsFormsApp1
             if (FirstTime != true)
             {
                 Initialize_New_Data();
-                string interv = String.Format("Интервал: {0:0.00000}", XEnd - XStart);
+                string interv = String.Format("Диапазон сканирования:\n {0:0.00} мкм", (XEnd - XStart) * 10000);
                 label1.Text = interv;
             }
         }
@@ -324,9 +340,6 @@ namespace WindowsFormsApp1
             Point l23 = new Point((int)(5.6 * base_x), 5 * base_y);
             Point l33 = new Point((int)(5 * base_x), (int)(4 * base_y));
             Point l43 = new Point((int)(5.6 * base_x), (int)(4 * base_y));
-
-
-
 
             graphics.DrawLine(red_pen, l1, l2);
             graphics.DrawLine(red_pen, l4, l3);
@@ -389,8 +402,8 @@ namespace WindowsFormsApp1
             chart3.Series.Clear();
             ser = chart3.Series.Add("New plot");
             ser.BorderWidth = 2;
-            chart3.ChartAreas[0].AxisX.Maximum = XEnd;
-            chart3.ChartAreas[0].AxisX.Minimum = XStart;
+            chart3.ChartAreas[0].AxisX.Maximum = XEnd * 10000;
+            chart3.ChartAreas[0].AxisX.Minimum = XStart * 10000;
             chart3.ChartAreas[0].AxisY.Maximum = 1.2;
             chart3.ChartAreas[0].AxisY.Minimum = 0;
             ser.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
@@ -435,5 +448,30 @@ namespace WindowsFormsApp1
         {
 
         }
+
+        private void chart1_Click(object sender, EventArgs e)
+        {
+            if (!sun_in_wave_num)
+            {
+                sun_in_wave_num = true;
+                chart1.Series.Clear();
+                chart1.ChartAreas[0].AxisX.Title = "волновое число(см -1)";
+                Functions.complex_re_paint_min_max(chart1, x_w_full, K_full, name: "Sun spectrum wave number");
+            }
+            else
+            {
+                sun_in_wave_num = false;
+                chart1.Series.Clear();
+                chart1.ChartAreas[0].AxisX.Title = "длина волны(нм)";
+                Functions.complex_re_paint_min_max(chart1, x_wave_length, K_full_lambda, name: "Sun spectrum wave length");
+            }
+        }
+
+        private void chart3_Click_1(object sender, EventArgs e)
+        {
+
+        }
     }
 }
+
+
