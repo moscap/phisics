@@ -24,7 +24,13 @@ namespace WindowsFormsApp1
         }
         private void Form2_Load(object sender, EventArgs e)
         {
+            Bitmap bim = new Bitmap("./vmk.png");
+            bim = new Bitmap(bim, pictureBox1.Width, pictureBox1.Height);
+            pictureBox1.Image = bim;
 
+            bim = new Bitmap("./ff.jpeg");
+            bim = new Bitmap(bim, pictureBox2.Width, pictureBox2.Height);
+            pictureBox2.Image = bim;
         }
 
         private void button1_Click(object sender, EventArgs e)
