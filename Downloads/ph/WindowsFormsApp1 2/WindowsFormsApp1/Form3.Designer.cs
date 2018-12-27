@@ -170,6 +170,7 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.chart2.BackColor = System.Drawing.Color.WhiteSmoke;
+            chartArea1.AxisY.LabelStyle.Enabled = false;
             chartArea1.Name = "ChartArea1";
             this.chart2.ChartAreas.Add(chartArea1);
             legend1.Enabled = false;
@@ -293,6 +294,7 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.chart1.BackColor = System.Drawing.Color.WhiteSmoke;
+            chartArea2.AxisY.LabelStyle.Enabled = false;
             chartArea2.Name = "ChartArea1";
             this.chart1.ChartAreas.Add(chartArea2);
             this.tableLayoutPanel1.SetColumnSpan(this.chart1, 2);
@@ -320,6 +322,7 @@
             this.chart3.BackColor = System.Drawing.Color.WhiteSmoke;
             chartArea3.AxisX.LabelAutoFitMaxFontSize = 14;
             chartArea3.AxisX.LabelAutoFitMinFontSize = 10;
+            chartArea3.AxisY.LabelStyle.Enabled = false;
             chartArea3.Name = "ChartArea1";
             this.chart3.ChartAreas.Add(chartArea3);
             legend3.Enabled = false;

@@ -149,6 +149,9 @@ namespace WindowsFormsApp1
             chart3.ChartAreas[0].AxisX.TitleFont = new Font(chart3.ChartAreas[0].AxisX.TitleFont.Name, 14,
                 chart3.ChartAreas[0].AxisX.TitleFont.Style, chart3.ChartAreas[0].AxisX.TitleFont.Unit);
 
+            chart3.ChartAreas[0].AxisY.IntervalOffset = 0.2;
+            chart3.ChartAreas[0].AxisY.Interval = 0.3;
+
             trackBar2_Scroll(this, new EventArgs());
             trackBar1_Scroll(this, new EventArgs());
             x = ArrayBuilder.CreateVector(XStart, XEnd, NumOfPoints);
@@ -166,8 +169,9 @@ namespace WindowsFormsApp1
 
         private void button1_Click_1(object sender, EventArgs e)
         {
-            chart2.Titles[0].Text = "Спектр источника";
+            chart2.Titles[0].Text = "Спектр";
             chart2.Titles[0].Visible = true;
+            chart2.Titles[0].ForeColor = Color.Black;
             chart2.Series.Clear();
             Functions.complex_re_paint_2(chart2, x_w, G, 1, sigma_G, omega_G, "G");
             button1.Enabled = false;
@@ -185,6 +189,7 @@ namespace WindowsFormsApp1
             trackBar1.Enabled = false;
             trackBar2.Enabled = false;
             chart2.Titles[0].Visible = false;
+            chart2.Titles[1].Visible = false;
             chart1.Series.Clear();
             chart2.Series.Clear();
             button1.Enabled = false;
@@ -211,7 +216,7 @@ namespace WindowsFormsApp1
             ser = chart3.Series.Add("New plot");
             chart3.ChartAreas[0].AxisX.Maximum = XEnd * 1000;
             chart3.ChartAreas[0].AxisX.Minimum = XStart * 1000;
-            chart3.ChartAreas[0].AxisY.Maximum = 1.2;
+            chart3.ChartAreas[0].AxisY.Maximum = 1.1;
             chart3.ChartAreas[0].AxisY.Minimum = 0;
             ser.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Point;
             // ser.Bubb
@@ -235,7 +240,7 @@ namespace WindowsFormsApp1
             mirror_graph.RotateTransform(45);
             DoubleBuffered = true;
             SolidBrush white_brush = new SolidBrush(Color.WhiteSmoke);
-            SolidBrush red_brush = new SolidBrush(Color.Red);
+            SolidBrush red_brush = new SolidBrush(Color.Black);
             SolidBrush black_brush = new SolidBrush(Color.Black);
             SolidBrush green_brush = new SolidBrush(Color.Red);
             SolidBrush yellow_brush = new SolidBrush(Color.LightGray);
@@ -375,7 +380,7 @@ namespace WindowsFormsApp1
             graphics.FillRectangle(blue_brush, new Rectangle(4 * base_x, 8 * base_y, base_x, base_y / 5));
             graphics.FillRectangle(black_brush, new Rectangle(base_x, 4 * base_y, base_x, base_y));
             graphics.FillRectangle(red_brush, new Rectangle(2 * base_x, 4 * base_y + (int)(base_y * 0.4), base_x / 10, base_y / 5));
-            graphics.FillRectangle(red_brush, new Rectangle(8 * base_x, 4 * base_y, base_x / 5, base_y));
+            graphics.FillRectangle(black_brush, new Rectangle(8 * base_x, 4 * base_y, base_x / 5, base_y));
 
             graphics.TranslateTransform((int)(base_x * 4.5), (int)(base_y * 4.5));
             graphics.RotateTransform(45);
@@ -418,7 +423,7 @@ namespace WindowsFormsApp1
 
         private void button4_Click(object sender, EventArgs e)
         {
-            chart2.Titles[0].Text = "Образец + источник";
+            chart2.Titles[0].Text = "Спектр";
             chart2.Titles[0].Visible = true;
             Functions.complex_re_paint_2(chart2, x_w, G_K, 1, sigma_G, omega_G, "GK");
             button4.Enabled = false;
@@ -428,6 +433,8 @@ namespace WindowsFormsApp1
         private void button3_Click(object sender, EventArgs e)
         {
             chart2.Titles[0].Text = "Спектр пропускания образца";
+            chart2.Titles[0].ForeColor = Color.DarkRed;
+            chart2.Titles[1].Visible = true;
             Functions.complex_re_paint_2(chart1, x_w, G_K, 1, sigma_G, omega_G, "GK");
             chart2.Series.Clear();
             Functions.complex_re_paint_2_n(chart2, x_w, K, 1, sigma_K, omega_K, "K");
@@ -437,7 +444,7 @@ namespace WindowsFormsApp1
 
         private void trackBar1_Scroll(object sender, EventArgs e)
         {
-            double step = 1.0 / ((11 - trackBar1.Value) * 2000);
+            double step = 0.00005 * trackBar1.Value;
             label7.Text = String.Format("{0:0.00}", step * 1000) + "мкм";
             NumOfPoints = (int)((XEnd - XStart) / step);
             x = ArrayBuilder.CreateVector(XStart, XEnd, NumOfPoints);
@@ -453,7 +460,7 @@ namespace WindowsFormsApp1
             label8.Text = width * 2000 + "мкм";
             XEnd = width;
             XStart = -width;
-            NumOfPoints = (int)((XEnd - XStart) / (1.0 / (18000 - trackBar1.Value)));
+            NumOfPoints = (int)((XEnd - XStart) / (0.00005 * trackBar1.Value));
             x = ArrayBuilder.CreateVector(XStart, XEnd, NumOfPoints);
             button1.Enabled = false;
             button4.Enabled = false;

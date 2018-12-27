@@ -192,6 +192,9 @@ namespace WindowsFormsApp1
             chart3.ChartAreas[0].AxisX.TitleFont = new Font(chart3.ChartAreas[0].AxisX.TitleFont.Name, 14,
                 chart3.ChartAreas[0].AxisX.TitleFont.Style, chart3.ChartAreas[0].AxisX.TitleFont.Unit);
 
+            chart3.ChartAreas[0].AxisY.IntervalOffset = 0.2;
+            chart3.ChartAreas[0].AxisY.Interval = 0.3;
+
             trackBar2_Scroll(this, new EventArgs());
             trackBar1_Scroll(this, new EventArgs());
             // x = ArrayBuilder.CreateVector(XStart, XEnd, NumOfPoints);
@@ -206,7 +209,7 @@ namespace WindowsFormsApp1
             FirstTime = false;
             chart1.Titles.Clear();
             Title tit = chart1.Titles.Add("Спектр солнца");
-            tit.Font = new System.Drawing.Font("Arial", 14);
+            tit.Font = new System.Drawing.Font("Arial", 18);
             chart1.Titles[0].Visible = true;
             tit.DockedToChartArea = "ChartArea0";
             Functions.complex_re_paint_min_max(chart1, x_w, K, name: "Sun spectrum wave number");
@@ -227,7 +230,7 @@ namespace WindowsFormsApp1
             mirror_graph.RotateTransform(45);
             DoubleBuffered = true;
             SolidBrush white_brush = new SolidBrush(Color.WhiteSmoke);
-            SolidBrush red_brush = new SolidBrush(Color.Red);
+            SolidBrush red_brush = new SolidBrush(Color.Black);
             SolidBrush black_brush = new SolidBrush(Color.Black);
             SolidBrush green_brush = new SolidBrush(Color.Red);
             SolidBrush yellow_brush = new SolidBrush(Color.Yellow);
@@ -362,7 +365,7 @@ namespace WindowsFormsApp1
             graphics.FillRectangle(blue_brush, new Rectangle(4 * base_x, 8 * base_y, base_x, base_y / 5));
             graphics.FillRectangle(black_brush, new Rectangle(base_x, 4 * base_y, base_x, base_y));
             graphics.FillRectangle(red_brush, new Rectangle(2 * base_x, 4 * base_y + (int)(base_y * 0.4), base_x / 10, base_y / 5));
-            graphics.FillRectangle(red_brush, new Rectangle(8 * base_x, 4 * base_y, base_x / 5, base_y));
+            graphics.FillRectangle(black_brush, new Rectangle(8 * base_x, 4 * base_y, base_x / 5, base_y));
 
             graphics.TranslateTransform((int)(base_x * 4.5), (int)(base_y * 4.5));
             graphics.RotateTransform(45);
@@ -407,7 +410,7 @@ namespace WindowsFormsApp1
             ser.BorderWidth = 2;
             chart3.ChartAreas[0].AxisX.Maximum = XEnd * 10000;
             chart3.ChartAreas[0].AxisX.Minimum = XStart * 10000;
-            chart3.ChartAreas[0].AxisY.Maximum = 1.2;
+            chart3.ChartAreas[0].AxisY.Maximum = 1.1;
             chart3.ChartAreas[0].AxisY.Minimum = 0;
             ser.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
             tic = 0;

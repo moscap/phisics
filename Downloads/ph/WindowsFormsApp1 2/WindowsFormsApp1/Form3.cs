@@ -154,7 +154,7 @@ namespace WindowsFormsApp1
 
         private void button1_Click_1(object sender, EventArgs e)
         {
-            chart2.Titles[0].Text = "Спектр источника";
+            chart2.Titles[0].Text = "Спектр";
             chart2.Titles[0].Visible = true;
             chart2.Series.Clear();
             Functions.complex_re_paint(chart2, x_w, G, 1, sigma_G, omega_G, "G");
@@ -196,9 +196,11 @@ namespace WindowsFormsApp1
             chart3.Series.Clear();
             ser = chart3.Series.Add("New plot");
             ser.BorderWidth = 2;
-            chart3.ChartAreas[0].AxisX.Maximum = XEnd * 1000;
-            chart3.ChartAreas[0].AxisX.Minimum = XStart * 1000;
-            chart3.ChartAreas[0].AxisY.Maximum = 1.2;
+            chart3.ChartAreas[0].AxisY.IntervalOffset = 0.2;
+            chart3.ChartAreas[0].AxisY.Interval = 0.3;
+            chart3.ChartAreas[0].AxisX.Maximum = 260;
+            chart3.ChartAreas[0].AxisX.Minimum = -260;
+            chart3.ChartAreas[0].AxisY.Maximum = 1.1;
             chart3.ChartAreas[0].AxisY.Minimum = 0;
             ser.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
             tic = 0;
@@ -216,7 +218,7 @@ namespace WindowsFormsApp1
             mirror_graph.RotateTransform(45);
             DoubleBuffered = true;
             SolidBrush white_brush = new SolidBrush(Color.WhiteSmoke);
-            SolidBrush red_brush = new SolidBrush(Color.Red);
+            SolidBrush red_brush = new SolidBrush(Color.Black);
             SolidBrush black_brush = new SolidBrush(Color.Black);
             SolidBrush green_brush = new SolidBrush(Color.Red);
             SolidBrush yellow_brush = new SolidBrush(Color.LightGray);
@@ -351,7 +353,7 @@ namespace WindowsFormsApp1
             graphics.FillRectangle(blue_brush, new Rectangle(4 * base_x, 8 * base_y, base_x, base_y / 5));
             graphics.FillRectangle(black_brush, new Rectangle(base_x, 4 * base_y, base_x, base_y));
             graphics.FillRectangle(red_brush, new Rectangle(2 * base_x, 4 * base_y + (int)(base_y * 0.4), base_x / 10, base_y / 5));
-            graphics.FillRectangle(red_brush, new Rectangle(8 * base_x, 4 * base_y, base_x / 5, base_y));
+            graphics.FillRectangle(black_brush, new Rectangle(8 * base_x, 4 * base_y, base_x / 5, base_y));
 
             graphics.TranslateTransform((int)(base_x * 4.5), (int)(base_y * 4.5));
             graphics.RotateTransform(45);
@@ -382,14 +384,14 @@ namespace WindowsFormsApp1
             ser.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
             Initialize_Filled();
             tic = 0;
-            chart3.ChartAreas[0].AxisX.Maximum = XEnd * 1000;
-            chart3.ChartAreas[0].AxisX.Minimum = XStart * 1000;
+            chart3.ChartAreas[0].AxisX.Maximum = 260;
+            chart3.ChartAreas[0].AxisX.Minimum = -260;
             timer1.Enabled = true;
         }
 
         private void button4_Click(object sender, EventArgs e)
         {
-            chart2.Titles[0].Text = "Вода + источник";
+            chart2.Titles[0].Text = "Спектр";
             chart2.Titles[0].Visible = true;
             Functions.complex_re_paint(chart2, x_w, G_K, 1, sigma_G, omega_G, "GK");
             button4.Enabled = false;

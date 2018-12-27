@@ -32,11 +32,6 @@ namespace WindowsFormsApp1
             this.Close();
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            Form6 form6 = new Form6();
-            form6.Show();
-        }
 
         private void button2_Click(object sender, EventArgs e)
         {
@@ -47,6 +42,12 @@ namespace WindowsFormsApp1
         private void tableLayoutPanel1_Paint(object sender, PaintEventArgs e)
         {
 
+        }
+
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+            Form6 form6 = new Form6();
+            form6.Show();
         }
     }
 }

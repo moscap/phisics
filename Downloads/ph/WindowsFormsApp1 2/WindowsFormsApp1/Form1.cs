@@ -17,9 +17,9 @@ namespace WindowsFormsApp1
 {
     public partial class Form1 : Form
     {
-        public int NumOfPoints = 1024;
-        double XStart = -0.02;
-        double XEnd = 0.02;
+        public int NumOfPoints = 2048;
+        double XStart = -0.025;
+        double XEnd = 0.025;
         double[] x = null;
         double[] x_w = null;
         double amplitude;
@@ -124,6 +124,9 @@ namespace WindowsFormsApp1
             chart3.ChartAreas[0].AxisX.TitleFont = new Font(chart3.ChartAreas[0].AxisX.TitleFont.Name, 14,
                 chart3.ChartAreas[0].AxisX.TitleFont.Style, chart3.ChartAreas[0].AxisX.TitleFont.Unit);
 
+            chart3.ChartAreas[0].AxisY.IntervalOffset = 0.2;
+            chart3.ChartAreas[0].AxisY.Interval = 0.3;
+
             amplitude = Convert.ToDouble(textBox1.Text);
             sigma_G = Convert.ToDouble(textBox5.Text) / 6;
             sigma_K = Convert.ToDouble(textBox6.Text) / 6;
@@ -139,7 +142,7 @@ namespace WindowsFormsApp1
 
         private void button1_Click_1(object sender, EventArgs e)
         {
-            chart2.Titles[0].Text = "Спектр источника";
+            chart2.Titles[0].Text = "Спектр";
             chart2.Titles[0].Visible = true;
             chart2.Series.Clear();
             Functions.complex_re_paint(chart2, x_w, G, 1, sigma_G, omega_G, "G");
@@ -202,7 +205,7 @@ namespace WindowsFormsApp1
             ser = chart3.Series.Add("New plot");
             chart3.ChartAreas[0].AxisX.Maximum = XEnd * 1000;
             chart3.ChartAreas[0].AxisX.Minimum = XStart * 1000;
-            chart3.ChartAreas[0].AxisY.Maximum = 1.2;
+            chart3.ChartAreas[0].AxisY.Maximum = 1.1;
             chart3.ChartAreas[0].AxisY.Minimum = 0;
             ser.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
             ser.BorderWidth = 2;
@@ -217,10 +220,10 @@ namespace WindowsFormsApp1
             double buf;
             if (textBox7.Text.Length == 0) return;
             else if (!double.TryParse(textBox7.Text, out buf)) return;
-            if (buf <= 1000)
+            if (buf <= 1)
             {
-                textBox7.Text = (1000).ToString();
-                buf = 1000;
+                textBox7.Text = (1).ToString();
+                buf = 1;
             } else if(buf > 3500)
             {
                 textBox7.Text = (3500).ToString();
@@ -240,7 +243,7 @@ namespace WindowsFormsApp1
             mirror_graph.RotateTransform(45);
             DoubleBuffered = true;
             SolidBrush white_brush = new SolidBrush(Color.WhiteSmoke);
-            SolidBrush red_brush = new SolidBrush(Color.Red);
+            SolidBrush red_brush = new SolidBrush(Color.Black);
             SolidBrush black_brush = new SolidBrush(Color.Black);
             SolidBrush green_brush = new SolidBrush(Color.Red);
             SolidBrush yellow_brush = new SolidBrush(Color.LightGray);
@@ -302,17 +305,17 @@ namespace WindowsFormsApp1
             double buf;
             if (textBox5.Text.Length == 0) return;
             else if (!double.TryParse(textBox5.Text, out buf)) return;
-            if (buf <= 100)
+            if (buf <= 1)
             {
-                textBox5.Text = (100).ToString();
-                buf = 100;
+                textBox5.Text = (1).ToString();
+                buf = 1;
             }
             else if (buf > 6000)
             {
                 textBox5.Text = (6000).ToString();
                 buf = 6000;
             }
-            sigma_G = buf / 6;
+            sigma_G = buf / 2.355;
             button1.Enabled = false;
         }
 
@@ -321,17 +324,17 @@ namespace WindowsFormsApp1
             double buf;
             if (textBox6.Text.Length == 0) return;
             else if (!double.TryParse(textBox6.Text, out buf)) return;
-            if (buf <= 100)
+            if (buf <= 1)
             {
-                textBox6.Text = (100).ToString();
-                buf = 100;
+                textBox6.Text = (1).ToString();
+                buf = 1;
             }
             else if (buf > 6000)
             {
                 textBox6.Text = (6000).ToString();
                 buf = 6000;
             }
-            sigma_K = buf / 6;
+            sigma_K = buf / 2.355;
             button1.Enabled = false;
         }
 
@@ -340,10 +343,10 @@ namespace WindowsFormsApp1
             double buf;
             if (textBox8.Text.Length == 0) return;
             else if (!double.TryParse(textBox8.Text, out buf)) return;
-            if (buf <= 1000)
+            if (buf <= 1)
             {
-                textBox8.Text = (1000).ToString();
-                buf = 1000;
+                textBox8.Text = (1).ToString();
+                buf = 1;
             }
             else if (buf > 3500)
             {
@@ -416,7 +419,7 @@ namespace WindowsFormsApp1
             graphics.FillRectangle(blue_brush, new Rectangle(4 * base_x, 8 * base_y, base_x, base_y / 5));
             graphics.FillRectangle(black_brush, new Rectangle(base_x, 4 * base_y, base_x, base_y));
             graphics.FillRectangle(red_brush, new Rectangle(2 * base_x, 4 * base_y + (int)(base_y * 0.4), base_x / 10, base_y / 5));
-            graphics.FillRectangle(red_brush, new Rectangle(8 * base_x, 4 * base_y, base_x / 5, base_y));
+            graphics.FillRectangle(black_brush, new Rectangle(8 * base_x, 4 * base_y, base_x / 5, base_y));
 
 
             graphics.TranslateTransform((int)(base_x * 4.5), (int)(base_y * 4.5));
@@ -457,7 +460,7 @@ namespace WindowsFormsApp1
 
         private void button4_Click(object sender, EventArgs e)
         {
-            chart2.Titles[0].Text = "Образец + источник";
+            chart2.Titles[0].Text = "Спектр";
             chart2.Titles[0].Visible = true;
             Functions.complex_re_paint(chart2, x_w, G_K, 1, sigma_G, omega_G, "GK");
             button4.Enabled = false;
