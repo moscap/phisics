@@ -186,8 +186,6 @@ namespace WindowsFormsApp1
 
         private void button2_Click_1(object sender, EventArgs e)
         {
-            trackBar1.Enabled = false;
-            trackBar2.Enabled = false;
             chart2.Titles[0].Visible = false;
             chart2.Titles[1].Visible = false;
             chart1.Series.Clear();
@@ -218,6 +216,8 @@ namespace WindowsFormsApp1
             chart3.ChartAreas[0].AxisX.Minimum = XStart * 1000;
             chart3.ChartAreas[0].AxisY.Maximum = 1.1;
             chart3.ChartAreas[0].AxisY.Minimum = 0;
+            chart3.ChartAreas[0].AxisX.Interval = (XEnd - XStart) * 200;
+            chart3.ChartAreas[0].AxisX.MajorGrid.Interval = (XEnd - XStart) * 200;
             ser.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Point;
             // ser.Bubb
             ser.MarkerSize = 5;
@@ -302,7 +302,7 @@ namespace WindowsFormsApp1
             if (tic >= NumOfPoints)
             {
                 timer1.Enabled = false;
-                if (button6.Enabled)
+                if (!sample.IsEmpty)
                 {
                     button6.Enabled = false;
                     button4.Enabled = true;
@@ -394,8 +394,7 @@ namespace WindowsFormsApp1
 
         private void button6_Click(object sender, EventArgs e)
         {
-            trackBar1.Enabled = false;
-            trackBar2.Enabled = false;
+            button6.Enabled = false;
             chart2.Titles[0].Visible = false;
             Graphics graphics = tableLayoutPanel3.CreateGraphics();
             Functions.complex_re_paint_2(chart1, x_w, G, 1, sigma_G, omega_G, "G");
@@ -444,6 +443,16 @@ namespace WindowsFormsApp1
 
         private void trackBar1_Scroll(object sender, EventArgs e)
         {
+            timer1.Enabled = false;
+            chart1.Series.Clear();
+            chart2.Series.Clear();
+            chart3.Series.Clear();
+            button1.Enabled = false;
+            button4.Enabled = false;
+            button3.Enabled = false;
+            button6.Enabled = false;
+            chart2.Titles[0].Visible = false;
+            chart2.Titles[1].Visible = false;
             double step = 0.00005 * trackBar1.Value;
             label7.Text = String.Format("{0:0.00}", step * 1000) + "мкм";
             NumOfPoints = (int)((XEnd - XStart) / step);
@@ -456,6 +465,16 @@ namespace WindowsFormsApp1
 
         private void trackBar2_Scroll(object sender, EventArgs e)
         {
+            timer1.Enabled = false;
+            chart1.Series.Clear();
+            chart2.Series.Clear();
+            chart3.Series.Clear();
+            button1.Enabled = false;
+            button4.Enabled = false;
+            button3.Enabled = false;
+            button6.Enabled = false;
+            chart2.Titles[0].Visible = false;
+            chart2.Titles[1].Visible = false;
             double width = trackBar2.Value / 400.0;
             label8.Text = width * 2000 + "мкм";
             XEnd = width;

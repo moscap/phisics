@@ -274,7 +274,7 @@ namespace WindowsFormsApp1
             if (tic >= NumOfPoints)
             {
                 timer1.Enabled = false;
-                if (button6.Enabled)
+                if (!sample.IsEmpty)
                 {
                     button6.Enabled = false;
                     button4.Enabled = true;
@@ -368,7 +368,7 @@ namespace WindowsFormsApp1
 
         private void button6_Click(object sender, EventArgs e)
         {
-            //button6.Enabled = false;
+            button6.Enabled = false;
             Graphics graphics = tableLayoutPanel3.CreateGraphics();
             chart2.Titles[0].Visible = false;
             Functions.complex_re_paint(chart1, x_w, G, 1, sigma_G, omega_G, "G");

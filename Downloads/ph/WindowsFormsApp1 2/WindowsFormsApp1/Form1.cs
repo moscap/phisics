@@ -159,6 +159,15 @@ namespace WindowsFormsApp1
         // а проверка приведения, это проверка того что в текст боксе число
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
+            timer1.Enabled = false;
+            chart1.Series.Clear();
+            chart2.Series.Clear();
+            chart3.Series.Clear();
+            button1.Enabled = false;
+            button4.Enabled = false;
+            button3.Enabled = false;
+            button6.Enabled = false;
+            chart2.Titles[0].Visible = false;
             double buf;
             if (textBox1.Text.Length == 0) return;
             else if (!double.TryParse(textBox1.Text, out buf)) return;
@@ -217,6 +226,15 @@ namespace WindowsFormsApp1
 
         private void textBox7_TextChanged(object sender, EventArgs e)
         {
+            timer1.Enabled = false;
+            chart2.Titles[0].Visible = false;
+            chart1.Series.Clear();
+            chart2.Series.Clear();
+            chart3.Series.Clear();
+            button1.Enabled = false;
+            button4.Enabled = false;
+            button3.Enabled = false;
+            button6.Enabled = false;
             double buf;
             if (textBox7.Text.Length == 0) return;
             else if (!double.TryParse(textBox7.Text, out buf)) return;
@@ -230,7 +248,6 @@ namespace WindowsFormsApp1
                 buf = 3500;
             }
             omega_G = buf;
-            button1.Enabled = false;
         }
 
         private void tic_graph()
@@ -286,7 +303,7 @@ namespace WindowsFormsApp1
             if (tic >= NumOfPoints)
             {
                 timer1.Enabled = false;
-                if (button6.Enabled)
+                if (!sample.IsEmpty)
                 {
                     button6.Enabled = false;
                     button4.Enabled = true;
@@ -302,6 +319,15 @@ namespace WindowsFormsApp1
     
         private void textBox5_TextChanged_1(object sender, EventArgs e)
         {
+            timer1.Enabled = false;
+            chart2.Titles[0].Visible = false;
+            chart1.Series.Clear();
+            chart2.Series.Clear();
+            chart3.Series.Clear();
+            button1.Enabled = false;
+            button4.Enabled = false;
+            button3.Enabled = false;
+            button6.Enabled = false;
             double buf;
             if (textBox5.Text.Length == 0) return;
             else if (!double.TryParse(textBox5.Text, out buf)) return;
@@ -316,11 +342,19 @@ namespace WindowsFormsApp1
                 buf = 6000;
             }
             sigma_G = buf / 2.355;
-            button1.Enabled = false;
         }
 
         private void textBox6_TextChanged(object sender, EventArgs e)
         {
+            timer1.Enabled = false;
+            chart1.Series.Clear();
+            chart2.Series.Clear();
+            chart3.Series.Clear();
+            button1.Enabled = false;
+            button4.Enabled = false;
+            button3.Enabled = false;
+            button6.Enabled = false;
+            chart2.Titles[0].Visible = false;
             double buf;
             if (textBox6.Text.Length == 0) return;
             else if (!double.TryParse(textBox6.Text, out buf)) return;
@@ -335,11 +369,19 @@ namespace WindowsFormsApp1
                 buf = 6000;
             }
             sigma_K = buf / 2.355;
-            button1.Enabled = false;
         }
 
         private void textBox8_TextChanged_2(object sender, EventArgs e)
         {
+            timer1.Enabled = false;
+            chart1.Series.Clear();
+            chart2.Series.Clear();
+            chart3.Series.Clear();
+            button1.Enabled = false;
+            button4.Enabled = false;
+            button3.Enabled = false;
+            button6.Enabled = false;
+            chart2.Titles[0].Visible = false;
             double buf;
             if (textBox8.Text.Length == 0) return;
             else if (!double.TryParse(textBox8.Text, out buf)) return;
@@ -354,7 +396,6 @@ namespace WindowsFormsApp1
                 buf = 3500;
             }
             omega_K = buf;
-            button1.Enabled = false;
         }
 
         private void tableLayoutPanel3_Paint(object sender, PaintEventArgs e)
@@ -434,7 +475,7 @@ namespace WindowsFormsApp1
 
         private void button6_Click(object sender, EventArgs e)
         {
-            //button6.Enabled = false;
+            button6.Enabled = false;
             Graphics graphics = tableLayoutPanel3.CreateGraphics();
             chart2.Titles[0].Visible = false;
             Functions.complex_re_paint(chart1, x_w, G, 1, sigma_G, omega_G, "G");

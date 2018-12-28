@@ -24,23 +24,37 @@ namespace WindowsFormsApp1
             double new_x = x - offset;
             return Math.Exp(-new_x * new_x / (sigma * sigma * 2.0)); // / (Math.Sqrt(2.0 * Math.PI) * sigma);
         }
-        //public static double func_rect(double x, double start, double end)
-        //{
-        //    // Returns rect that is non-zero from -5 to 5.
-        //    if (x < start || x > end)
-        //    {
-        //        return 0;
-        //    }
-        //    else
-        //    {
-        //        return 5;
-        //    }
-        //}
-        //public static double trans_func_rect(double x, double start, double end)
-        //{
-        //    return Math.Abs((end - start) * 5 *  Trig.Sinc(x * ((end - start) / 2.0) / Math.PI));
-        //}
-        // приводим к нормальному виду
+
+        public static void Interpol(double[] xst, double[] yst, double[] xend, double[] yend)
+        {
+            int k = 0;
+            for(int i = 0; i < xst.Length;)
+            {
+                for(int j = i; j < xst.Length; ++j)
+                {
+                    if(xend[k] <= xst[j])
+                    {
+                        if (xend[k] == xst[j])
+                            yend[k] = yst[j];
+                        else
+                        {
+                            j--;
+                            double lamda = (xend[k] - xst[j]) / (xst[j + 1] - xst[k]);
+                            yend[k] = (yst[j] + lamda * yst[j + 1]) / (1.0 + lamda);
+                        }
+                        i = j;
+                        break;
+                    }
+                    if(j == xst.Length - 1)
+                    {
+                        i = xst.Length;
+                    }
+                }
+                k++;
+                if (k >= xend.Length)
+                    break;
+            }
+        }
         public static void FlipFlop<T>(T[] f)
         {
             if (f.Length % 2 == 0)

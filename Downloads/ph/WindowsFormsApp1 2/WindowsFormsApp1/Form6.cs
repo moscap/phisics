@@ -60,7 +60,7 @@ namespace WindowsFormsApp1
                 x_val = Convert.ToDouble(vals[0]);
                 if (x_val >= 350 && x_val <= 800)
                 {
-                    x_w_full[k] = x_val;
+                    x_w_full[k] = x_val; 
                     K_full[k] = new Complex(Convert.ToDouble(vals[1]), 0);
                     k += 1;
                 }
@@ -69,21 +69,19 @@ namespace WindowsFormsApp1
             x_wave_length = new double[x_w_full.Length];
             for (int i = 0; i < K_full.Length; i++)
             {
-                new_x[i] = Math.Pow(10, 7) / x_w_full[i];
+                new_x[i] = Math.Pow(10, 7) / x_w_full[i];// in wave num
             }
-            x_w_full.CopyTo(x_wave_length, 0);
-            new_x.CopyTo(x_w_full, 0);
+            x_w_full.CopyTo(x_wave_length, 0); //in ch
+            new_x.CopyTo(x_w_full, 0); //in wn
             K_full_lambda = new Complex[K_full.Length];
             K_full.CopyTo(K_full_lambda, 0);
             for (int i = 0; i < K_full.Length; i++)
             {
-                K_full[i] = Complex.Multiply(K_full[i], Math.Pow(x_wave_length[i], 2));
+                K_full[i] = Complex.Multiply(K_full[i], Math.Pow(x_wave_length[i], 2)); // y in wn
             }
             for (int i = 0; i <= (x_w_full.Length / 2); i++)
             {
-                //double tmp = x_wave_length[i];
-                //x_wave_length[i] = x_wave_length[x_w_full.Length - i - 1];
-                //x_wave_length[x_w_full.Length - i - 1] = tmp;
+                // inverse
                 double tmp = x_w_full[i];
                 x_w_full[i] = x_w_full[x_w_full.Length - i - 1];
                 x_w_full[x_w_full.Length - i - 1] = tmp;
@@ -100,13 +98,6 @@ namespace WindowsFormsApp1
                 length_x_w);
             XEnd = x[length_x_w - 1];
             XStart = x[0];
-            //x = ArrayBuilder.CreateVector(
-            //    -0.5 / ((x_w_full[NumOfPoints - 1] - x_w_full[0]) / NumOfPoints),
-            //    0.5 / ((x_w_full[NumOfPoints - 1] - x_w_full[0]) / NumOfPoints),
-            //    NumOfPoints);
-            //XStart = x[0];
-            //XEnd = x[NumOfPoints - 1];
-            // Console.WriteLine(k);
         }
 
         void Initialize_Filled()
@@ -292,7 +283,11 @@ namespace WindowsFormsApp1
 
         private void trackBar1_Scroll(object sender, EventArgs e)
         {
-            step = (int)trackBar1.Value;
+            timer1.Enabled = false;
+            chart2.Series.Clear();
+            chart3.Series.Clear();
+            button1.Enabled = false;
+            step = 21 - trackBar1.Value;
             if (FirstTime != true)
             {
                 Initialize_New_Data();
@@ -379,7 +374,6 @@ namespace WindowsFormsApp1
 
         private void button2_Click(object sender, EventArgs e)
         {
-            trackBar1.Enabled = false;
             Graphics graphics = tableLayoutPanel3.CreateGraphics();
             DoubleBuffered = true;
             chart2.Titles[0].Visible = false;
@@ -430,6 +424,7 @@ namespace WindowsFormsApp1
 
         private void button1_Click(object sender, EventArgs e)
         {
+            button1.Enabled = false;
             chart2.Titles.Clear();
             Title tit = chart2.Titles.Add("Измеренный спектр солнца");
             tit.Font = new System.Drawing.Font("Arial", 14);

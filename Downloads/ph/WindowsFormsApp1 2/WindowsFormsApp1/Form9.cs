@@ -21,5 +21,12 @@ namespace WindowsFormsApp1
         {
             this.Close();
         }
+
+        private void Form9_Load(object sender, EventArgs e)
+        {
+            Bitmap bim = new Bitmap("./sp.jpg");
+            bim = new Bitmap(bim, pictureBox1.Width, pictureBox1.Height);
+            pictureBox1.Image = bim;
+        }
     }
 }
