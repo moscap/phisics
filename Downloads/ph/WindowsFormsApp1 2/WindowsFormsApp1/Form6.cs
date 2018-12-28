@@ -455,7 +455,7 @@ namespace WindowsFormsApp1
             chart2.Titles[0].Visible = true;
             tit.DockedToChartArea = "ChartArea0";
             chart2.Series.Clear();
-            chart1.ChartAreas[0].AxisX.Title = "длина волны(нм)";
+            chart2.ChartAreas[0].AxisX.Title = "длина волны(нм)";
             Functions.complex_re_paint_min_max(chart2, x_lambda_print, K_lambda_print, name: "K");
             button1.Enabled = true;
         }
