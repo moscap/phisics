@@ -170,6 +170,8 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.chart2.BackColor = System.Drawing.Color.WhiteSmoke;
+            chartArea1.AxisX.LabelAutoFitMaxFontSize = 14;
+            chartArea1.AxisX.LabelAutoFitMinFontSize = 10;
             chartArea1.AxisY.LabelStyle.Enabled = false;
             chartArea1.Name = "ChartArea1";
             this.chart2.ChartAreas.Add(chartArea1);
@@ -294,6 +296,8 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.chart1.BackColor = System.Drawing.Color.WhiteSmoke;
+            chartArea2.AxisX.LabelAutoFitMaxFontSize = 14;
+            chartArea2.AxisX.LabelAutoFitMinFontSize = 10;
             chartArea2.AxisY.LabelStyle.Enabled = false;
             chartArea2.Name = "ChartArea1";
             this.chart1.ChartAreas.Add(chartArea2);

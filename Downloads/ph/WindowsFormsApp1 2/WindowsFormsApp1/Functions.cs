@@ -25,7 +25,7 @@ namespace WindowsFormsApp1
             return Math.Exp(-new_x * new_x / (sigma * sigma * 2.0)); // / (Math.Sqrt(2.0 * Math.PI) * sigma);
         }
 
-        public static void Interpol(double[] xst, double[] yst, double[] xend, double[] yend)
+        public static void Interpol(double[] xst, Complex[] yst, double[] xend, Complex[] yend)
         {
             int k = 0;
             for(int i = 0; i < xst.Length;)
@@ -104,8 +104,11 @@ namespace WindowsFormsApp1
         {
             var paint_obj = obj as System.Windows.Forms.DataVisualization.Charting.Chart;
             var ser = paint_obj.Series.Add(name);
-            paint_obj.ChartAreas[0].AxisX.Minimum = x.Min();
-            paint_obj.ChartAreas[0].AxisX.Maximum = x.Max();
+            paint_obj.ChartAreas[0].AxisX.Minimum = 350;
+            paint_obj.ChartAreas[0].AxisX.Maximum = 800;
+            paint_obj.ChartAreas[0].AxisX.IntervalOffset = 50;
+            paint_obj.ChartAreas[0].AxisX.MajorGrid.Interval = 50;
+            paint_obj.ChartAreas[0].AxisX.Interval = 100;
             ser.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
             ser.BorderWidth = 3;
             for (int i = 0; i < x.Length; i++)
@@ -186,18 +189,6 @@ namespace WindowsFormsApp1
                 ser.Points.AddXY(x[x.Length - 1] + x[i] - x[0], y[i].Re / koef);
             }
         }
-        //public static void complex_re_paint_for_ch2(object obj, double[] x, Complex[] y, double koef = 1.0, double sigma = 10, double offset = 0, string name = "New plot!")
-        //{
-        //    var paint_obj = obj as System.Windows.Forms.DataVisualization.Charting.Chart;
-        //    var ser = paint_obj.Series.Add(name);
-        //    paint_obj.ChartAreas[0].AxisX.Maximum = 4000;
-        //    paint_obj.ChartAreas[0].AxisX.Minimum = 400;
-        //    ser.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
-        //    for (int i = 0; i < x.Length; i++)
-        //    {
-        //        ser.Points.AddXY(x[i], y[i].Re / koef);
-        //    }
-        //}
         
     }
 }

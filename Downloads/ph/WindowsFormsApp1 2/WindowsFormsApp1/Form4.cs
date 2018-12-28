@@ -191,6 +191,9 @@ namespace WindowsFormsApp1
             chart1.Series.Clear();
             chart2.Series.Clear();
             button1.Enabled = false;
+            button6.Enabled = false;
+            button4.Enabled = false;
+            button3.Enabled = false;
             Graphics graphics = tableLayoutPanel3.CreateGraphics();
             SolidBrush smoke_brush = new SolidBrush(Color.WhiteSmoke);
             if (!moving_length.IsEmpty)
@@ -212,12 +215,12 @@ namespace WindowsFormsApp1
             graphics.FillRectangle(red_brush, moving_length);
             chart3.Series.Clear();
             ser = chart3.Series.Add("New plot");
-            chart3.ChartAreas[0].AxisX.Maximum = XEnd * 1000;
-            chart3.ChartAreas[0].AxisX.Minimum = XStart * 1000;
+            chart3.ChartAreas[0].AxisX.Maximum = XEnd * 10000;
+            chart3.ChartAreas[0].AxisX.Minimum = XStart * 10000;
             chart3.ChartAreas[0].AxisY.Maximum = 1.1;
             chart3.ChartAreas[0].AxisY.Minimum = 0;
-            chart3.ChartAreas[0].AxisX.Interval = (XEnd - XStart) * 200;
-            chart3.ChartAreas[0].AxisX.MajorGrid.Interval = (XEnd - XStart) * 200;
+            chart3.ChartAreas[0].AxisX.Interval = (XEnd - XStart) * 2000;
+            chart3.ChartAreas[0].AxisX.MajorGrid.Interval = (XEnd - XStart) * 2000;
             ser.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Point;
             // ser.Bubb
             ser.MarkerSize = 5;
@@ -248,11 +251,23 @@ namespace WindowsFormsApp1
 
             graphics.FillRectangle(white_brush, moving_length);
             graphics.FillRectangle(white_brush, s_line);
-            moving_length = new Rectangle(tableLayoutPanel3.Width * 8 / 9 - (int)(2.3 * tableLayoutPanel3.Width / 9 * tic / NumOfPoints)
+            int Value = trackBar2.Value;
+            if((Value == 6) || (Value == 7))
+            {
+                moving_length = new Rectangle(tableLayoutPanel3.Width * 8 / 9 - (int)(2.3 * tableLayoutPanel3.Width / 9 * tic / NumOfPoints)
                 , moving_length.Top, moving_length.Width, moving_length.Height);
+            } else if((Value == 4) || (Value == 5))
+            {
+                moving_length = new Rectangle(tableLayoutPanel3.Width * 8 / 9 - (int)(1.5 * tableLayoutPanel3.Width / 9 * tic / NumOfPoints)
+                , moving_length.Top, moving_length.Width, moving_length.Height);
+            } else
+            {
+                moving_length = new Rectangle(tableLayoutPanel3.Width * 8 / 9 - (int)(1.0 * tableLayoutPanel3.Width / 9 * tic / NumOfPoints)
+                , moving_length.Top, moving_length.Width, moving_length.Height);
+            }
             s_line = new Rectangle((int)(base_x * 4.5), (int)(base_y * 4.5) - 3, moving_length.Left - (int)(base_x * 4.5) - 2, 7);
 
-            ser.Points.AddXY(x[tic] * 1000, Y_c[tic].Re / koef);
+            ser.Points.AddXY(x[tic] * 10000, Y_c[tic].Re / koef);
 
             mirror_graph.FillRectangle(black_brush, new Rectangle(-base_x / 10, (int)(-base_y / 1.5), base_x / 5, (int)(base_y * 1.5)));
 
@@ -454,7 +469,7 @@ namespace WindowsFormsApp1
             chart2.Titles[0].Visible = false;
             chart2.Titles[1].Visible = false;
             double step = 0.00005 * trackBar1.Value;
-            label7.Text = String.Format("{0:0.00}", step * 1000) + "мкм";
+            label7.Text = String.Format("{0:0.0}", step * 10000) + "мкм";
             NumOfPoints = (int)((XEnd - XStart) / step);
             x = ArrayBuilder.CreateVector(XStart, XEnd, NumOfPoints);
             button1.Enabled = false;
@@ -476,7 +491,7 @@ namespace WindowsFormsApp1
             chart2.Titles[0].Visible = false;
             chart2.Titles[1].Visible = false;
             double width = trackBar2.Value / 400.0;
-            label8.Text = width * 2000 + "мкм";
+            label8.Text = width * 20000 + "мкм";
             XEnd = width;
             XStart = -width;
             NumOfPoints = (int)((XEnd - XStart) / (0.00005 * trackBar1.Value));

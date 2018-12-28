@@ -119,7 +119,7 @@ namespace WindowsFormsApp1
                 chart2.ChartAreas[0].AxisX.TitleFont.Style, chart2.ChartAreas[0].AxisX.TitleFont.Unit);
 
             chart3.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.Bright;
-            chart3.ChartAreas[0].AxisX.LabelStyle.Format = "{F1}";
+            chart3.ChartAreas[0].AxisX.LabelStyle.Format = "{F0}";
             chart3.ChartAreas[0].AxisX.Title = "мкм";
             chart3.ChartAreas[0].AxisX.TitleFont = new Font(chart3.ChartAreas[0].AxisX.TitleFont.Name, 14,
                 chart3.ChartAreas[0].AxisX.TitleFont.Style, chart3.ChartAreas[0].AxisX.TitleFont.Unit);
@@ -131,7 +131,7 @@ namespace WindowsFormsApp1
             sigma_G = Convert.ToDouble(textBox5.Text) / 6;
             sigma_K = Convert.ToDouble(textBox6.Text) / 6;
             omega_K = Convert.ToDouble(textBox8.Text);
-            omega_G = Convert.ToDouble(textBox7.Text);
+            omega_G = Convert.ToDouble(textBox2.Text);
             x = ArrayBuilder.CreateVector(XStart, XEnd, NumOfPoints);
             graphics = tableLayoutPanel3.CreateGraphics();
             button1.Enabled = false;
@@ -192,6 +192,9 @@ namespace WindowsFormsApp1
             chart1.Series.Clear();
             chart2.Series.Clear();
             button1.Enabled = false;
+            button6.Enabled = false;
+            button4.Enabled = false;
+            button3.Enabled = false;
             SolidBrush smoke_brush = new SolidBrush(Color.WhiteSmoke);
             if (!moving_length.IsEmpty)
             {
@@ -212,8 +215,8 @@ namespace WindowsFormsApp1
             graphics.FillRectangle(red_brush, moving_length);
             chart3.Series.Clear();
             ser = chart3.Series.Add("New plot");
-            chart3.ChartAreas[0].AxisX.Maximum = XEnd * 1000;
-            chart3.ChartAreas[0].AxisX.Minimum = XStart * 1000;
+            chart3.ChartAreas[0].AxisX.Maximum = XEnd * 10000;
+            chart3.ChartAreas[0].AxisX.Minimum = XStart * 10000;
             chart3.ChartAreas[0].AxisY.Maximum = 1.1;
             chart3.ChartAreas[0].AxisY.Minimum = 0;
             ser.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
@@ -224,31 +227,6 @@ namespace WindowsFormsApp1
             timer1.Enabled = true;
         }
 
-        private void textBox7_TextChanged(object sender, EventArgs e)
-        {
-            timer1.Enabled = false;
-            chart2.Titles[0].Visible = false;
-            chart1.Series.Clear();
-            chart2.Series.Clear();
-            chart3.Series.Clear();
-            button1.Enabled = false;
-            button4.Enabled = false;
-            button3.Enabled = false;
-            button6.Enabled = false;
-            double buf;
-            if (textBox7.Text.Length == 0) return;
-            else if (!double.TryParse(textBox7.Text, out buf)) return;
-            if (buf <= 1)
-            {
-                textBox7.Text = (1).ToString();
-                buf = 1;
-            } else if(buf > 3500)
-            {
-                textBox7.Text = (3500).ToString();
-                buf = 3500;
-            }
-            omega_G = buf;
-        }
 
         private void tic_graph()
         {
@@ -272,7 +250,7 @@ namespace WindowsFormsApp1
                 , moving_length.Top, moving_length.Width, moving_length.Height);
             s_line = new Rectangle((int)(base_x * 4.5), (int)(base_y * 4.5) - 3, moving_length.Left - (int)(base_x * 4.5) - 2, 7);
 
-            ser.Points.AddXY(x[tic] * 1000, Y_c[tic].Re / koef);
+            ser.Points.AddXY(x[tic] * 10000, Y_c[tic].Re / koef);
 
             graphics.FillRectangle(red_brush, moving_length);
             graphics.DrawRectangle(green_pen, s_line);
@@ -518,6 +496,49 @@ namespace WindowsFormsApp1
         }
 
         private void label3_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            Form9 f = new Form9();
+            f.Show();
+        }
+
+        private void textBox2_TextChanged_1(object sender, EventArgs e)
+        {
+            timer1.Enabled = false;
+            chart2.Titles[0].Visible = false;
+            chart1.Series.Clear();
+            chart2.Series.Clear();
+            chart3.Series.Clear();
+            button1.Enabled = false;
+            button4.Enabled = false;
+            button3.Enabled = false;
+            button6.Enabled = false;
+            double buf;
+            if (textBox2.Text.Length == 0) return;
+            else if (!double.TryParse(textBox2.Text, out buf)) return;
+            if (buf <= 1)
+            {
+                textBox2.Text = (1).ToString();
+                buf = 1;
+            }
+            else if (buf > 3500)
+            {
+                textBox2.Text = (3500).ToString();
+                buf = 3500;
+            }
+            omega_G = buf;
+        }
+
+        private void label6_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label7_Click(object sender, EventArgs e)
         {
 
         }

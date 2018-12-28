@@ -139,7 +139,7 @@ namespace WindowsFormsApp1
                 chart2.ChartAreas[0].AxisY.TitleFont.Style, chart2.ChartAreas[0].AxisY.TitleFont.Unit);
 
             chart3.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.Bright;
-            chart3.ChartAreas[0].AxisX.LabelStyle.Format = "{F1}";
+            chart3.ChartAreas[0].AxisX.LabelStyle.Format = "{F0}";
             chart3.ChartAreas[0].AxisX.Title = "мкм";
             chart3.ChartAreas[0].AxisX.TitleFont = new Font(chart3.ChartAreas[0].AxisX.TitleFont.Name, 14,
                 chart3.ChartAreas[0].AxisX.TitleFont.Style, chart3.ChartAreas[0].AxisX.TitleFont.Unit);
@@ -175,6 +175,9 @@ namespace WindowsFormsApp1
             chart2.Series.Clear();
             Initialize_Empty();
             button1.Enabled = false;
+            button6.Enabled = false;
+            button4.Enabled = false;
+            button3.Enabled = false;
             SolidBrush smoke_brush = new SolidBrush(Color.WhiteSmoke);
             if (!moving_length.IsEmpty)
             {
@@ -198,8 +201,8 @@ namespace WindowsFormsApp1
             ser.BorderWidth = 2;
             chart3.ChartAreas[0].AxisY.IntervalOffset = 0.2;
             chart3.ChartAreas[0].AxisY.Interval = 0.3;
-            chart3.ChartAreas[0].AxisX.Maximum = 260;
-            chart3.ChartAreas[0].AxisX.Minimum = -260;
+            chart3.ChartAreas[0].AxisX.Maximum = 2600;
+            chart3.ChartAreas[0].AxisX.Minimum = -2600;
             chart3.ChartAreas[0].AxisY.Maximum = 1.1;
             chart3.ChartAreas[0].AxisY.Minimum = 0;
             ser.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
@@ -230,7 +233,7 @@ namespace WindowsFormsApp1
                 , moving_length.Top, moving_length.Width, moving_length.Height);
             s_line = new Rectangle((int)(base_x * 4.5), (int)(base_y * 4.5) - 3, moving_length.Left - (int)(base_x * 4.5) - 2, 7);
 
-            ser.Points.AddXY(x[tic] * 1000, Y_c[tic].Re / koef);
+            ser.Points.AddXY(x[tic] * 10000, Y_c[tic].Re / koef);
 
             graphics.FillRectangle(red_brush, moving_length);
             graphics.DrawRectangle(green_pen, s_line);
@@ -279,15 +282,15 @@ namespace WindowsFormsApp1
                     button6.Enabled = false;
                     button4.Enabled = true;
                     //clear_rays();
-                    chart3.ChartAreas[0].AxisX.Maximum = 30 ;
-                    chart3.ChartAreas[0].AxisX.Minimum = -30;
+                    chart3.ChartAreas[0].AxisX.Maximum = 300 ;
+                    chart3.ChartAreas[0].AxisX.Minimum = -300;
                 }
                 else
                 {
                     button1.Enabled = true;
                     //clear_rays();
-                    chart3.ChartAreas[0].AxisX.Maximum = 30;
-                    chart3.ChartAreas[0].AxisX.Minimum = -30;
+                    chart3.ChartAreas[0].AxisX.Maximum = 300;
+                    chart3.ChartAreas[0].AxisX.Minimum = -300;
                 }
             }
         }
@@ -384,8 +387,8 @@ namespace WindowsFormsApp1
             ser.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
             Initialize_Filled();
             tic = 0;
-            chart3.ChartAreas[0].AxisX.Maximum = 260;
-            chart3.ChartAreas[0].AxisX.Minimum = -260;
+            chart3.ChartAreas[0].AxisX.Maximum = 2600;
+            chart3.ChartAreas[0].AxisX.Minimum = -2600;
             timer1.Enabled = true;
         }
 

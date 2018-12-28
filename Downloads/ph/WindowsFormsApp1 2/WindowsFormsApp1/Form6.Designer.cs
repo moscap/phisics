@@ -103,6 +103,8 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.chart2.BackColor = System.Drawing.Color.WhiteSmoke;
+            chartArea1.AxisX.LabelAutoFitMaxFontSize = 14;
+            chartArea1.AxisX.LabelAutoFitMinFontSize = 10;
             chartArea1.AxisY.LabelStyle.Enabled = false;
             chartArea1.Name = "ChartArea1";
             this.chart2.ChartAreas.Add(chartArea1);
@@ -169,12 +171,11 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.trackBar1.LargeChange = 1;
             this.trackBar1.Location = new System.Drawing.Point(3, 3);
-            this.trackBar1.Maximum = 20;
             this.trackBar1.Minimum = 1;
             this.trackBar1.Name = "trackBar1";
             this.trackBar1.Size = new System.Drawing.Size(192, 60);
             this.trackBar1.TabIndex = 31;
-            this.trackBar1.Value = 20;
+            this.trackBar1.Value = 10;
             this.trackBar1.Scroll += new System.EventHandler(this.trackBar1_Scroll);
             // 
             // button1
@@ -315,6 +316,8 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.chart1.BackColor = System.Drawing.Color.WhiteSmoke;
+            chartArea3.AxisX.LabelAutoFitMaxFontSize = 14;
+            chartArea3.AxisX.LabelAutoFitMinFontSize = 10;
             chartArea3.AxisY.LabelStyle.Enabled = false;
             chartArea3.Name = "ChartArea1";
             this.chart1.ChartAreas.Add(chartArea3);
