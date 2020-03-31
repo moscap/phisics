@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace WindowsFormsApp1
 {
-    public partial class Form5 : Form
+    public partial class Char_submenu : Form
     {
-        public Form5()
+        public Char_submenu()
         {
             InitializeComponent();
             this.ControlBox = false;
@@ -32,7 +32,7 @@ namespace WindowsFormsApp1
 
         private void button2_Click(object sender, EventArgs e)
         {
-            Form4 form4 = new Form4();
+            Characteristics form4 = new Characteristics();
             form4.Show();
         }
 
@@ -43,7 +43,7 @@ namespace WindowsFormsApp1
 
         private void button1_Click_1(object sender, EventArgs e)
         {
-            Form6 form6 = new Form6();
+            Sun form6 = new Sun();
             form6.Show();
         }
     }

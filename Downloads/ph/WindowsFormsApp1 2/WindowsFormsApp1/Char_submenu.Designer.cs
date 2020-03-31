@@ -1,6 +1,6 @@
 ﻿namespace WindowsFormsApp1
 {
-    partial class Form5
+    partial class Char_submenu
     {
         /// <summary>
         /// Required designer variable.

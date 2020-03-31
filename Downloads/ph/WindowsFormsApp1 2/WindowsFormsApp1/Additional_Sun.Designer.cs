@@ -1,6 +1,6 @@
 ﻿namespace WindowsFormsApp1
 {
-    partial class Form7
+    partial class Additional_Sun
     {
         /// <summary>
         /// Required designer variable.

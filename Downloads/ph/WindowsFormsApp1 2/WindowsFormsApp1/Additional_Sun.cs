@@ -12,7 +12,7 @@ using System.IO;
 
 namespace WindowsFormsApp1
 {
-    public partial class Form7 : Form
+    public partial class Additional_Sun : Form
     {
         Complex[] Y_c = null;
         double[] x_w = null;
@@ -58,7 +58,7 @@ namespace WindowsFormsApp1
             Functions.FlipFlop(Y_c);
         }
 
-        public Form7()
+        public Additional_Sun()
         {
             InitializeComponent();
 
@@ -109,7 +109,7 @@ namespace WindowsFormsApp1
             }
             else
             {
-                Form6 form6 = new Form6();
+                Sun form6 = new Sun();
                 form6.Show();
             }
         }

@@ -16,9 +16,9 @@ using AForge.Math;
 
 namespace WindowsFormsApp1
 {
-    public partial class Form2 : Form
+    public partial class Start : Form
     {
-        public Form2()
+        public Start()
         {
             InitializeComponent();
         }
@@ -35,13 +35,13 @@ namespace WindowsFormsApp1
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Form1 form1 = new Form1();
+            Principles form1 = new Principles();
             form1.Show();
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
-            Form3 form3 = new Form3();
+            Water form3 = new Water();
             form3.Show();
         }
 
@@ -52,7 +52,7 @@ namespace WindowsFormsApp1
 
         private void button2_Click(object sender, EventArgs e)
         {
-            Form5 form5 = new Form5();
+            Char_submenu form5 = new Char_submenu();
             form5.Show();
         }
 
@@ -78,7 +78,7 @@ namespace WindowsFormsApp1
 
         private void button5_Click(object sender, EventArgs e)
         {
-            Form8 f = new Form8();
+            Authors f = new Authors();
             f.Show();
         }
 

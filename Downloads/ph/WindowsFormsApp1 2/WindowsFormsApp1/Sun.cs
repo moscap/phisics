@@ -17,7 +17,7 @@ using System.Windows.Forms.DataVisualization.Charting;
 
 namespace WindowsFormsApp1
 {
-    public partial class Form6 : Form
+    public partial class Sun : Form
     {
         public int NumOfPoints;
         double XStart;
@@ -155,7 +155,7 @@ namespace WindowsFormsApp1
             koef = Y_c.Max(t => t.Re);
         }
 
-        public Form6()
+        public Sun()
         {
             InitializeComponent();
             Timer timer1 = new Timer();
